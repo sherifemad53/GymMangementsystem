@@ -6,6 +6,7 @@ abstract public class utilsFunctions {
     //like get date 
     void hello(){
         System.out.println("hello");
+        System.out.println("jehad");
     }
     
 }
