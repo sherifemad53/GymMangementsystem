@@ -7,8 +7,6 @@ abstract public class utilsFunctions {
     void hello(){
         System.out.println("hello");
         System.out.println("jehad");
-        System.err.println("Omar");
-        System.err.println("Omar");
     }
     
 }
