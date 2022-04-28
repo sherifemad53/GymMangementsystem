@@ -12,11 +12,11 @@ public class DatabaseManeger<neededtype> {
     Connection con = javaconnect.connectdb();
     PreparedStatement ps;
     ResultSet rs;
-
+    int x;
     public boolean addmember(String NAME, int AGE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, String ADDRESS, String GENDER) {
         String register = "INSERT INTO MEMBERS (MEMBERS_NAME,MEMBERS_AGE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_PHONE,MEMBERS_EMAIL,MEMBERS_ADDRESS,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?)";
         try {
-            //comment tot test merge
+          //test
             ps = con.prepareStatement(register);
             if (NAME.isEmpty() || EMAIL.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Missing");
