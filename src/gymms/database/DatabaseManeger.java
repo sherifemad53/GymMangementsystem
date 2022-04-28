@@ -34,7 +34,7 @@ public class DatabaseManeger<neededtype> {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
-        }
+        }///kkkkkkkkkk
         return false;
     }
 
