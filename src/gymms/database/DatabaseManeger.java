@@ -17,7 +17,6 @@ public class DatabaseManeger<neededtype> {
         String register = "INSERT INTO MEMBERS (MEMBERS_NAME,MEMBERS_AGE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_PHONE,MEMBERS_EMAIL,MEMBERS_ADDRESS,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?)";
         try {
             //this edit for checking marge option
-            System.out.println("jehad");
             ps = con.prepareStatement(register);
             if (NAME.isEmpty() || EMAIL.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Missing");
