@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class javaconnect {
 
-    public static Connection connectdb() { 
+    /*public static Connection connectdb() { 
         Connection con = null;
         String currentdir = System.getProperty("user.dir");
         try {
@@ -17,7 +17,7 @@ public class javaconnect {
             System.out.println("Connect failed ! ");
         }
         return null;
-    }/*
+    }*/
     public static Connection connectdb() { 
         Connection con = null;
         try {
@@ -29,5 +29,4 @@ public class javaconnect {
         }
         return null;
     }
-    */
 }
