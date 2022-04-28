@@ -288,7 +288,7 @@
         <Component class="javax.swing.JSpinner" name="heightSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="150" numberType="java.lang.Integer" stepSize="1" type="number"/>
+              <SpinnerModel initial="165" maximum="200" minimum="140" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Select Member&apos;s Height"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -417,7 +417,7 @@
         <Component class="javax.swing.JSpinner" name="weightSpinner">
           <Properties>
             <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
-              <SpinnerModel initial="40" numberType="java.lang.Integer" stepSize="1" type="number"/>
+              <SpinnerModel initial="40" maximum="130" minimum="30" numberType="java.lang.Integer" stepSize="1" type="number"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Select Member&apos;s Weight"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">

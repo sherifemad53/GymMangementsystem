@@ -253,7 +253,7 @@ public class AddMember extends javax.swing.JFrame {
         jLabel4.setText("Height :");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 303, 52, -1));
 
-        heightSpinner.setModel(new javax.swing.SpinnerNumberModel(150, null, null, 1));
+        heightSpinner.setModel(new javax.swing.SpinnerNumberModel(165, 140, 200, 1));
         heightSpinner.setToolTipText("Select Member's Height");
         heightSpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(heightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 301, 105, -1));
@@ -309,7 +309,7 @@ public class AddMember extends javax.swing.JFrame {
         });
         jPanel1.add(returnmainpageButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 34, -1, -1));
 
-        weightSpinner.setModel(new javax.swing.SpinnerNumberModel(40, null, null, 1));
+        weightSpinner.setModel(new javax.swing.SpinnerNumberModel(40, 30, 130, 1));
         weightSpinner.setToolTipText("Select Member's Weight");
         weightSpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.add(weightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 301, 105, -1));
