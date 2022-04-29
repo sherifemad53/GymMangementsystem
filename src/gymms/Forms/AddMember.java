@@ -12,25 +12,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import utils.utilsFunctions;
 
 public class AddMember extends javax.swing.JFrame {
 
     Connection con = javaconnect.connectdb();
     PreparedStatement ps;
     ResultSet rs;
-  
-    DatabaseManeger dbmanager=new DatabaseManeger();
-    User user=new User();    
+
+    DatabaseManeger dbmanager = new DatabaseManeger();
+    User user = new User();
     Package packagee = new Package();
-    
-    Receptionist receptionist =new Receptionist();
+
+    Receptionist receptionist = new Receptionist();
     ArrayList<String> trainerlist = new ArrayList<>();
-    
+
     ArrayList<String> subscribelist = new ArrayList<>();
-    
+
     public int trainermodifyCombobox() {
         int counter = 0;
         try {
@@ -45,6 +45,7 @@ public class AddMember extends javax.swing.JFrame {
         }
         return 0;
     }
+
     public int subcribemodifyCombobox() {
         int counter = 0;
         try {
@@ -59,68 +60,71 @@ public class AddMember extends javax.swing.JFrame {
         }
         return 0;
     }
-    int size ;
-    
+    int size;
+
     public AddMember() {
         initComponents();
         size = trainermodifyCombobox();
         for (int i = 0; i < size; i++) {
             trainerComboBox.addItem(trainerlist.get(i));
         }
-        size=subcribemodifyCombobox();
+        size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
             subscribtionComboBox.addItem(subscribelist.get(i));
         }
     }
-    
+
     int loginidx;
-    
+
     public AddMember(int loginid) {
-        loginidx=loginid;
+        loginidx = loginid;
         initComponents();
         size = trainermodifyCombobox();
         for (int i = 0; i < size; i++) {
             trainerComboBox.addItem(trainerlist.get(i));
         }
-        size=subcribemodifyCombobox();
+        size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
             subscribtionComboBox.addItem(subscribelist.get(i));
         }
-        
-       
     }
+    
+    utilsFunctions utilfuncs =new utilsFunctions();
     
     public void add() {
         if (nameTextField.getText().isEmpty()
                 || ageTextField.getText().isEmpty()
                 || heightSpinner.getValue().equals(0)
                 || weightSpinner.getValue().equals(0)
-                ||MaleButton1.isSelected()==false&&FemailButton2.isSelected()==false) {
+                || MaleButton1.isSelected() == false && FemailButton2.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
-         
-            try {
-                Member member = new Member(nameTextField.getText(),
-                        Integer.parseInt(ageTextField.getText()),
-                        (Integer)(weightSpinner.getValue()),
-                        (Integer) heightSpinner.getValue(),
-                        Long.parseLong(phoneTextField.getText()),
-                        emailTextField.getText(),
-                        addressTextField.getText(),GenderbuttonGroup.getSelection().getActionCommand()
-                );
-                boolean flag=receptionist.addmember(member,subscribtionComboBox.getSelectedItem().toString(),trainerComboBox.getSelectedItem().toString());
-                if (flag) {
-                    JOptionPane.showMessageDialog(null, "ADDED");
-                    // dispose();
-                    //new Mainpage().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Failed to ADD");
+            if (utilfuncs.checkname(nameTextField.getText())
+                    && utilfuncs.checkemail(emailTextField.getText())
+                    && utilfuncs.checkphone(phoneTextField.getText())
+                    && utilfuncs.checkage(ageTextField.getText())
+                    && utilfuncs.checkaddress(addressTextField.getText())) {
+                try {
+                    Member member = new Member(nameTextField.getText(),
+                            Integer.parseInt(ageTextField.getText()),
+                            (Integer) (weightSpinner.getValue()),
+                            (Integer) heightSpinner.getValue(),
+                            Long.parseLong(phoneTextField.getText()),
+                            emailTextField.getText(),
+                            addressTextField.getText(), GenderbuttonGroup.getSelection().getActionCommand()
+                    );
+                    boolean flag = receptionist.addmember(member, subscribtionComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString());
+                    if (flag) {
+                        JOptionPane.showMessageDialog(null, "ADDED");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to ADD");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
                 }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, ex);
             }
         }
-    } //System.out.println("Loginfailed");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

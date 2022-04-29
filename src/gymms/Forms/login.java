@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import utils.utilsFunctions;
 
 public class login extends javax.swing.JFrame {
 
@@ -21,7 +22,7 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         //javaconnect.connectdb();
-       }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -101,16 +102,19 @@ public class login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_usernameActionPerformed
 
-    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
+    utils.utilsFunctions utilfuncs = new utilsFunctions();
 
+    private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         User user = new User();
-        if (user.login(username.getText(), password.getText()) != 0) {
-            JOptionPane.showMessageDialog(null, "Login Sucessfull");
-            dispose();
-            ///takes role
-            new Mainpage(user.login(username.getText(), password.getText())).setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "Login Failed.....");
+        if (utilfuncs.checkusername(username.getText()) && utilfuncs.checkpassword(password.getText())) {
+            if (user.login(username.getText(), password.getText()) != 0) {
+                JOptionPane.showMessageDialog(null, "Login Sucessfull");
+                dispose();
+                ///takes role
+                new Mainpage(user.login(username.getText(), password.getText())).setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Login Failed.....");
+            }
         }
     }//GEN-LAST:event_loginActionPerformed
 
