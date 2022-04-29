@@ -68,18 +68,18 @@ public class ViewMembersData extends javax.swing.JFrame {
             ViewMemberProfile obj = new ViewMemberProfile(loginidx);
             try {
                 int ID = rss2.getInt("MEMBERS_ID");
-                obj.IDTextField.setText(ID + "");
+                obj.idTextField.setText(ID + "");
                 String Name = rss2.getString("MEMBERS_NAME");
-                obj.NameTextField.setText(Name);
+                obj.nameTextField.setText(Name);
                 String Age = rss2.getString("MEMBERS_AGE");
-                obj.AgeTextField.setText(Age);
-                obj.EmailTextField.setText(rss2.getString("MEMBERS_EMAIL"));
-                obj.PhoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
-                obj.AddressTextField.setText(rss2.getString("MEMBERS_ADDRESS"));
-                obj.HeightTextField.setText(rss2.getString("MEMBERS_HEIGHT"));
+                obj.ageTextField.setText(Age);
+                obj.emailTextField.setText(rss2.getString("MEMBERS_EMAIL"));
+                obj.phoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
+                obj.addressTextField.setText(rss2.getString("MEMBERS_ADDRESS"));
+                obj.heightTextField.setText(rss2.getString("MEMBERS_HEIGHT"));
                 obj.ProgramTextArea.setText(rss2.getString("MEMBERS_PROGRAM"));
-                obj.WeightTextField.setText(rss2.getString("MEMBERS_WEIGHT"));
-                obj.GenderTextField.setText(rss2.getString("MEMBERS_GENDER"));
+                obj.weightTextField.setText(rss2.getString("MEMBERS_WEIGHT"));
+                obj.genderTextField.setText(rss2.getString("MEMBERS_GENDER"));
                 obj.SubscribtionTextField.setText(rss2.getString("PACKAGE_NAME"));
                 obj.StartDateTextField.setText(rss2.getDate("STARTDATE").toString());
                 obj.CostTextField.setText(rss2.getString("PACKAGE_COST"));

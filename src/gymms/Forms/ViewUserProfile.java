@@ -3,6 +3,7 @@ package gymms.Forms;
 import gymms.classes.Gymowner;
 import gymms.classes.User;
 import javax.swing.JOptionPane;
+import utils.utilsFunctions;
 
 public class ViewUserProfile extends javax.swing.JFrame {
 
@@ -10,30 +11,29 @@ public class ViewUserProfile extends javax.swing.JFrame {
 
     public ViewUserProfile() {
         initComponents();
-        IDTextField.setEditable(false);
-        NameTextField.setEditable(false);
-        EmailTextField.setEditable(false);
-        UsernameTextField.setEditable(false);
-        PasswordTextField.setEditable(false);
-        PhoneTextField.setEditable(false);
-        AddressTextField.setEditable(false);
-        GenderTextField.setEditable(false);
+        idTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        usernameTextField.setEditable(false);
+        passwordTextField.setEditable(false);
+        phoneTextField.setEditable(false);
+        addressTextField.setEditable(false);
+        genderTextField.setEditable(false);
     }
     int loginidx;
+
     public ViewUserProfile(int loginid) {
         initComponents();
-        loginidx=loginid;
-        IDTextField.setEditable(false);
-        NameTextField.setEditable(false);
-        EmailTextField.setEditable(false);
-        UsernameTextField.setEditable(false);
-        PasswordTextField.setEditable(false);
-        PhoneTextField.setEditable(false);
-        AddressTextField.setEditable(false);
-        GenderTextField.setEditable(false);
+        loginidx = loginid;
+        idTextField.setEditable(false);
+        nameTextField.setEditable(false);
+        emailTextField.setEditable(false);
+        usernameTextField.setEditable(false);
+        passwordTextField.setEditable(false);
+        phoneTextField.setEditable(false);
+        addressTextField.setEditable(false);
+        genderTextField.setEditable(false);
     }
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,13 +41,13 @@ public class ViewUserProfile extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        IDTextField = new javax.swing.JTextField();
-        NameTextField = new javax.swing.JTextField();
-        RoleTextField = new javax.swing.JTextField();
-        EmailTextField = new javax.swing.JTextField();
-        PhoneTextField = new javax.swing.JTextField();
-        AddressTextField = new javax.swing.JTextField();
-        UsernameTextField = new javax.swing.JTextField();
+        idTextField = new javax.swing.JTextField();
+        nameTextField = new javax.swing.JTextField();
+        roleTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
+        phoneTextField = new javax.swing.JTextField();
+        addressTextField = new javax.swing.JTextField();
+        usernameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -56,11 +56,11 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        PasswordTextField = new javax.swing.JTextField();
+        passwordTextField = new javax.swing.JTextField();
         PrintButton = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        GenderTextField = new javax.swing.JTextField();
+        genderTextField = new javax.swing.JTextField();
         DeleteButton = new javax.swing.JButton();
         EditButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
@@ -78,48 +78,48 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 77, -1, -1));
 
-        IDTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        IDTextField.setToolTipText("User's ID");
-        IDTextField.addActionListener(new java.awt.event.ActionListener() {
+        idTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        idTextField.setToolTipText("User's ID");
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDTextFieldActionPerformed(evt);
+                idTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(IDTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 230, 166, -1));
+        jPanel1.add(idTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 230, 166, -1));
 
-        NameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        NameTextField.setToolTipText("User's Name");
-        NameTextField.addActionListener(new java.awt.event.ActionListener() {
+        nameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        nameTextField.setToolTipText("User's Name");
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameTextFieldActionPerformed(evt);
+                nameTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(NameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 265, 166, -1));
+        jPanel1.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 265, 166, -1));
 
-        RoleTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        RoleTextField.setToolTipText("User's Role");
-        jPanel1.add(RoleTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 300, 166, -1));
+        roleTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        roleTextField.setToolTipText("User's Role");
+        jPanel1.add(roleTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 300, 166, -1));
 
-        EmailTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        EmailTextField.setToolTipText("User's Email");
-        EmailTextField.addActionListener(new java.awt.event.ActionListener() {
+        emailTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        emailTextField.setToolTipText("User's Email");
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailTextFieldActionPerformed(evt);
+                emailTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 335, 166, -1));
+        jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 335, 166, -1));
 
-        PhoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        PhoneTextField.setToolTipText("User's Phone");
-        jPanel1.add(PhoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 370, 166, -1));
+        phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        phoneTextField.setToolTipText("User's Phone");
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 370, 166, -1));
 
-        AddressTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        AddressTextField.setToolTipText("User's Address");
-        jPanel1.add(AddressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 403, 166, -1));
+        addressTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        addressTextField.setToolTipText("User's Address");
+        jPanel1.add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 403, 166, -1));
 
-        UsernameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        UsernameTextField.setToolTipText("User's Username");
-        jPanel1.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 436, 166, -1));
+        usernameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        usernameTextField.setToolTipText("User's Username");
+        jPanel1.add(usernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 436, 166, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -144,7 +144,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Phone:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -161,9 +161,9 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel9.setText("Password :");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 470, -1, -1));
 
-        PasswordTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        PasswordTextField.setToolTipText("User's Password");
-        jPanel1.add(PasswordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 471, 166, -1));
+        passwordTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        passwordTextField.setToolTipText("User's Password");
+        jPanel1.add(passwordTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 471, 166, -1));
 
         PrintButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PrintButton.setText("Print");
@@ -185,9 +185,9 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel15.setText("Gender :");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 510, -1, -1));
 
-        GenderTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        GenderTextField.setToolTipText("User's Gender");
-        jPanel1.add(GenderTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 506, 166, -1));
+        genderTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        genderTextField.setToolTipText("User's Gender");
+        jPanel1.add(genderTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 506, 166, -1));
 
         DeleteButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         DeleteButton.setText("Delete");
@@ -260,37 +260,45 @@ public class ViewUserProfile extends javax.swing.JFrame {
         dispose();
         new login().setVisible(true);     }//GEN-LAST:event_LogOutMenuActionPerformed
 
+    utils.utilsFunctions utilfuncs =new utilsFunctions();
+    
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            User user = new User();
-            user.setID(Integer.parseInt(IDTextField.getText()));
-            user.setNAME(NameTextField.getText());
-            user.setADDRESS(AddressTextField.getText());
-            user.setEMAIL(EmailTextField.getText());
-            user.setPHONE(Long.parseLong(PhoneTextField.getText()));
-            user.setUSERNAME(UsernameTextField.getText());
-            user.setPASSWORD(PasswordTextField.getText());
-            user.setGENDER(GenderTextField.getText());
-            if (gymowner.editUser(user)) {
-                JOptionPane.showMessageDialog(null, "Editted successfully...");
+        if (utilfuncs.checkname(nameTextField.getText())
+                && utilfuncs.checkemail(emailTextField.getText())
+                && utilfuncs.checkphone(phoneTextField.getText())
+                && utilfuncs.checkusername(usernameTextField.getText())
+                && utilfuncs.checkaddress(addressTextField.getText())) {
+            try {
+                User user = new User();
+                user.setID(Integer.parseInt(idTextField.getText()));
+                user.setNAME(nameTextField.getText());
+                user.setADDRESS(addressTextField.getText());
+                user.setEMAIL(emailTextField.getText());
+                user.setPHONE(Long.parseLong(phoneTextField.getText()));
+                user.setUSERNAME(usernameTextField.getText());
+                user.setPASSWORD(passwordTextField.getText());
+                user.setGENDER(genderTextField.getText());
+                if (gymowner.editUser(user)) {
+                    JOptionPane.showMessageDialog(null, "Editted successfully...");
+                }
+            } catch (ArithmeticException ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
-        } catch (ArithmeticException ex) {
-            JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void EditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditButtonActionPerformed
-        NameTextField.setEditable(true);
-        EmailTextField.setEditable(true);
-        UsernameTextField.setEditable(true);
-        PasswordTextField.setEditable(true);
-        PhoneTextField.setEditable(true);
-        AddressTextField.setEditable(true);
-        GenderTextField.setEditable(true);
+        nameTextField.setEditable(true);
+        emailTextField.setEditable(true);
+        usernameTextField.setEditable(true);
+        passwordTextField.setEditable(true);
+        phoneTextField.setEditable(true);
+        addressTextField.setEditable(true);
+        genderTextField.setEditable(true);
     }//GEN-LAST:event_EditButtonActionPerformed
 
     private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
-        gymowner.deleteUser(Integer.parseInt(IDTextField.getText()));
+        gymowner.deleteUser(Integer.parseInt(idTextField.getText()));
         dispose();
         new ViewUsersData(loginidx).setVisible(true);
     }//GEN-LAST:event_DeleteButtonActionPerformed
@@ -299,24 +307,24 @@ public class ViewUserProfile extends javax.swing.JFrame {
         //   dispose();
         PrintUser obj = new PrintUser();
 
-        obj.InformationTextArea.setText("ID :\t" + IDTextField.getText() + "\nName :\t" + NameTextField.getText() + "\nRole :\t" + RoleTextField.getText() + "\nEmail"
-                + " :\t" + EmailTextField.getText() + "\nPhone :\t" + PhoneTextField.getText() + "\nAddress \t" + AddressTextField.getText() + "\nUsername :\t"
-                + UsernameTextField.getText() + "\nPassword :\t" + PasswordTextField.getText() + "\nGender :\t" + GenderTextField.getText());
+        obj.InformationTextArea.setText("ID :\t" + idTextField.getText() + "\nName :\t" + nameTextField.getText() + "\nRole :\t" + roleTextField.getText() + "\nEmail"
+                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + addressTextField.getText() + "\nUsername :\t"
+                + usernameTextField.getText() + "\nPassword :\t" + passwordTextField.getText() + "\nGender :\t" + genderTextField.getText());
         obj.setVisible(true);
 
     }//GEN-LAST:event_PrintButtonActionPerformed
 
-    private void EmailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailTextFieldActionPerformed
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EmailTextFieldActionPerformed
+    }//GEN-LAST:event_emailTextFieldActionPerformed
 
-    private void NameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NameTextFieldActionPerformed
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NameTextFieldActionPerformed
+    }//GEN-LAST:event_nameTextFieldActionPerformed
 
-    private void IDTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDTextFieldActionPerformed
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IDTextFieldActionPerformed
+    }//GEN-LAST:event_idTextFieldActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -366,19 +374,14 @@ public class ViewUserProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public javax.swing.JTextField AddressTextField;
     private javax.swing.JButton DeleteButton;
     private javax.swing.JButton EditButton;
-    public javax.swing.JTextField EmailTextField;
-    public javax.swing.JTextField GenderTextField;
-    public javax.swing.JTextField IDTextField;
     private javax.swing.JMenuItem LogOutMenu;
-    public javax.swing.JTextField NameTextField;
-    public javax.swing.JTextField PasswordTextField;
-    public javax.swing.JTextField PhoneTextField;
     private javax.swing.JButton PrintButton;
-    public javax.swing.JTextField RoleTextField;
-    public javax.swing.JTextField UsernameTextField;
+    public javax.swing.JTextField addressTextField;
+    public javax.swing.JTextField emailTextField;
+    public javax.swing.JTextField genderTextField;
+    public javax.swing.JTextField idTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -396,6 +399,11 @@ public class ViewUserProfile extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    public javax.swing.JTextField nameTextField;
+    public javax.swing.JTextField passwordTextField;
+    public javax.swing.JTextField phoneTextField;
+    public javax.swing.JTextField roleTextField;
     private javax.swing.JButton saveButton;
+    public javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables
 }

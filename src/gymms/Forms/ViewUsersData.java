@@ -55,16 +55,16 @@ public class ViewUsersData extends javax.swing.JFrame {
             ViewUserProfile obj = new ViewUserProfile(loginidx);
             try {
                 int ID = rss2.getInt("USERS_ID");
-                obj.IDTextField.setText(ID + "");
+                obj.idTextField.setText(ID + "");
                 String Name = rss2.getString("USERS_NAME");
-                obj.NameTextField.setText(Name);
-                obj.EmailTextField.setText(rss2.getString("USERS_EMAIL"));
-                obj.PhoneTextField.setText(rss2.getString("USERS_PHONE"));
-                obj.AddressTextField.setText(rss2.getString("USERS_ADDRESS"));
-                obj.GenderTextField.setText(rss2.getString("USERS_GENDER"));
-                obj.RoleTextField.setText(rss2.getString("ROLE_NAME"));
-                obj.UsernameTextField.setText(rss2.getString("USERS_USERNAME"));
-                obj.PasswordTextField.setText(rss2.getString("USERS_PASSWORD"));
+                obj.nameTextField.setText(Name);
+                obj.emailTextField.setText(rss2.getString("USERS_EMAIL"));
+                obj.phoneTextField.setText(rss2.getString("USERS_PHONE"));
+                obj.addressTextField.setText(rss2.getString("USERS_ADDRESS"));
+                obj.genderTextField.setText(rss2.getString("USERS_GENDER"));
+                obj.roleTextField.setText(rss2.getString("ROLE_NAME"));
+                obj.usernameTextField.setText(rss2.getString("USERS_USERNAME"));
+                obj.passwordTextField.setText(rss2.getString("USERS_PASSWORD"));
             } catch (SQLException ex) {
                 Logger.getLogger(ViewMembersData.class.getName()).log(Level.SEVERE, null, ex);
             }

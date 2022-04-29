@@ -55,37 +55,41 @@ public class AddUser extends javax.swing.JFrame {
         }
     }
 
-   utilsFunctions functions=new utilsFunctions();
-    
+    utilsFunctions utilfuncs = new utilsFunctions();
+
     public void submitdatabase() {
         if (nameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
                 || passwordTextField.getText().isEmpty() || confpasswordTextField.getText().isEmpty() || MaleRadioButton.isSelected() == false && FemaleRadioButton.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
-            functions.checkusername(usernameTextField.getText());
-            functions.checkpassword(passwordTextField.getText(),confpasswordTextField.getText());
-            if(functions.checkemail(emailTextField.getText())){
-                JOptionPane.showMessageDialog(null, "emailgood");
-            }
-            if (passwordTextField.getText().equals(confpasswordTextField.getText())) {
-                Gymowner gymowner = new Gymowner(nameTextField.getText(),
-                        emailTextField.getText(), usernameTextField.getText(),
-                        passwordTextField.getText(), addressTextField.getText(),
-                        Long.parseLong(phoneTextField.getText()),
-                        roleComboBox.getSelectedItem().toString(), GenderButtonGroup.getSelection().getActionCommand());
-                if (gymowner.adduser()) {
-                    JOptionPane.showMessageDialog(null, "Add User complete");
-                    dispose();
-                    new login().setVisible(true);
+            if (utilfuncs.checkname(nameTextField.getText())
+                    && utilfuncs.checkemail(emailTextField.getText())
+                    && utilfuncs.checkphone(phoneTextField.getText())
+                    && utilfuncs.checkusername(usernameTextField.getText())) {
+                if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
+                    Gymowner gymowner = new Gymowner(nameTextField.getText(),
+                            emailTextField.getText(), usernameTextField.getText(),
+                            passwordTextField.getText(), addressTextField.getText(),
+                            Long.parseLong(phoneTextField.getText()),
+                            roleComboBox.getSelectedItem().toString(), GenderButtonGroup.getSelection().getActionCommand());
+                    if (gymowner.adduser()) {
+                        JOptionPane.showMessageDialog(null, "Add User complete");
+                        dispose();
+                        new login().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Add User failed......");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Add User failed......");
+                    JOptionPane.showMessageDialog(null, "Password doesn't match.......");
+                    passwordTextField.setText("");
+                    confpasswordTextField.setText("");
                 }
+
             } else {
-                JOptionPane.showMessageDialog(null, "Password doesn't match.......");
-                passwordTextField.setText("");
-                confpasswordTextField.setText("");
+                JOptionPane.showMessageDialog(null, "error");
             }
-        } //System.out.println("Loginfailed");
+            //TODO give user a note to know what entered wrong
+        }
     }
 
     @SuppressWarnings("unchecked")

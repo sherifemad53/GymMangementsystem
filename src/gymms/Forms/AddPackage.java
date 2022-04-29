@@ -4,6 +4,7 @@ import gymms.classes.Gymowner;
 import gymms.classes.Member;
 import gymms.classes.Package;
 import javax.swing.JOptionPane;
+import utils.utilsFunctions;
 
 public class AddPackage extends javax.swing.JFrame {
 
@@ -14,6 +15,7 @@ public class AddPackage extends javax.swing.JFrame {
     }
 
     int loginidx;
+
     AddPackage(int loginid) {
         initComponents();
         loginidx = loginid;
@@ -78,7 +80,7 @@ public class AddPackage extends javax.swing.JFrame {
         costTextfield.setToolTipText("Enter Package's Cost");
         jPanel1.add(costTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 224, -1));
 
-        durationSpinner.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+        durationSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
         durationSpinner.setToolTipText("Select Duration's Months");
         durationSpinner.setValue(1);
         jPanel1.add(durationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 240, 224, -1));
@@ -124,33 +126,35 @@ public class AddPackage extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    utils.utilsFunctions utilfuncs = new utilsFunctions();
+
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
         if (nameTextfield.getText().isEmpty()
                 || costTextfield.getText().isEmpty()
                 || durationSpinner.getValue().equals(0)
                 || descriptionTextfield.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
-            try {
-                Package packagee = new Package(nameTextfield.getText(),
-                        descriptionTextfield.getText(),
-                        Integer.parseInt(costTextfield.getText()),
-                        (Integer) durationSpinner.getValue()
-                );
-                boolean flag = gymowner.addpackage(packagee);
-                if (flag) {
-                    JOptionPane.showMessageDialog(null, "ADDED");
-                    // dispose();
-                    //new Mainpage().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Failed to ADD");
+            if ( utilfuncs.checkname(nameTextfield.getText())&&utilfuncs.checkcost(costTextfield.getText())) {
+                try {
+                    Package packagee = new Package(nameTextfield.getText(),
+                            descriptionTextfield.getText(),
+                            Integer.parseInt(costTextfield.getText()),
+                            (Integer) durationSpinner.getValue()
+                    );
+                    boolean flag = gymowner.addpackage(packagee);
+                    if (flag) {
+                        JOptionPane.showMessageDialog(null, "ADDED");
+                        // dispose();
+                        //new Mainpage().setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Failed to ADD");
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, ex);
                 }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, ex);
             }
         }
-    
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void nameTextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextfieldActionPerformed
