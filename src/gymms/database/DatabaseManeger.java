@@ -14,9 +14,9 @@ public class DatabaseManeger<neededtype> {
     ResultSet rs;
     int x;
     public boolean addmember(String NAME, int AGE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, String ADDRESS, String GENDER) {
+        //TODO here we can use as method from slides for less sql command 
         String register = "INSERT INTO MEMBERS (MEMBERS_NAME,MEMBERS_AGE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_PHONE,MEMBERS_EMAIL,MEMBERS_ADDRESS,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?)";
         try {
-          //test
             ps = con.prepareStatement(register);
             if (NAME.isEmpty() || EMAIL.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Missing");
@@ -34,7 +34,7 @@ public class DatabaseManeger<neededtype> {
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
-        }///kkkkkkkkkk
+        }
         return false;
     }
 
