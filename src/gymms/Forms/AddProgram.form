@@ -84,6 +84,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="text" type="java.lang.String" value="Saturday: &#xa;/sun/day:&#xa;monday: "/>
                 <Property name="toolTipText" type="java.lang.String" value="Enter A Suitable Program For A Member"/>
               </Properties>
             </Component>

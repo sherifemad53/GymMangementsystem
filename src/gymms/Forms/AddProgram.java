@@ -41,6 +41,7 @@ public class AddProgram extends javax.swing.JFrame {
 
         ProgramTextArea.setColumns(20);
         ProgramTextArea.setRows(5);
+        ProgramTextArea.setText("Saturday: \n/sun/day:\nmonday: ");
         ProgramTextArea.setToolTipText("Enter A Suitable Program For A Member");
         jScrollPane1.setViewportView(ProgramTextArea);
 
