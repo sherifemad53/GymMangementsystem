@@ -70,7 +70,7 @@ public class AddMember extends javax.swing.JFrame {
         }
         size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
-            subscribtionComboBox.addItem(subscribelist.get(i));
+            branchComboBox.addItem(subscribelist.get(i));
         }
     }
 
@@ -85,7 +85,7 @@ public class AddMember extends javax.swing.JFrame {
         }
         size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
-            subscribtionComboBox.addItem(subscribelist.get(i));
+            branchComboBox.addItem(subscribelist.get(i));
         }
     }
     
@@ -113,7 +113,7 @@ public class AddMember extends javax.swing.JFrame {
                             emailTextField.getText(),
                             addressTextField.getText(), GenderbuttonGroup.getSelection().getActionCommand()
                     );
-                    boolean flag = receptionist.addmember(member, subscribtionComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString());
+                    boolean flag = receptionist.addmember(member, branchComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString());
                     if (flag) {
                         JOptionPane.showMessageDialog(null, "ADDED");
                     } else {
@@ -143,7 +143,7 @@ public class AddMember extends javax.swing.JFrame {
         nameTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         addressTextField = new javax.swing.JTextField();
-        subscribtionComboBox = new javax.swing.JComboBox<>();
+        branchComboBox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -157,9 +157,11 @@ public class AddMember extends javax.swing.JFrame {
         returnmainpageButton = new javax.swing.JButton();
         weightSpinner = new javax.swing.JSpinner();
         ageTextField = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        subscribtionComboBox3 = new javax.swing.JComboBox<>();
+        pic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -189,7 +191,7 @@ public class AddMember extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 480, 425, -1));
+        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 425, -1));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 39)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -228,19 +230,19 @@ public class AddMember extends javax.swing.JFrame {
         });
         jPanel1.add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 221, 302, -1));
 
-        subscribtionComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        subscribtionComboBox.setToolTipText("Select Suitable Subscription");
-        subscribtionComboBox.addActionListener(new java.awt.event.ActionListener() {
+        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchComboBox.setToolTipText("Select Suitable Subscription");
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subscribtionComboBoxActionPerformed(evt);
+                branchComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(subscribtionComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 419, 302, -1));
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 302, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Subscribtion  :");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 421, -1, -1));
+        jLabel9.setText("Branch:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -321,10 +323,6 @@ public class AddMember extends javax.swing.JFrame {
         ageTextField.setToolTipText("Enter Member's Age");
         jPanel1.add(ageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 261, 302, -1));
 
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(-160, 0, 880, 560));
-
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Email  :");
@@ -334,6 +332,24 @@ public class AddMember extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Phone  :");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 184, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Subscribtion  :");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 421, -1, -1));
+
+        subscribtionComboBox3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        subscribtionComboBox3.setToolTipText("Select Suitable Subscription");
+        subscribtionComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subscribtionComboBox3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(subscribtionComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 302, -1));
+
+        pic.setForeground(new java.awt.Color(255, 255, 255));
+        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
+        jPanel1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 870, 560));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -363,9 +379,9 @@ public class AddMember extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_addressTextFieldActionPerformed
 
-    private void subscribtionComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribtionComboBoxActionPerformed
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_subscribtionComboBoxActionPerformed
+    }//GEN-LAST:event_branchComboBoxActionPerformed
 
     private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -387,6 +403,10 @@ public class AddMember extends javax.swing.JFrame {
     private void trainerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_trainerComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_trainerComboBoxActionPerformed
+
+    private void subscribtionComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribtionComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_subscribtionComboBox3ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -431,14 +451,15 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JButton addButton;
     private javax.swing.JTextField addressTextField;
     private javax.swing.JTextField ageTextField;
+    private javax.swing.JComboBox<String> branchComboBox;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JSpinner heightSpinner;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -451,8 +472,9 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField phoneTextField;
+    private javax.swing.JLabel pic;
     private javax.swing.JButton returnmainpageButton;
-    private javax.swing.JComboBox<String> subscribtionComboBox;
+    private javax.swing.JComboBox<String> subscribtionComboBox3;
     private javax.swing.JComboBox<String> trainerComboBox;
     private javax.swing.JSpinner weightSpinner;
     // End of variables declaration//GEN-END:variables

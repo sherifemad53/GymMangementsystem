@@ -25,9 +25,6 @@ public class Gymms {
             Connection con = javaconnect.connectdb();
             new login().setVisible(true);
             
-            System.out.println("hello");
-            System.out.println("hello");
-            
         }
     }
 }

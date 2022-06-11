@@ -65,6 +65,8 @@ public class ViewUserProfile extends javax.swing.JFrame {
         EditButton = new javax.swing.JButton();
         saveButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        branchTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -124,7 +126,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("ID :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -220,6 +222,15 @@ public class ViewUserProfile extends javax.swing.JFrame {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/BY.PNG"))); // NOI18N
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 84, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Branch:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, 70, -1));
+
+        branchTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchTextField1.setToolTipText("MEmber's Gender");
+        jPanel1.add(branchTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 160, -1));
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, -260, 760, 920));
@@ -379,6 +390,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton PrintButton;
     public javax.swing.JTextField addressTextField;
+    public javax.swing.JTextField branchTextField1;
     public javax.swing.JTextField emailTextField;
     public javax.swing.JTextField genderTextField;
     public javax.swing.JTextField idTextField;
@@ -387,6 +399,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

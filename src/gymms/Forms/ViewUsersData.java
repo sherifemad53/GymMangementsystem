@@ -96,6 +96,12 @@ public class ViewUsersData extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         searchButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
+        branchButton = new javax.swing.JButton();
+        branchComboBox = new javax.swing.JComboBox<>();
+        branchButton1 = new javax.swing.JButton();
+        orderbyComboBox1 = new javax.swing.JComboBox<>();
+        countTextField1 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -137,7 +143,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 searchTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 123, 127, -1));
+        jPanel1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 127, -1));
 
         deleteButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         deleteButton.setText("Delete User");
@@ -165,7 +171,49 @@ public class ViewUsersData extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 204, -1, -1));
+        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+
+        branchButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        branchButton.setText("Changebranch");
+        branchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(branchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 160, 130, -1));
+
+        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchComboBox.setToolTipText("Select Suitable Subscription");
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 130, 20));
+
+        branchButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        branchButton1.setText("Order By");
+        branchButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(branchButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 130, 20));
+
+        orderbyComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        orderbyComboBox1.setToolTipText("Select Suitable Subscription");
+        orderbyComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderbyComboBox1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(orderbyComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 130, 20));
+        jPanel1.add(countTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 120, -1));
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Total users:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 250, 130, 20));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/Gymback.PNG"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -160, -1, 470));
@@ -246,6 +294,25 @@ public class ViewUsersData extends javax.swing.JFrame {
         new Mainpage(loginidx).setVisible(true);
     }//GEN-LAST:event_mainpageMenuItemActionPerformed
 
+    private void branchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButtonActionPerformed
+        if (loginidx == 3) {
+            String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
+            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
+        }
+    }//GEN-LAST:event_branchButtonActionPerformed
+
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_branchComboBoxActionPerformed
+
+    private void branchButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_branchButton1ActionPerformed
+
+    private void orderbyComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderbyComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderbyComboBox1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -285,14 +352,20 @@ public class ViewUsersData extends javax.swing.JFrame {
     private javax.swing.JButton AddUserButton;
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JTable UserDataTable;
+    private javax.swing.JButton branchButton;
+    private javax.swing.JButton branchButton1;
+    private javax.swing.JComboBox<String> branchComboBox;
+    private javax.swing.JTextField countTextField1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem mainpageMenuItem;
+    private javax.swing.JComboBox<String> orderbyComboBox1;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchTextField;
