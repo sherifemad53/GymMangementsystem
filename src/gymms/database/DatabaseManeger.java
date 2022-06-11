@@ -1,5 +1,6 @@
 package gymms.database;
 
+import gymms.Gymms;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -451,5 +452,24 @@ public class DatabaseManeger<neededtype> {
             JOptionPane.showMessageDialog(null, ex);
         }
         return false;
+    }
+
+    public boolean addbranch(Gymms gymms) {
+        String addb = "INSERT INTO GYM (ID,GYM_NAME,TYPE,DESCRIPTION,CITY,STREET) VALUES (?,?,?,?,?,?) ";
+        try {
+            ps = con.prepareStatement(addb);
+            ps.setInt(1, gymms.getID());
+            ps.setString(2, gymms.getName());
+            ps.setString(3, gymms.getTYPE());
+            ps.setString(4, gymms.getDESCRIPTION());
+            ps.setString(5, gymms.getCity());
+            ps.setInt(6, gymms.getStreet());
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return false;
+
     }
 }
