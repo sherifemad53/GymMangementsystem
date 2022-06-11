@@ -33,8 +33,8 @@ public class login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
-        login = new javax.swing.JButton();
         password = new javax.swing.JPasswordField();
+        login = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -46,17 +46,17 @@ public class login extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 52)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Login");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Book Antiqua", 1, 28)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Username :");
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Book Antiqua", 1, 28)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password :");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         username.setToolTipText("Enter The Username Here");
         username.addActionListener(new java.awt.event.ActionListener() {
@@ -64,7 +64,10 @@ public class login extends javax.swing.JFrame {
                 usernameActionPerformed(evt);
             }
         });
-        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 257, 32));
+        jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 257, 32));
+
+        password.setToolTipText("Enter The Password Here");
+        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 257, 32));
 
         login.setBackground(new java.awt.Color(204, 204, 204));
         login.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
@@ -75,13 +78,10 @@ public class login extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, -1, -1));
-
-        password.setToolTipText("Enter The Password Here");
-        jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 180, 257, 32));
+        jPanel2.add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 200, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/ADDDD.PNG"))); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 300));
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 310));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

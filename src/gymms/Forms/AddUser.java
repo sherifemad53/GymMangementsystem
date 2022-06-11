@@ -121,6 +121,8 @@ public class AddUser extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         FemaleRadioButton = new javax.swing.JRadioButton();
         returnmainpageButton = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        branchComboBox = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -161,7 +163,7 @@ public class AddUser extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, 520, -1));
+        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 520, -1));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -249,12 +251,12 @@ public class AddUser extends javax.swing.JFrame {
                 MaleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(MaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, -1, -1));
+        jPanel1.add(MaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 17)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Gender:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
 
         GenderButtonGroup.add(FemaleRadioButton);
         FemaleRadioButton.setFont(new java.awt.Font("Arial Black", 0, 17)); // NOI18N
@@ -265,7 +267,7 @@ public class AddUser extends javax.swing.JFrame {
                 FemaleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(FemaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 480, -1, -1));
+        jPanel1.add(FemaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, -1, -1));
 
         returnmainpageButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         returnmainpageButton.setText("Back To Mainpage");
@@ -277,8 +279,22 @@ public class AddUser extends javax.swing.JFrame {
         });
         jPanel1.add(returnmainpageButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 13, 160, 40));
 
+        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Branch:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 480, -1, -1));
+
+        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchComboBox.setToolTipText("Select Suitable Subscription");
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, 302, -1));
+
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/DumbleForUSer.PNG"))); // NOI18N
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 590));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 620, 590));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -332,6 +348,10 @@ public class AddUser extends javax.swing.JFrame {
         MaleRadioButton.setActionCommand("Male");
     }//GEN-LAST:event_MaleRadioButtonActionPerformed
 
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_branchComboBoxActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -373,11 +393,13 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.ButtonGroup GenderButtonGroup;
     private javax.swing.JRadioButton MaleRadioButton;
     private javax.swing.JTextField addressTextField;
+    private javax.swing.JComboBox<String> branchComboBox;
     private javax.swing.JPasswordField confpasswordTextField;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

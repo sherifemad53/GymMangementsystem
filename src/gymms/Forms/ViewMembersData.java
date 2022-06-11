@@ -127,7 +127,11 @@ public class ViewMembersData extends javax.swing.JFrame {
         AddProgramButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         subscribeComboBox = new javax.swing.JComboBox<>();
-        resubscribeButton = new javax.swing.JButton();
+        branchButton = new javax.swing.JButton();
+        branchComboBox = new javax.swing.JComboBox<>();
+        resubscribeButton1 = new javax.swing.JButton();
+        countTextField1 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -197,7 +201,7 @@ public class ViewMembersData extends javax.swing.JFrame {
                 AddProgramButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(AddProgramButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 227, 126, 32));
+        jPanel1.add(AddProgramButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 126, 32));
 
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
@@ -205,7 +209,7 @@ public class ViewMembersData extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 278, 79, -1));
+        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 79, -1));
 
         subscribeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,14 +218,38 @@ public class ViewMembersData extends javax.swing.JFrame {
         });
         jPanel1.add(subscribeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 185, 127, -1));
 
-        resubscribeButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        resubscribeButton.setText("Resubscribe");
-        resubscribeButton.addActionListener(new java.awt.event.ActionListener() {
+        branchButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        branchButton.setText("Changebranch");
+        branchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resubscribeButtonActionPerformed(evt);
+                branchButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(resubscribeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 186, 127, -1));
+        jPanel1.add(branchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 127, -1));
+
+        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchComboBox.setToolTipText("Select Suitable Subscription");
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                branchComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 130, 20));
+
+        resubscribeButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        resubscribeButton1.setText("Resubscribe");
+        resubscribeButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resubscribeButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(resubscribeButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 186, 127, -1));
+        jPanel1.add(countTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 120, 20));
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Total members:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 280, 150, 40));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/ADDDD.PNG"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -264,7 +292,7 @@ public class ViewMembersData extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -329,12 +357,20 @@ public class ViewMembersData extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_subscribeComboBoxActionPerformed
 
-    private void resubscribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resubscribeButtonActionPerformed
+    private void branchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButtonActionPerformed
         if (loginidx == 3) {
             String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
             receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
         }
-    }//GEN-LAST:event_resubscribeButtonActionPerformed
+    }//GEN-LAST:event_branchButtonActionPerformed
+
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_branchComboBoxActionPerformed
+
+    private void resubscribeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resubscribeButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_resubscribeButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -374,8 +410,12 @@ public class ViewMembersData extends javax.swing.JFrame {
     private javax.swing.JButton AddProgramButton;
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton SearchButton;
+    private javax.swing.JButton branchButton;
+    private javax.swing.JComboBox<String> branchComboBox;
+    private javax.swing.JTextField countTextField1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
@@ -384,7 +424,7 @@ public class ViewMembersData extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem mainpageMenuItem;
     private javax.swing.JButton refreshButton;
-    private javax.swing.JButton resubscribeButton;
+    private javax.swing.JButton resubscribeButton1;
     private javax.swing.JTextField searchTextField;
     private javax.swing.JComboBox<String> subscribeComboBox;
     // End of variables declaration//GEN-END:variables

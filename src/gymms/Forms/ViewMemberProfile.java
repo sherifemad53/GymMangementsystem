@@ -126,6 +126,8 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         subscribeButton = new javax.swing.JButton();
         subscribeComboBox = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
+        branchTextField1 = new javax.swing.JTextField();
+        jLabel19 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -345,6 +347,15 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/GENDER.PNG"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 41, -1, -1));
 
+        branchTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchTextField1.setToolTipText("MEmber's Gender");
+        jPanel1.add(branchTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 232, -1));
+
+        jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Branch:");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
+
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 720));
 
@@ -529,6 +540,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     public javax.swing.JTextField SubscribtionTextField;
     public javax.swing.JTextField addressTextField;
     public javax.swing.JTextField ageTextField;
+    public javax.swing.JTextField branchTextField1;
     private javax.swing.JButton editButton;
     public javax.swing.JTextField emailTextField;
     public javax.swing.JTextField genderTextField;
@@ -545,6 +557,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
