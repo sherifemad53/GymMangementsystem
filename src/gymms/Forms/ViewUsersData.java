@@ -296,8 +296,8 @@ public class ViewUsersData extends javax.swing.JFrame {
 
     private void branchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButtonActionPerformed
         if (loginidx == 3) {
-            String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
-            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
+//            String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
+//            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
         }
     }//GEN-LAST:event_branchButtonActionPerformed
 
