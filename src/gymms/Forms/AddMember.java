@@ -1,5 +1,6 @@
 package gymms.Forms;
 
+import gymms.Gymms;
 import gymms.classes.Receptionist;
 import gymms.classes.Member;
 import gymms.classes.User;
@@ -31,6 +32,8 @@ public class AddMember extends javax.swing.JFrame {
     ArrayList<String> trainerlist = new ArrayList<>();
 
     ArrayList<String> subscribelist = new ArrayList<>();
+    ArrayList<String> branchlist = new ArrayList<>();
+    
 
     public int trainermodifyCombobox() {
         int counter = 0;
@@ -61,6 +64,22 @@ public class AddMember extends javax.swing.JFrame {
         }
         return 0;
     }
+    Gymms gymms =new Gymms();
+    
+    public int branchmodifyCombobox() {
+        int counter = 0;
+        try {
+            ResultSet rss = gymms.getbranch();
+            while (rss.next()) {
+                branchlist.add(rss.getString("GYM_NAME"));
+                counter++;
+            }
+            return counter;
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     int size;
 
     public AddMember() {
@@ -71,8 +90,13 @@ public class AddMember extends javax.swing.JFrame {
         }
         size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
-            branchComboBox.addItem(subscribelist.get(i));
+            subComboBox.addItem(subscribelist.get(i));
         }
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(branchlist.get(i));
+        }
+       
     }
 
     int loginidx;
@@ -86,8 +110,13 @@ public class AddMember extends javax.swing.JFrame {
         }
         size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
-            branchComboBox.addItem(subscribelist.get(i));
+            subComboBox.addItem(subscribelist.get(i));
         }
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(branchlist.get(i));
+        }
+       
     }
     
     utilsFunctions utilfuncs =new utilsFunctions();
@@ -113,11 +142,11 @@ public class AddMember extends javax.swing.JFrame {
                             Date.valueOf(birthdateTextField.getText()),
                             (Integer) (weightSpinner.getValue()),
                             (Integer) heightSpinner.getValue(),
-                            Long.parseLong(phoneTextField.getText()),
+                            phoneTextField.getText(),
                             emailTextField.getText(),
                             Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(), GenderbuttonGroup.getSelection().getActionCommand()
                     );
-                    boolean flag = receptionist.addmember(member, branchComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString());
+                    boolean flag = receptionist.addmember(member, subComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString(),branchComboBox.getSelectedItem().toString());
                     if (flag) {
                         JOptionPane.showMessageDialog(null, "ADDED");
                     } else {
@@ -147,7 +176,7 @@ public class AddMember extends javax.swing.JFrame {
         lnameTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         Apt_noTextField = new javax.swing.JTextField();
-        branchComboBox = new javax.swing.JComboBox<>();
+        subComboBox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -163,7 +192,7 @@ public class AddMember extends javax.swing.JFrame {
         birthdateTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        subscribtionComboBox3 = new javax.swing.JComboBox<>();
+        branchComboBox = new javax.swing.JComboBox<>();
         fnameTextField = new javax.swing.JTextField();
         CityTextField1 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
@@ -217,7 +246,7 @@ public class AddMember extends javax.swing.JFrame {
                 phoneTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 302, -1));
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 300, -1));
 
         lnameTextField.setToolTipText("Enter Member's Name");
         lnameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -243,14 +272,14 @@ public class AddMember extends javax.swing.JFrame {
         });
         jPanel1.add(Apt_noTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 30, -1));
 
-        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        branchComboBox.setToolTipText("Select Suitable Subscription");
-        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
+        subComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        subComboBox.setToolTipText("Select Suitable Subscription");
+        subComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                branchComboBoxActionPerformed(evt);
+                subComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 302, -1));
+        jPanel1.add(subComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 460, 302, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -351,14 +380,14 @@ public class AddMember extends javax.swing.JFrame {
         jLabel15.setText("Subscribtion  :");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
 
-        subscribtionComboBox3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        subscribtionComboBox3.setToolTipText("Select Suitable Subscription");
-        subscribtionComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchComboBox.setToolTipText("Select Suitable Subscription");
+        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subscribtionComboBox3ActionPerformed(evt);
+                branchComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(subscribtionComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 302, -1));
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 302, -1));
 
         fnameTextField.setToolTipText("Enter Member's Name");
         fnameTextField.addActionListener(new java.awt.event.ActionListener() {
@@ -426,9 +455,9 @@ public class AddMember extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Apt_noTextFieldActionPerformed
 
-    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
+    private void subComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_branchComboBoxActionPerformed
+    }//GEN-LAST:event_subComboBoxActionPerformed
 
     private void lnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameTextFieldActionPerformed
         // TODO add your handling code here:
@@ -451,9 +480,9 @@ public class AddMember extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_trainerComboBoxActionPerformed
 
-    private void subscribtionComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribtionComboBox3ActionPerformed
+    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_subscribtionComboBox3ActionPerformed
+    }//GEN-LAST:event_branchComboBoxActionPerformed
 
     private void birthdateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthdateTextFieldActionPerformed
         // TODO add your handling code here:
@@ -545,7 +574,7 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JLabel pic;
     private javax.swing.JButton returnmainpageButton;
-    private javax.swing.JComboBox<String> subscribtionComboBox3;
+    private javax.swing.JComboBox<String> subComboBox;
     private javax.swing.JComboBox<String> trainerComboBox;
     private javax.swing.JSpinner weightSpinner;
     // End of variables declaration//GEN-END:variables

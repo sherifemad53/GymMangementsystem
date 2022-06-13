@@ -13,14 +13,14 @@ public class Receptionist extends User {
     public Receptionist() {
     }
 
-    public boolean addmember(Member member, String PACKAGENAME, String USERNAME) {
+    public boolean addmember(Member member, String PACKAGENAME, String USERNAME,String branch) {
         StringTokenizer st = new StringTokenizer(USERNAME," ");
         ArrayList<String> usernamelist = new ArrayList<>();
         while (st.hasMoreTokens()) {  
             usernamelist.add(st.nextToken());  
          }  
         boolean flag = false;
-        flag = dbmanager.addmember(member.getFNAME(),member.getLNAME(),member.getBIRTHDATE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getApt_no(), member.getStreet(),member.getCity(),member.getGENDER());
+        flag = dbmanager.addmember(member.getFNAME(),member.getLNAME(),member.getBIRTHDATE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getApt_no(), member.getStreet(),member.getCity(),member.getGENDER(),branch);
         if (flag) {
             dbmanager.subscribe(usernamelist.get(0),usernamelist.get(1) ,PACKAGENAME, member.getFNAME(),member.getLNAME());
         }

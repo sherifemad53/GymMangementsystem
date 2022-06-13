@@ -27,7 +27,7 @@ public class AddUser extends javax.swing.JFrame {
         jobtypelist.add("GYMOWNER");
         jobtypelist.add("TRANIER");
         jobtypelist.add("GYMMANAGER");
-        jobtypelist.add("RECIPTIONIST");
+        jobtypelist.add("RECEPTIONIST");
         return counter;
     }
 

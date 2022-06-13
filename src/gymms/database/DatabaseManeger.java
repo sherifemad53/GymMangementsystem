@@ -16,14 +16,28 @@ public class DatabaseManeger<neededtype> {
     ResultSet rs;
     int x;
 
-    public boolean addmember(String FNAME, String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER) {
+    public boolean addmember(String FNAME, String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, String PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER, String branch) {
         //TODO here we can use as method from slides for less sql command 
-        String register = "INSERT INTO MEMBERS (MEMBERS_FNAME,MEMBERS_LNAME,MEMBERS_BIRTHDATE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_EMAIL,MEMBERS_APT_NO,MEMBERS_STREET,MEMBERS_CITY,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        int branid = 0;
+        String branchid = "SELECT ID FROM GYM WHERE GYM_NAME=?";
+        String register = "INSERT INTO MEMBERS (MEMBERS_FNAME,MEMBERS_LNAME,MEMBERS_BIRTHDATE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_EMAIL,MEMBERS_APT_NO,MEMBERS_STREET,MEMBERS_CITY,MEMBERS_GENDER,GYM_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        String addphone = "INSERT INTO MEMBERPHONE (MEMBERPHONE_ID,PHONE_NUMBER) VALUES (?,?)";
+        //System.out.println("sdkjsd");
+        PreparedStatement ps2;
         try {
-            ps = con.prepareStatement(register);
+            //ps = con.prepareStatement(register);
             if (FNAME.isEmpty() || EMAIL.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Missing");
             } else {
+                ps2 = con.prepareStatement(branchid);
+                ps2.setString(1, branch);
+                rs = ps2.executeQuery();
+                rs.next();
+                branid=rs.getInt("ID");
+                
+                System.out.println("dakshbdfkajdsc");
+                ps = null;
+                ps = con.prepareStatement(register);
                 ps.setString(1, FNAME);
                 ps.setString(2, LNAME);
 
@@ -36,7 +50,13 @@ public class DatabaseManeger<neededtype> {
                 ps.setString(8, street);
                 ps.setString(9, city);
                 ps.setString(10, GENDER);
+                ps.setInt(11, branid);
+
                 int i = ps.executeUpdate();
+
+//                ps=con.prepareStatement(addphone);
+//                ps.setString(1, FNAME);
+//                ps.setString(2, LNAME);
                 return i > 0;
             }
         } catch (SQLException ex) {
@@ -228,6 +248,7 @@ public class DatabaseManeger<neededtype> {
     }
 
     public boolean adduser/*register*/(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, String CONFPASSWORD, int Apt_no, String street, String city, long PHONE, String JOBTYPE, String GENDER) {
+        String branchid = "SELECT ID FROM GYM WHERE GYM_NAME=?";
         String register = "INSERT INTO USERS (USERS_FNAME,USERS_LNAME,USERS_EMAIL,USERS_USERNAME,USERS_PASSWORD,USERS_APT_NO,USERS_STREET,USERS_CITY,USERS_GENDER,USERS_JOBTYPE) VALUES (?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement ps;
         try {
@@ -408,7 +429,7 @@ public class DatabaseManeger<neededtype> {
         return false;
     }
 
-    public boolean editmember(int MEMBERID, String fname, String lname, Date birthdate, int weight, int height, long phone, String email, int Apt_no, String street, String city, String gender) {
+    public boolean editmember(int MEMBERID, String fname, String lname, Date birthdate, int weight, int height, String phone, String email, int Apt_no, String street, String city, String gender) {
         String editquery = "UPDATE MEMBERS SET MEMBERS_NAME=?,MEMBERS_AGE=?,MEMBERS_WEIGHT=?,"
                 + "MEMBERS_HEIGHT=?,MEMBERS_PHONE=?,MEMBERS_EMAIL=?,MEMBERS_ADDRESS=?,MEMBERS_GENDER=? WHERE MEMBERS_ID=?";
         try {
@@ -419,7 +440,7 @@ public class DatabaseManeger<neededtype> {
             ps.setDate(3, birthdate);
             ps.setInt(4, weight);
             ps.setInt(5, height);
-            ps.setLong(6, phone);
+            ps.setString(6, phone);
             ps.setString(7, email);
             ps.setInt(8, Apt_no);
             ps.setString(9, street);

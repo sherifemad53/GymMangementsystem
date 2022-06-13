@@ -11,10 +11,10 @@ public class Member {
     private String FNAME,LNAME;
     private int ID,WEIGHT, HEIGHT,Apt_no;
     Date BIRTHDATE;
-    private long PHONE;
-    private String EMAIL, street,city, GENDER, PROGRAM;
+    private String PHONE;
+    private String EMAIL, street,city, GENDER, PROGRAM,BRANCH;
 
-    public Member(String FNAME,String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER) {
+    public Member(String FNAME,String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, String PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER) {
         this.FNAME = FNAME;
         this.LNAME = LNAME;
         
@@ -27,6 +27,7 @@ public class Member {
         this.street = street;
         this.city = city;
         this.GENDER = GENDER;
+        
     }
 
     public boolean generateProgram(String PROGRAM, String NAME) {
@@ -61,7 +62,7 @@ public class Member {
     }
 
     public boolean addmember() {
-        return dbmanager.addmember(FNAME,LNAME,BIRTHDATE, WEIGHT, HEIGHT, PHONE, EMAIL, Apt_no, street, city, GENDER);
+        return dbmanager.addmember(FNAME,LNAME,BIRTHDATE, WEIGHT, HEIGHT, PHONE, EMAIL, Apt_no, street, city, GENDER, BRANCH);
     }
 
     //overloading 
@@ -114,13 +115,14 @@ public class Member {
         this.WEIGHT = WEIGHT;
     }
 
-    public long getPHONE() {
+    public String getPHONE() {
         return PHONE;
     }
 
-    public void setPHONE(long PHONE) {
+    public void setPHONE(String PHONE) {
         this.PHONE = PHONE;
     }
+
 
     public String getEMAIL() {
         return EMAIL;

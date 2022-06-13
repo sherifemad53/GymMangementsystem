@@ -517,7 +517,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 try {
                     Member member = new Member(fnameTextField.getText(),lnameTextField.getText(),
                             Date.valueOf(birthTextField.getText()), Integer.parseInt(weightTextField.getText()),
-                            Integer.parseInt(heightTextField.getText()), Long.parseLong(phoneTextField.getText()),
+                            Integer.parseInt(heightTextField.getText()), phoneTextField.getText(),
                             emailTextField.getText(), Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(), genderTextField.getText());
                     member.setID(Integer.parseInt(idTextField.getText()));
                     if (receptionist.editmember(member)) {
