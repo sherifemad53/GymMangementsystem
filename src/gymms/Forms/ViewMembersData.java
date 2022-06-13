@@ -1,11 +1,16 @@
 package gymms.Forms;
 
+import gymms.Gymms;
 import gymms.classes.Receptionist;
 import gymms.classes.User;
 import gymms.database.DatabaseManeger;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import static java.util.Calendar.DATE;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -20,6 +25,8 @@ public class ViewMembersData extends javax.swing.JFrame {
     Receptionist receptionist = new Receptionist();
 
     ArrayList<String> subscribelist = new ArrayList<>();
+    ArrayList<String> branchlist = new ArrayList<>();
+    
     gymms.classes.Package packagee = new gymms.classes.Package();
 
     public int subcribemodifyCombobox() {
@@ -36,6 +43,22 @@ public class ViewMembersData extends javax.swing.JFrame {
         }
         return 0;
     }
+    
+    public int branchmodifyCombobox() {
+        Gymms gymms =new Gymms();
+        int counter = 0;
+        try {
+            ResultSet rss = gymms.getbranch();
+            while (rss.next()) {
+                branchlist.add(rss.getString("GYM_NAME"));
+                counter++;
+            }
+            return counter;
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
 
     public void viewdata() {
         DefaultTableModel tbmodel = (DefaultTableModel) jTable1.getModel();
@@ -44,14 +67,16 @@ public class ViewMembersData extends javax.swing.JFrame {
             ResultSet rss = user.viewMemberdata();
             while (rss.next()) {
                 String ID=Integer.toString(rss.getInt("MEMBERS_ID"));
-                String username = rss.getString("USERS_NAME");
-                String membername = rss.getString("MEMBERS_NAME");
+                String trainerfname = rss.getString("USERS_FNAME"); 
+                String trainerlname = rss.getString("USERS_LNAME");
+                String memberfname = rss.getString("MEMBERS_FNAME");
+                String memberlname = rss.getString("MEMBERS_LNAME");
                 String packagename = rss.getString("PACKAGE_NAME");
                 String packagecost = rss.getString("PACKAGE_COST");
                 String startdate = rss.getDate("STARTDATE").toString();
                 String enddate = rss.getDate("ENDDATE").toString();
                 String program = rss.getString("MEMBERS_PROGRAM");
-                String tbdata[] = {ID,membername, username, packagename, packagecost, startdate, enddate, program};
+                String tbdata[] = {ID,memberfname, memberlname,trainerfname,trainerlname, packagename, packagecost, startdate, enddate, program};
                 tbmodel.addRow(tbdata);
             }
         } catch (SQLException ex) {
@@ -61,6 +86,7 @@ public class ViewMembersData extends javax.swing.JFrame {
 
     public boolean search_member_ID(int loginidx) {
         ResultSet rss2 = receptionist.SearchMember(searchTextField.getText());
+        int Age;
         if (rss2 == null) {
             JOptionPane.showMessageDialog(null, "Not Found....");
             return false;
@@ -69,13 +95,20 @@ public class ViewMembersData extends javax.swing.JFrame {
             try {
                 int ID = rss2.getInt("MEMBERS_ID");
                 obj.idTextField.setText(ID + "");
-                String Name = rss2.getString("MEMBERS_NAME");
-                obj.nameTextField.setText(Name);
-                String Age = rss2.getString("MEMBERS_AGE");
-                obj.ageTextField.setText(Age);
+                String fname = rss2.getString("MEMBERS_FNAME");
+                obj.fnameTextField.setText(fname);
+                String lname = rss2.getString("MEMBERS_LNAME");
+                obj.lnameTextField.setText(lname);
+                Date birthdate = rss2.getDate("MEMBERS_BIRTHDATE");
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+                LocalDateTime now = LocalDateTime.now();
+                Age = now.getYear() - birthdate.getYear();
+                obj.birthTextField.setText(Integer.toString(Age));
                 obj.emailTextField.setText(rss2.getString("MEMBERS_EMAIL"));
-                obj.phoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
-                obj.addressTextField.setText(rss2.getString("MEMBERS_ADDRESS"));
+                //obj.phoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
+                obj.Apt_noTextField.setText(rss2.getString("MEMBERS_APT_NO"));
+                obj.StreetTextField2.setText(rss2.getString("MEMBERS_STREET"));
+                obj.CityTextField1.setText(rss2.getString("MEMBERS_CITY"));
                 obj.heightTextField.setText(rss2.getString("MEMBERS_HEIGHT"));
                 obj.ProgramTextArea.setText(rss2.getString("MEMBERS_PROGRAM"));
                 obj.weightTextField.setText(rss2.getString("MEMBERS_WEIGHT"));
@@ -169,7 +202,7 @@ public class ViewMembersData extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Member Name", "Trainer Name", "Package Name", "Cost", "Start date", "End date", "Program"
+                "ID", "Member FName", "Member LName", "Trainer FName", "Trainer LName", "Package Name", "Cost", "Start date", "End date", "Program"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -323,8 +356,8 @@ public class ViewMembersData extends javax.swing.JFrame {
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         if (loginidx == 3) {
-            String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
-            receptionist.deletemember(membername);
+            String memberfname = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
+            receptionist.deletemember(memberfname);
             viewdata();
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
@@ -359,8 +392,8 @@ public class ViewMembersData extends javax.swing.JFrame {
 
     private void branchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButtonActionPerformed
         if (loginidx == 3) {
-            String membername = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0).toString();
-            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
+            String memberid = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), -1).toString();
+            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), memberid);
         }
     }//GEN-LAST:event_branchButtonActionPerformed
 

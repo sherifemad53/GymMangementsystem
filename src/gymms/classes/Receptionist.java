@@ -1,19 +1,28 @@
 package gymms.classes;
 
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
 public class Receptionist extends User {
 
-    public Receptionist(String NAME, String EMAIL, String USERNAME, String PASSWORD, String ADDRESS, int PHONE, String ROLENAME, String GENDER) {
-        super(NAME, EMAIL, USERNAME, PASSWORD, ADDRESS, PHONE, ROLENAME, GENDER);
+    public Receptionist(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, long PHONE, String ROLENAME, String GENDER) {
+        super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER);
     }
+
 
     public Receptionist() {
     }
 
     public boolean addmember(Member member, String PACKAGENAME, String USERNAME) {
+        StringTokenizer st = new StringTokenizer(USERNAME," ");
+        ArrayList<String> usernamelist = new ArrayList<>();
+        while (st.hasMoreTokens()) {  
+            usernamelist.add(st.nextToken());  
+         }  
         boolean flag = false;
-        flag = dbmanager.addmember(member.getNAME(), member.getAGE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getADDRESS(), member.getGENDER());
+        flag = dbmanager.addmember(member.getFNAME(),member.getLNAME(),member.getBIRTHDATE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getApt_no(), member.getStreet(),member.getCity(),member.getGENDER());
         if (flag) {
-            dbmanager.subscribe(USERNAME, PACKAGENAME, member.getNAME());
+            dbmanager.subscribe(usernamelist.get(0),usernamelist.get(1) ,PACKAGENAME, member.getFNAME(),member.getLNAME());
         }
         return flag;
     }
@@ -33,7 +42,7 @@ public class Receptionist extends User {
     }
 
     public boolean editmember(Member member) {
-        return getDbmanager().editmember(member.getID(), member.getNAME(), member.getAGE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getADDRESS(), member.getGENDER());
+        return getDbmanager().editmember(member.getID(), member.getFNAME(),member.getLNAME(),member.getBIRTHDATE(), member.getWEIGHT(), member.getHEIGHT(), member.getPHONE(), member.getEMAIL(), member.getApt_no(), member.getStreet(),member.getCity(), member.getGENDER());
     }
 
 }

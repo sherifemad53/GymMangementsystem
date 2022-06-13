@@ -17,9 +17,7 @@ public class ViewUsersData extends javax.swing.JFrame {
     Gymowner gymowner = new Gymowner();
 
     DatabaseManeger dbmanager = new DatabaseManeger();
-
     
-
     public void viewdata() {
         DefaultTableModel tbmodel = (DefaultTableModel) UserDataTable.getModel();
         tbmodel.setRowCount(0);
@@ -28,16 +26,18 @@ public class ViewUsersData extends javax.swing.JFrame {
             UserDataTable.removeAll();
             while (rss.next()) {
                 String id = Integer.toString(rss.getInt("USERS_ID"));
-                String name = rss.getString("USERS_NAME");
+                String fname = rss.getString("USERS_FNAME");
+                String lname = rss.getString("USERS_LNAME");
+                
                 String email = rss.getString("USERS_EMAIL");
                 String username = rss.getString("USERS_USERNAME");
                 String password = rss.getString("USERS_PASSWORD");
-                String address = rss.getString("USERS_ADDRESS");
-                String phone = Long.toString(rss.getLong("USERS_PHONE"));
-                String rolename = rss.getString("ROLE_NAME");
+                String address = rss.getString("USERS_APT_NO") + rss.getString("USERS_STREET")+rss.getString("USERS_CITY");
+                String phone = null; //Long.toString(rss.getLong("USERS_PHONE"));
+                String jobtype = rss.getString("USERS_JOBTYPE");
                 String gender = rss.getString("USERS_GENDER");
 
-                String tbdata[] = {id, name, email, username, password, address, phone, rolename, gender};
+                String tbdata[] = {id, fname,lname, email, username, password, address, phone, jobtype,gender};
 
                 tbmodel.addRow(tbdata);
             }
@@ -56,13 +56,17 @@ public class ViewUsersData extends javax.swing.JFrame {
             try {
                 int ID = rss2.getInt("USERS_ID");
                 obj.idTextField.setText(ID + "");
-                String Name = rss2.getString("USERS_NAME");
-                obj.nameTextField.setText(Name);
+                String fname = rss2.getString("USERS_FNAME");
+                obj.fnameTextField.setText(fname);
+                String lname = rss2.getString("USERS_LNAME");
+                obj.lnameTextField.setText(lname);
                 obj.emailTextField.setText(rss2.getString("USERS_EMAIL"));
-                obj.phoneTextField.setText(rss2.getString("USERS_PHONE"));
-                obj.addressTextField.setText(rss2.getString("USERS_ADDRESS"));
+                //obj.phoneTextField.setText(rss2.getString("USERS_PHONE"));
+                obj.Apt_noTextField.setText(rss2.getString("USERS_APT_NO"));
+                obj.StreetTextField2.setText(rss2.getString("USERS_STREET"));
+                obj.CityTextField1.setText(rss2.getString("USERS_CITY"));
                 obj.genderTextField.setText(rss2.getString("USERS_GENDER"));
-                obj.roleTextField.setText(rss2.getString("ROLE_NAME"));
+                obj.jobtypeTextField.setText(rss2.getString("USERS_JOBTYPE"));
                 obj.usernameTextField.setText(rss2.getString("USERS_USERNAME"));
                 obj.passwordTextField.setText(rss2.getString("USERS_PASSWORD"));
             } catch (SQLException ex) {
@@ -129,7 +133,7 @@ public class ViewUsersData extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Name", "Email", "Username", "Password", "Address", "Phone", "Role", "Gender"
+                "ID", "FName", "LName", "Email", "Username", "Password", "Address", "Phone", "Role", "Gender"
             }
         ));
         UserDataTable.setToolTipText("User Data Table");

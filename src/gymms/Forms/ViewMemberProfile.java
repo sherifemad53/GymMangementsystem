@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import gymms.classes.Receptionist;
 import gymms.classes.Trainer;
 import gymms.classes.User;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,11 +38,15 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     public ViewMemberProfile() {
         initComponents();
         idTextField.setEditable(false);
-        nameTextField.setEditable(false);
-        ageTextField.setEditable(false);
+        fnameTextField.setEditable(false);
+        lnameTextField.setEditable(false);
+        
+        birthTextField.setEditable(false);
         emailTextField.setEditable(false);
         phoneTextField.setEditable(false);
-        addressTextField.setEditable(false);
+        Apt_noTextField.setEditable(false);
+        StreetTextField2.setEditable(false);
+        CityTextField1.setEditable(false);
         heightTextField.setEditable(false);
         ProgramTextArea.setEditable(false);
         weightTextField.setEditable(false);
@@ -63,11 +68,13 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         loginid = loginidx;
         initComponents();
         idTextField.setEditable(false);
-        nameTextField.setEditable(false);
-        ageTextField.setEditable(false);
+        fnameTextField.setEditable(false);
+        birthTextField.setEditable(false);
         emailTextField.setEditable(false);
         phoneTextField.setEditable(false);
-        addressTextField.setEditable(false);
+        Apt_noTextField.setEditable(false);
+        StreetTextField2.setEditable(false);
+        CityTextField1.setEditable(false);
         heightTextField.setEditable(false);
         ProgramTextArea.setEditable(false);
         weightTextField.setEditable(false);
@@ -90,11 +97,10 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         idTextField = new javax.swing.JTextField();
-        nameTextField = new javax.swing.JTextField();
-        ageTextField = new javax.swing.JTextField();
+        fnameTextField = new javax.swing.JTextField();
+        birthTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         phoneTextField = new javax.swing.JTextField();
-        addressTextField = new javax.swing.JTextField();
         weightTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -128,6 +134,15 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         branchTextField1 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        lnameTextField = new javax.swing.JTextField();
+        nameTextField1 = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        CityTextField1 = new javax.swing.JTextField();
+        jLabel22 = new javax.swing.JLabel();
+        StreetTextField2 = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        Apt_noTextField = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -148,36 +163,32 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 idTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(idTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 230, 232, -1));
+        jPanel1.add(idTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 230, 370, -1));
 
-        nameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        nameTextField.setToolTipText("Member's Name");
-        jPanel1.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 265, 232, -1));
+        fnameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        fnameTextField.setToolTipText("Member's Name");
+        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 265, 370, -1));
 
-        ageTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        ageTextField.setToolTipText("Member's Age");
-        ageTextField.addActionListener(new java.awt.event.ActionListener() {
+        birthTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        birthTextField.setToolTipText("Member's Age");
+        birthTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ageTextFieldActionPerformed(evt);
+                birthTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(ageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 300, 232, -1));
+        jPanel1.add(birthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, 370, -1));
 
         emailTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         emailTextField.setToolTipText("Member's Email");
-        jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 335, 232, -1));
+        jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 370, -1));
 
         phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         phoneTextField.setToolTipText("Member's Phone");
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 370, 232, -1));
-
-        addressTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        addressTextField.setToolTipText("Member's Address");
-        jPanel1.add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 404, 232, -1));
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 370, -1));
 
         weightTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         weightTextField.setToolTipText("Member's Date");
-        jPanel1.add(weightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 437, 232, -1));
+        jPanel1.add(weightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 490, 370, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -186,42 +197,42 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Name:");
+        jLabel3.setText("Fname:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 265, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Age:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 300, -1, -1));
+        jLabel4.setText("birth:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 350, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Email :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 335, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 390, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Phone:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(614, 370, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 420, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Address :");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 404, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 460, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Weight:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 437, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 490, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Height:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 472, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 530, -1, -1));
 
         heightTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         heightTextField.setToolTipText("Member's Height");
-        jPanel1.add(heightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 472, 232, -1));
+        jPanel1.add(heightTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 530, 370, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
@@ -274,7 +285,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 PrintButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(PrintButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 560, 107, 38));
+        jPanel1.add(PrintButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 610, 107, 38));
 
         jLabel14.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
@@ -283,12 +294,12 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
         genderTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         genderTextField.setToolTipText("MEmber's Gender");
-        jPanel1.add(genderTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 507, 232, -1));
+        jPanel1.add(genderTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, 370, -1));
 
         jLabel15.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Gender:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 507, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 560, -1, -1));
 
         editButton.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         editButton.setText("Edit");
@@ -298,7 +309,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 editButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 560, 107, 38));
+        jPanel1.add(editButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 610, 107, 38));
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton2.setText("Delete");
@@ -308,7 +319,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 560, 107, 38));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 610, 107, 38));
 
         ProgramTextArea.setColumns(20);
         ProgramTextArea.setRows(5);
@@ -330,7 +341,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 saveButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 610, 107, 42));
+        jPanel1.add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 660, 107, 42));
 
         subscribeButton.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         subscribeButton.setText("Resubscribe");
@@ -349,15 +360,67 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
         branchTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         branchTextField1.setToolTipText("MEmber's Gender");
-        jPanel1.add(branchTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 232, -1));
+        jPanel1.add(branchTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 370, -1));
 
         jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
         jLabel19.setText("Branch:");
         jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 190, -1, -1));
 
+        jLabel21.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Lname:");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 310, -1, -1));
+
+        lnameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lnameTextField.setToolTipText("Member's Name");
+        jPanel1.add(lnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 370, -1));
+
+        nameTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        nameTextField1.setToolTipText("Member's Name");
+        jPanel1.add(nameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(702, 265, 232, -1));
+
+        jLabel20.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Fname:");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(612, 265, -1, -1));
+
+        CityTextField1.setToolTipText("Enter Member's Address");
+        CityTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CityTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CityTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 460, 100, -1));
+
+        jLabel22.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("City:");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 460, -1, -1));
+
+        StreetTextField2.setToolTipText("Enter Member's Address");
+        StreetTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StreetTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(StreetTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 460, 100, -1));
+
+        jLabel23.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Street:");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 460, -1, -1));
+
+        Apt_noTextField.setToolTipText("Enter Member's Address");
+        Apt_noTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Apt_noTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Apt_noTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, 40, -1));
+
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
-        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 980, 720));
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 720));
 
         jMenu1.setText("File");
 
@@ -397,8 +460,8 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
     private void PrintButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintButtonActionPerformed
         PrintMember obj = new PrintMember();
-        obj.MemberTextArea.setText("ID :\t" + idTextField.getText() + "\nName :\t" + nameTextField.getText() + "\nAge :\t" + ageTextField.getText() + "\nEmail"
-                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + addressTextField.getText() + "\nWeight :\t" + weightTextField.getText()
+        obj.MemberTextArea.setText("ID :\t" + idTextField.getText() + "\nFname :\t" + fnameTextField.getText()+ "\nLname :\t" + lnameTextField.getText() + "\nAge :\t" + birthTextField.getText() + "\nEmail"
+                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + Apt_noTextField.getText()+ StreetTextField2.getText() + CityTextField1.getText() + "\nWeight :\t" + weightTextField.getText()
                 + "\nHeight :\t" + heightTextField.getText() + "\nGender :\t" + genderTextField.getText() + "\nSubsribtion :\t" + SubscribtionTextField.getText() + ""
                 + "\nCost :\t" + CostTextField.getText() + "\nStart Date :+\t" + StartDateTextField.getText() + "\nEnd Date :\t" + EndDateTextField.getText() + "\nProgram :\n\n" + ProgramTextArea.getText());
         obj.setVisible(true);
@@ -411,11 +474,17 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         //   loginid = 2;
         if (loginid == 3) {
-            nameTextField.setEditable(true);
-            ageTextField.setEditable(true);
+            fnameTextField.setEditable(true);
+            lnameTextField.setEditable(true);
+            
+            birthTextField.setEditable(true);
+            
+            
             emailTextField.setEditable(true);
             phoneTextField.setEditable(true);
-            addressTextField.setEditable(true);
+            Apt_noTextField.setEditable(true);
+            StreetTextField2.setEditable(true);
+            CityTextField1.setEditable(true);
             heightTextField.setEditable(true);
             weightTextField.setEditable(true);
             genderTextField.setEditable(true);
@@ -440,16 +509,16 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (loginid == 3) {
-            if (utilfuncs.checkname(nameTextField.getText())
+            if (utilfuncs.checkname(fnameTextField.getText())
                     && utilfuncs.checkemail(emailTextField.getText())
                     && utilfuncs.checkphone(phoneTextField.getText())
-                    && utilfuncs.checkage(ageTextField.getText())
-                    && utilfuncs.checkaddress(addressTextField.getText())) {
+                    && utilfuncs.checkage(birthTextField.getText())
+                    && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " +CityTextField1.getText())) {
                 try {
-                    Member member = new Member(nameTextField.getText(),
-                            Integer.parseInt(ageTextField.getText()), Integer.parseInt(weightTextField.getText()),
+                    Member member = new Member(fnameTextField.getText(),lnameTextField.getText(),
+                            Date.valueOf(birthTextField.getText()), Integer.parseInt(weightTextField.getText()),
                             Integer.parseInt(heightTextField.getText()), Long.parseLong(phoneTextField.getText()),
-                            emailTextField.getText(), addressTextField.getText(), genderTextField.getText());
+                            emailTextField.getText(), Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(), genderTextField.getText());
                     member.setID(Integer.parseInt(idTextField.getText()));
                     if (receptionist.editmember(member)) {
                         JOptionPane.showMessageDialog(null, "Editted successfully...");
@@ -460,7 +529,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
             } else if (loginid == 2) {
                 Trainer trainer = new Trainer();
                 try {
-                    if (trainer.generateprogram(nameTextField.getText(), ProgramTextArea.getText())) {
+                    if (trainer.generateprogram(fnameTextField.getText(), ProgramTextArea.getText())) {
                         JOptionPane.showMessageDialog(null, "Editted successfully...");
                     }
                 } catch (ArithmeticException ex) {
@@ -471,7 +540,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void subscribeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribeButtonActionPerformed
-        String membername = nameTextField.getText();
+        String membername = fnameTextField.getText();
         receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), membername);
         User user = new User();
 
@@ -487,9 +556,21 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_subscribeButtonActionPerformed
 
-    private void ageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTextFieldActionPerformed
+    private void birthTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ageTextFieldActionPerformed
+    }//GEN-LAST:event_birthTextFieldActionPerformed
+
+    private void CityTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CityTextField1ActionPerformed
+
+    private void StreetTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StreetTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StreetTextField2ActionPerformed
+
+    private void Apt_noTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Apt_noTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Apt_noTextFieldActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -531,18 +612,21 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextField Apt_noTextField;
+    public javax.swing.JTextField CityTextField1;
     public javax.swing.JTextField CostTextField;
     public javax.swing.JTextField EndDateTextField;
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton PrintButton;
     public javax.swing.JTextArea ProgramTextArea;
     public javax.swing.JTextField StartDateTextField;
+    public javax.swing.JTextField StreetTextField2;
     public javax.swing.JTextField SubscribtionTextField;
-    public javax.swing.JTextField addressTextField;
-    public javax.swing.JTextField ageTextField;
+    public javax.swing.JTextField birthTextField;
     public javax.swing.JTextField branchTextField1;
     private javax.swing.JButton editButton;
     public javax.swing.JTextField emailTextField;
+    public javax.swing.JTextField fnameTextField;
     public javax.swing.JTextField genderTextField;
     public javax.swing.JTextField heightTextField;
     public javax.swing.JTextField idTextField;
@@ -559,6 +643,10 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -571,7 +659,8 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField nameTextField;
+    public javax.swing.JTextField lnameTextField;
+    public javax.swing.JTextField nameTextField1;
     public javax.swing.JTextField phoneTextField;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton subscribeButton;

@@ -1,25 +1,31 @@
 package gymms.classes;
 
 import gymms.database.DatabaseManeger;
+import java.sql.Date;
 
 public class Member {
 //TODO program in program
 
     DatabaseManeger dbmanager = new DatabaseManeger();
 
-    private String NAME;
-    private int ID, AGE, WEIGHT, HEIGHT;
+    private String FNAME,LNAME;
+    private int ID,WEIGHT, HEIGHT,Apt_no;
+    Date BIRTHDATE;
     private long PHONE;
-    private String EMAIL, ADDRESS, GENDER, PROGRAM;
+    private String EMAIL, street,city, GENDER, PROGRAM;
 
-    public Member(String NAME, int AGE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, String ADDRESS, String GENDER) {
-        this.NAME = NAME;
-        this.AGE = AGE;
+    public Member(String FNAME,String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER) {
+        this.FNAME = FNAME;
+        this.LNAME = LNAME;
+        
+        this.BIRTHDATE = BIRTHDATE;
         this.WEIGHT = WEIGHT;
         this.HEIGHT = HEIGHT;
         this.PHONE = PHONE;
         this.EMAIL = EMAIL;
-        this.ADDRESS = ADDRESS;
+        this.Apt_no = Apt_no;
+        this.street = street;
+        this.city = city;
         this.GENDER = GENDER;
     }
 
@@ -55,7 +61,7 @@ public class Member {
     }
 
     public boolean addmember() {
-        return dbmanager.addmember(NAME, AGE, WEIGHT, HEIGHT, PHONE, EMAIL, ADDRESS, GENDER);
+        return dbmanager.addmember(FNAME,LNAME,BIRTHDATE, WEIGHT, HEIGHT, PHONE, EMAIL, Apt_no, street, city, GENDER);
     }
 
     //overloading 
@@ -75,13 +81,30 @@ public class Member {
         this.ID = ID;
     }
 
-    public int getAGE() {
-        return AGE;
+    public String getFNAME() {
+        return FNAME;
     }
 
-    public void setAGE(int AGE) {
-        this.AGE = AGE;
+    public void setFNAME(String FNAME) {
+        this.FNAME = FNAME;
     }
+
+    public String getLNAME() {
+        return LNAME;
+    }
+
+    public void setLNAME(String LNAME) {
+        this.LNAME = LNAME;
+    }
+
+    public Date getBIRTHDATE() {
+        return BIRTHDATE;
+    }
+
+    public void setBIRTHDATE(Date BIRTHDATE) {
+        this.BIRTHDATE = BIRTHDATE;
+    }
+
 
     public int getWEIGHT() {
         return WEIGHT;
@@ -99,14 +122,6 @@ public class Member {
         this.PHONE = PHONE;
     }
 
-    public String getNAME() {
-        return NAME;
-    }
-
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
-    }
-
     public String getEMAIL() {
         return EMAIL;
     }
@@ -115,12 +130,31 @@ public class Member {
         this.EMAIL = EMAIL;
     }
 
-    public String getADDRESS() {
-        return ADDRESS;
+    public int getApt_no() {
+        return Apt_no;
     }
 
-    public void setADDRESS(String ADDRESS) {
-        this.ADDRESS = ADDRESS;
+    public void setApt_no(int Apt_no) {
+        this.Apt_no = Apt_no;
     }
+
+  
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
 
 }

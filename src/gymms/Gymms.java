@@ -4,6 +4,7 @@ import gymms.Forms.login;
 import gymms.database.DatabaseManeger;
 import gymms.database.javaconnect;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 public class Gymms {
     
@@ -32,6 +33,12 @@ public class Gymms {
     // change gym type 
     // add gym description
 
+    public ResultSet getbranch(){
+    
+        return dbmaneger.getbranch();
+  
+    }
+    
     public int getID() {
         return ID;
     }

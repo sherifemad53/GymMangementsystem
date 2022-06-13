@@ -52,7 +52,6 @@ public class Mainpage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         AddProgramButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         menubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         LogOutMenu = new javax.swing.JMenuItem();
@@ -129,9 +128,6 @@ public class Mainpage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/Webp.net-resizeimage.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/istockphoto-1213615964-170667a.PNG.jpg"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, -1, 490));
 
         FileMenu.setText("File");
         FileMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +250,6 @@ public class Mainpage extends javax.swing.JFrame {
     private javax.swing.JButton addpackageButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JMenuBar menubar;

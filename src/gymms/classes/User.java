@@ -7,9 +7,9 @@ public class User<needtype> {
 
     DatabaseManeger dbmanager = new DatabaseManeger();
 
-    protected int ID; 
+    protected int ID , Apt_no; 
     protected long PHONE;
-    protected String NAME, EMAIL, USERNAME, PASSWORD, ADDRESS, ROLENAME,GENDER;
+    protected String FNAME,LNAME, EMAIL, USERNAME, PASSWORD, street,city, ROLENAME,GENDER;
 
     public User(){
     }
@@ -22,13 +22,16 @@ public class User<needtype> {
         this.PHONE = PHONE;
     }
     
-    public User(String NAME, String EMAIL, String USERNAME, String PASSWORD, String ADDRESS, long PHONE, String ROLENAME,String GENDER) {
+    public User(String FNAME,String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, long PHONE, String ROLENAME,String GENDER) {
         this.PHONE = PHONE;
-        this.NAME = NAME;
+        this.FNAME = FNAME;
+        this.FNAME = FNAME;
         this.EMAIL = EMAIL;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
-        this.ADDRESS = ADDRESS;
+        this.Apt_no = Apt_no;
+        this.street = street;
+        this.city = city;
         this.ROLENAME = ROLENAME;
         this.GENDER=GENDER;
     }
@@ -37,9 +40,14 @@ public class User<needtype> {
         return dbmanager;
     }
 
-    public String getNAME() {
-        return NAME;
+    public String getFNAME() {
+        return FNAME;
     }
+    
+    public String getLNAME() {
+        return LNAME;
+    }
+    
 
     public String getEMAIL() {
         return EMAIL;
@@ -51,10 +59,6 @@ public class User<needtype> {
 
     public String getPASSWORD() {
         return PASSWORD;
-    }
-
-    public String getADDRESS() {
-        return ADDRESS;
     }
 
     public String getROLENAME() {
@@ -86,8 +90,11 @@ public class User<needtype> {
     }
 
 
-    public void setNAME(String NAME) {
-        this.NAME = NAME;
+    public void setFNAME(String FNAME) {
+        this.FNAME = FNAME;
+    }
+    public void setLNAME(String LNAME) {
+        this.LNAME = LNAME;
     }
 
     public void setEMAIL(String EMAIL) {
@@ -102,8 +109,28 @@ public class User<needtype> {
         this.PASSWORD = PASSWORD;
     }
 
-    public void setADDRESS(String ADDRESS) {
-        this.ADDRESS = ADDRESS;
+    public int getApt_no() {
+        return Apt_no;
+    }
+
+    public void setApt_no(int Apt_no) {
+        this.Apt_no = Apt_no;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public void setROLENAME(String ROLENAME) {

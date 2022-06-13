@@ -2,6 +2,7 @@ package gymms.database;
 
 import gymms.Gymms;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,22 +15,27 @@ public class DatabaseManeger<neededtype> {
     PreparedStatement ps;
     ResultSet rs;
     int x;
-    public boolean addmember(String NAME, int AGE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, String ADDRESS, String GENDER) {
+
+    public boolean addmember(String FNAME, String LNAME, Date BIRTHDATE, int WEIGHT, int HEIGHT, long PHONE, String EMAIL, int Apt_no, String street, String city, String GENDER) {
         //TODO here we can use as method from slides for less sql command 
-        String register = "INSERT INTO MEMBERS (MEMBERS_NAME,MEMBERS_AGE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_PHONE,MEMBERS_EMAIL,MEMBERS_ADDRESS,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?)";
+        String register = "INSERT INTO MEMBERS (MEMBERS_FNAME,MEMBERS_LNAME,MEMBERS_BIRTHDATE,MEMBERS_WEIGHT,MEMBERS_HEIGHT,MEMBERS_EMAIL,MEMBERS_APT_NO,MEMBERS_STREET,MEMBERS_CITY,MEMBERS_GENDER) VALUES (?,?,?,?,?,?,?,?,?,?)";
         try {
             ps = con.prepareStatement(register);
-            if (NAME.isEmpty() || EMAIL.isEmpty()) {
+            if (FNAME.isEmpty() || EMAIL.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Missing");
             } else {
-                ps.setString(1, NAME);
-                ps.setInt(2, AGE);
-                ps.setInt(3, WEIGHT);
-                ps.setInt(4, HEIGHT);
-                ps.setLong(5, PHONE);
+                ps.setString(1, FNAME);
+                ps.setString(2, LNAME);
+
+                ps.setDate(3, BIRTHDATE);
+                ps.setInt(4, WEIGHT);
+                ps.setInt(5, HEIGHT);
+
                 ps.setString(6, EMAIL);
-                ps.setString(7, ADDRESS);
-                ps.setString(8, GENDER);
+                ps.setInt(7, Apt_no);
+                ps.setString(8, street);
+                ps.setString(9, city);
+                ps.setString(10, GENDER);
                 int i = ps.executeUpdate();
                 return i > 0;
             }
@@ -86,16 +92,16 @@ public class DatabaseManeger<neededtype> {
                 int id = Integer.valueOf(nameOrid.toString());
                 ps = con.prepareStatement(searchid);
                 ps.setInt(1, id);
-                rs=ps.executeQuery();
-                if(rs.next()){
+                rs = ps.executeQuery();
+                if (rs.next()) {
                     return rs;
                 }
             } catch (NumberFormatException e) {
                 ps = con.prepareStatement(searchname);
                 ps.setString(1, nameOrid.toString());
                 ps.setString(2, nameOrid.toString());
-                rs=ps.executeQuery();
-                if(rs.next()){
+                rs = ps.executeQuery();
+                if (rs.next()) {
                     return rs;
                 }
             }
@@ -106,7 +112,7 @@ public class DatabaseManeger<neededtype> {
     }
 
     public ResultSet viewmembersdata() {
-        String viewquery = "SELECT USERS.USERS_NAME,MEMBERS.MEMBERS_ID,MEMBERS.MEMBERS_NAME ,PACKAGE.PACKAGE_NAME,PACKAGE.PACKAGE_COST,SUBSCRIBE.STARTDATE,SUBSCRIBE.ENDDATE,MEMBERS.MEMBERS_PROGRAM "
+        String viewquery = "SELECT USERS.USERS_FNAME, USERS.USERS_LNAME, MEMBERS.MEMBERS_ID,MEMBERS.MEMBERS_FNAME, MEMBERS.MEMBERS_LNAME ,PACKAGE.PACKAGE_NAME,PACKAGE.PACKAGE_COST,SUBSCRIBE.STARTDATE,SUBSCRIBE.ENDDATE,MEMBERS.MEMBERS_PROGRAM "
                 + "FROM USERS ,MEMBERS, PACKAGE, SUBSCRIBE "
                 + "WHERE SUBSCRIBE.MEMBERID=MEMBERS.MEMBERS_ID AND SUBSCRIBE.USERID=USERS.USERS_ID AND SUBSCRIBE.PACKAGEID=PACKAGE.PACKAGE_ID";
         try {
@@ -120,7 +126,7 @@ public class DatabaseManeger<neededtype> {
     }
 
     public ResultSet viewuserdata() {
-        String viewquery = "SELECT USERS.USERS_ID, USERS.USERS_NAME,USERS.USERS_EMAIL ,USERS.USERS_USERNAME ,USERS.USERS_PASSWORD,USERS.USERS_PHONE,USERS.USERS_ADDRESS, ROLE.ROLE_NAME, USERS.USERS_GENDER FROM USERS , ROLE WHERE USERS.ROLEID = ROLE.ROLE_ID ";
+        String viewquery = "SELECT * FROM USERS ";
         try {
             ps = con.prepareStatement(viewquery);
             rs = ps.executeQuery();
@@ -132,11 +138,11 @@ public class DatabaseManeger<neededtype> {
 
     }
 
-    public void subscribe(String USERNAME, String PACKAGENAME, String MEMBERNAME) {
+    public void subscribe(String USERFNAME, String USERLNAME, String PACKAGENAME, String MEMBERFNAME, String MEMBERLNAME) {
         int MEMBERID = 0, USERID = 0, PACKAGEID = 0, PACKAGEDURATION = 0;
 
-        String strMEMBERID = "SELECT MEMBERS_ID FROM MEMBERS WHERE MEMBERS_NAME = '" + MEMBERNAME + "'";
-        String strUSERID = "SELECT USERS_ID FROM USERS WHERE USERS_NAME = '" + USERNAME + "'";
+        String strMEMBERID = "SELECT MEMBERS_ID FROM MEMBERS WHERE MEMBERS_FNAME = '" + MEMBERFNAME + "' AND MEMBERS_LNAME = '" + MEMBERLNAME + "'";
+        String strUSERID = "SELECT USERS_ID FROM USERS WHERE USERS_FNAME = '" + USERFNAME + "' AND USERS_LNAME = '" + USERLNAME + "'";
         String strPACKAGE = "SELECT PACKAGE_ID,PACKAGE_DURATION FROM PACKAGE WHERE PACKAGE_NAME = '" + PACKAGENAME + "'";
         String sub = "INSERT INTO SUBSCRIBE (MEMBERID,USERID,PACKAGEID,STARTDATE,ENDDATE) VALUES(?,?,?,?,?)";
         try {
@@ -221,90 +227,81 @@ public class DatabaseManeger<neededtype> {
         return rslocal;
     }
 
-    public boolean adduser/*register*/(String NAME, String EMAIL, String USERNAME, String PASSWORD, String CONFPASSWORD, String ADDRESS, long PHONE, String ROLENAME, String GENDER) {
-        String register = "INSERT INTO USERS (USERS_NAME,USERS_EMAIL,USERS_USERNAME,USERS_PASSWORD,USERS_ADDRESS,USERS_PHONE,ROLEID,USERS_GENDER) VALUES (?,?,?,?,?,?,?,?) ";
-        String role = "SELECT ROLE_ID FROM ROLE WHERE ROLE_NAME = ?";
-        PreparedStatement ps2;
-
-        int ROLEID = 0;
+    public boolean adduser/*register*/(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, String CONFPASSWORD, int Apt_no, String street, String city, long PHONE, String JOBTYPE, String GENDER) {
+        String register = "INSERT INTO USERS (USERS_FNAME,USERS_LNAME,USERS_EMAIL,USERS_USERNAME,USERS_PASSWORD,USERS_APT_NO,USERS_STREET,USERS_CITY,USERS_GENDER,USERS_JOBTYPE) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps;
         try {
             ps = con.prepareStatement(register);
-            ps2 = con.prepareStatement(role);
-            if (NAME.isEmpty() || EMAIL.isEmpty() || USERNAME.isEmpty()
-                    || PASSWORD.isEmpty() || CONFPASSWORD.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Missing");
-            } else {
-                if (PASSWORD.equals(CONFPASSWORD)) {
-                    ps2.setString(1, ROLENAME);
-                    rs = ps2.executeQuery();
-                    if (rs.next()) {
-                        ROLEID = rs.getInt("ROLE_ID");
-                        System.out.println(ROLEID);
-                    }
-                    ps.setString(1, NAME);
-                    ps.setString(2, EMAIL);
-                    ps.setString(3, USERNAME);
-                    ps.setString(4, PASSWORD);
-                    ps.setString(5, ADDRESS);
-                    ps.setLong(6, PHONE);
-                    ps.setInt(7, ROLEID);
-                    ps.setString(8, GENDER);
-                    int i = ps.executeUpdate();
-                    return i > 0;
-                    //JOptionPane.showMessageDialog(null, "resgiter complete");
-                    //dispose();
-                    //new Mainpage().setVisible(true);
-                    //JOptionPane.showMessageDialog(null, "Resgiter failed......");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Password doesn't match.......");
-                }
-            }
+
+            System.out.println("hhhhhhhhhhh");
+            ps.setString(1, FNAME);
+            ps.setString(2, LNAME);
+            ps.setString(3, EMAIL);
+            ps.setString(4, USERNAME);
+            ps.setString(5, PASSWORD);
+            ps.setInt(6, Apt_no);
+            ps.setString(7, street);
+            ps.setString(8, city);
+            //ps.setLong(9, PHONE);
+            ps.setString(9, GENDER);
+            ps.setString(10, JOBTYPE);
+            int i = ps.executeUpdate();
+            return i > 0;
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
-            //System.out.println("Loginfailed");
         }
         return false;
     }
 
+    //1 for GYMOWNER 2 for TRAINER 3 for RECEPTIONIST 4 for GYMMANAGER
     public int login(String USERNAME, String PASSWORD) {
         String loginn = "SELECT * FROM Users WHERE USERS_USERNAME=? AND USERS_PASSWORD=?";
+        String temp;
         try {
             ps = con.prepareStatement(loginn);
             ps.setString(1, USERNAME);
             ps.setString(2, PASSWORD);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return rs.getInt("ROLEID");
+                temp = rs.getString("USERS_JOBTYPE");
+                System.out.println(temp);
+                if ("GYMOWNER".equals(temp)) {
+                    return 1;
+                }
+                if ("TRAINER".equals(temp)) {
+                    return 2;
+                }
+                if ("RECEPTIONIST".equals(temp)) {
+                    return 3;
+                }
+                if ("GYMMAMAGER".equals(temp)) {
+                    return 4;
+                }
             }
-            //JOptionPane.showMessageDialog(null, "Login sucessfull");
-            //dispose();
-            //new Mainpage().setVisible(true);
-            //JOptionPane.showMessageDialog(null, "Login failed.....");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
-            //System.out.println("Loginfailed");
         }
         return 0;
     }
 
     public ResultSet searchuser(neededtype nameOrid) {
-        String searchid = "SELECT * FROM USERS,ROLE WHERE USERS_ID =?";
-        String searchname = "SELECT * FROM USERS,ROLE WHERE USERS_NAME =? ";
+        String searchid = "SELECT * FROM USERS WHERE USERS_ID =?";
+        String searchname = "SELECT * FROM USERS WHERE USERS_FNAME =? AND USERS_FNAME =? ";
         try {
             try {
                 int id = Integer.valueOf(nameOrid.toString());
                 ps = con.prepareStatement(searchid);
                 ps.setInt(1, id);
-                rs=ps.executeQuery();
-                if(rs.next()){
+                rs = ps.executeQuery();
+                if (rs.next()) {
                     return rs;
                 }
             } catch (NumberFormatException e) {
                 ps = con.prepareStatement(searchname);
                 ps.setString(1, nameOrid.toString());
-                rs=ps.executeQuery();
-               if(rs.next()){
+                rs = ps.executeQuery();
+                if (rs.next()) {
                     return rs;
                 }
             }
@@ -314,11 +311,11 @@ public class DatabaseManeger<neededtype> {
         return null;
     }
 
-    public ResultSet getUser(String ROLENAME) {
-        String search = "SELECT USERS_NAME FROM USERS WHERE ROLEID = (SELECT ROLE_ID FROM ROLE WHERE ROLE_NAME = ?)";
+    public ResultSet getUser(String JOBTYPE) {
+        String search = "SELECT USERS_FNAME, USERS_LNAME FROM USERS WHERE USERS_JOBTYPE = ?";
         try {
             ps = con.prepareStatement(search);
-            ps.setString(1, ROLENAME);
+            ps.setString(1, JOBTYPE);
             rs = ps.executeQuery();
             return rs;
         } catch (SQLException ex) {
@@ -411,20 +408,24 @@ public class DatabaseManeger<neededtype> {
         return false;
     }
 
-    public boolean editmember(int MEMBERID, String name, int age, int weight, int height, long phone, String email, String address, String gender) {
+    public boolean editmember(int MEMBERID, String fname, String lname, Date birthdate, int weight, int height, long phone, String email, int Apt_no, String street, String city, String gender) {
         String editquery = "UPDATE MEMBERS SET MEMBERS_NAME=?,MEMBERS_AGE=?,MEMBERS_WEIGHT=?,"
                 + "MEMBERS_HEIGHT=?,MEMBERS_PHONE=?,MEMBERS_EMAIL=?,MEMBERS_ADDRESS=?,MEMBERS_GENDER=? WHERE MEMBERS_ID=?";
         try {
             ps = con.prepareStatement(editquery);
-            ps.setString(1, name);
-            ps.setInt(2, age);
-            ps.setInt(3, weight);
-            ps.setInt(4, height);
-            ps.setLong(5, phone);
-            ps.setString(6, email);
-            ps.setString(7, address);
-            ps.setString(8, gender);
-            ps.setInt(9, MEMBERID);
+            ps.setString(1, fname);
+            ps.setString(2, lname);
+
+            ps.setDate(3, birthdate);
+            ps.setInt(4, weight);
+            ps.setInt(5, height);
+            ps.setLong(6, phone);
+            ps.setString(7, email);
+            ps.setInt(8, Apt_no);
+            ps.setString(9, street);
+            ps.setString(10, city);
+            ps.setString(1, gender);
+            ps.setInt(11, MEMBERID);
             int i = ps.executeUpdate();
             return i > 0;
         } catch (SQLException ex) {
@@ -433,19 +434,23 @@ public class DatabaseManeger<neededtype> {
         return false;
     }
 
-    public boolean edituser(int userid, String name, String username, String password, String email, long phone, String address, String gender) {
-        String editquery = "UPDATE USERS SET USERS_NAME=?,USERS_USERNAME=?,USERS_PASSWORD=?,"
+    public boolean edituser(int userid, String fname, String lname, String username, String password, String email, long phone, int Apt_no, String street, String city, String gender) {
+        String editquery = "UPDATE USERS SET USERS_FNAME=?,USERS_LNAME=?, ,USERS_USERNAME=?,USERS_PASSWORD=?,"
                 + "USERS_EMAIL=?,USERS_PHONE=?,USERS_ADDRESS=?,USERS_GENDER=? WHERE USERS_ID=?";
         try {
             ps = con.prepareStatement(editquery);
-            ps.setString(1, name);
-            ps.setString(2, username);
-            ps.setString(3, password);
-            ps.setString(4, email);
-            ps.setLong(5, phone);
-            ps.setString(6, address);
-            ps.setString(7, gender);
-            ps.setInt(8, userid);
+            ps.setString(1, fname);
+            ps.setString(2, lname);
+
+            ps.setString(3, username);
+            ps.setString(4, password);
+            ps.setString(5, email);
+            ps.setLong(6, phone);
+            ps.setInt(7, Apt_no);
+            ps.setString(8, street);
+            ps.setString(9, city);
+            ps.setString(10, gender);
+            ps.setInt(11, userid);
             int i = ps.executeUpdate();
             return i > 0;
         } catch (SQLException ex) {
@@ -471,5 +476,17 @@ public class DatabaseManeger<neededtype> {
         }
         return false;
 
+    }
+
+    public ResultSet getbranch() {
+        String search = "SELECT GYM_NAME FROM GYM ";
+        try {
+            ps = con.prepareStatement(search);
+            rs = ps.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return rs;
     }
 }

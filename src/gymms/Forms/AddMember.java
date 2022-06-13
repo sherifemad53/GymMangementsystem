@@ -7,6 +7,7 @@ import gymms.classes.Package;
 import gymms.database.DatabaseManeger;
 import gymms.database.javaconnect;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -34,9 +35,9 @@ public class AddMember extends javax.swing.JFrame {
     public int trainermodifyCombobox() {
         int counter = 0;
         try {
-            ResultSet rss = user.getUser("trainer");
+            ResultSet rss = user.getUser("TRAINER");
             while (rss.next()) {
-                trainerlist.add(rss.getString("USERS_NAME"));
+                trainerlist.add(rss.getString("USERS_FNAME") +" "+ rss.getString("USERS_LNAME"));
                 counter++;
             }
             return counter;
@@ -92,26 +93,29 @@ public class AddMember extends javax.swing.JFrame {
     utilsFunctions utilfuncs =new utilsFunctions();
     
     public void add() {
-        if (nameTextField.getText().isEmpty()
-                || ageTextField.getText().isEmpty()
+        if (fnameTextField.getText().isEmpty()
+                ||lnameTextField.getText().isEmpty()
+                || birthdateTextField.getText().isEmpty()
                 || heightSpinner.getValue().equals(0)
                 || weightSpinner.getValue().equals(0)
                 || MaleButton1.isSelected() == false && FemailButton2.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
-            if (utilfuncs.checkname(nameTextField.getText())
-                    && utilfuncs.checkemail(emailTextField.getText())
-                    && utilfuncs.checkphone(phoneTextField.getText())
-                    && utilfuncs.checkage(ageTextField.getText())
-                    && utilfuncs.checkaddress(addressTextField.getText())) {
+//            if (utilfuncs.checkname(fnameTextField.getText())
+//                    && utilfuncs.checkname(lnameTextField.getText())
+//                    && utilfuncs.checkemail(emailTextField.getText())
+//                    && utilfuncs.checkphone(phoneTextField.getText())
+//                    && utilfuncs.checkage(birthdateTextField.getText())
+//                    && utilfuncs.checkaddress(addressTextField.getText())) {
                 try {
-                    Member member = new Member(nameTextField.getText(),
-                            Integer.parseInt(ageTextField.getText()),
+                    Member member = new Member(fnameTextField.getText(),
+                            lnameTextField.getText(),
+                            Date.valueOf(birthdateTextField.getText()),
                             (Integer) (weightSpinner.getValue()),
                             (Integer) heightSpinner.getValue(),
                             Long.parseLong(phoneTextField.getText()),
                             emailTextField.getText(),
-                            addressTextField.getText(), GenderbuttonGroup.getSelection().getActionCommand()
+                            Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(), GenderbuttonGroup.getSelection().getActionCommand()
                     );
                     boolean flag = receptionist.addmember(member, branchComboBox.getSelectedItem().toString(), trainerComboBox.getSelectedItem().toString());
                     if (flag) {
@@ -122,7 +126,7 @@ public class AddMember extends javax.swing.JFrame {
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, ex);
                 }
-            }
+            //}
         }
     }
 
@@ -140,9 +144,9 @@ public class AddMember extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         phoneTextField = new javax.swing.JTextField();
-        nameTextField = new javax.swing.JTextField();
+        lnameTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        addressTextField = new javax.swing.JTextField();
+        Apt_noTextField = new javax.swing.JTextField();
         branchComboBox = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -156,11 +160,15 @@ public class AddMember extends javax.swing.JFrame {
         FemailButton2 = new javax.swing.JRadioButton();
         returnmainpageButton = new javax.swing.JButton();
         weightSpinner = new javax.swing.JSpinner();
-        ageTextField = new javax.swing.JTextField();
+        birthdateTextField = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         subscribtionComboBox3 = new javax.swing.JComboBox<>();
+        fnameTextField = new javax.swing.JTextField();
+        CityTextField1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        StreetTextField2 = new javax.swing.JTextField();
         pic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -171,17 +179,17 @@ public class AddMember extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Email  :");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 143, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Phone  :");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 184, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Address  :");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 223, -1, -1));
+        jLabel7.setText("Apt_NO:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, -1, -1));
 
         addButton.setFont(new java.awt.Font("Tahoma", 1, 17)); // NOI18N
         addButton.setText("Add Member");
@@ -191,7 +199,7 @@ public class AddMember extends javax.swing.JFrame {
                 addButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 425, -1));
+        jPanel1.add(addButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 425, -1));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 39)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,7 +208,7 @@ public class AddMember extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Name  :");
+        jLabel1.setText("Fname  :");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 103, -1, -1));
 
         phoneTextField.setToolTipText("Enter Member's Phone");
@@ -209,26 +217,31 @@ public class AddMember extends javax.swing.JFrame {
                 phoneTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 181, 302, -1));
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 302, -1));
 
-        nameTextField.setToolTipText("Enter Member's Name");
-        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+        lnameTextField.setToolTipText("Enter Member's Name");
+        lnameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nameTextFieldActionPerformed(evt);
+                lnameTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(nameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 101, 302, -1));
+        jPanel1.add(lnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 140, 302, -1));
 
         emailTextField.setToolTipText("Enter MeMber's Email");
-        jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 141, 302, -1));
-
-        addressTextField.setToolTipText("Enter Member's Address");
-        addressTextField.addActionListener(new java.awt.event.ActionListener() {
+        emailTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addressTextFieldActionPerformed(evt);
+                emailTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(addressTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 221, 302, -1));
+        jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 302, -1));
+
+        Apt_noTextField.setToolTipText("Enter Member's Address");
+        Apt_noTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Apt_noTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(Apt_noTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 30, -1));
 
         branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         branchComboBox.setToolTipText("Select Suitable Subscription");
@@ -242,32 +255,32 @@ public class AddMember extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Branch:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 490, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Age :");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 263, -1, -1));
+        jLabel2.setText("BirthDate");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Weight :");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 303, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Height :");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(385, 303, 52, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 52, -1));
 
         heightSpinner.setModel(new javax.swing.SpinnerNumberModel(165, 140, 200, 1));
         heightSpinner.setToolTipText("Select Member's Height");
         heightSpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(heightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(449, 301, 105, -1));
+        jPanel1.add(heightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 330, 105, -1));
 
         jLabel10.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Assigned Trainer :");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 386, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, -1, -1));
 
         trainerComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         trainerComboBox.setToolTipText("Select Trainer For The Member");
@@ -276,12 +289,12 @@ public class AddMember extends javax.swing.JFrame {
                 trainerComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(trainerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 384, 302, -1));
+        jPanel1.add(trainerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 302, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Gender :");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 344, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
 
         GenderbuttonGroup.add(MaleButton1);
         MaleButton1.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
@@ -293,7 +306,7 @@ public class AddMember extends javax.swing.JFrame {
                 MaleButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(MaleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 341, -1, -1));
+        jPanel1.add(MaleButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, -1, -1));
 
         GenderbuttonGroup.add(FemailButton2);
         FemailButton2.setFont(new java.awt.Font("Arial Black", 0, 11)); // NOI18N
@@ -305,7 +318,7 @@ public class AddMember extends javax.swing.JFrame {
                 FemailButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(FemailButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 341, -1, -1));
+        jPanel1.add(FemailButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 370, -1, -1));
 
         returnmainpageButton.setText("Back To Main Page");
         returnmainpageButton.addActionListener(new java.awt.event.ActionListener() {
@@ -318,25 +331,25 @@ public class AddMember extends javax.swing.JFrame {
         weightSpinner.setModel(new javax.swing.SpinnerNumberModel(40, 30, 130, 1));
         weightSpinner.setToolTipText("Select Member's Weight");
         weightSpinner.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jPanel1.add(weightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 301, 105, -1));
+        jPanel1.add(weightSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, 105, -1));
 
-        ageTextField.setToolTipText("Enter Member's Age");
-        jPanel1.add(ageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 261, 302, -1));
+        birthdateTextField.setToolTipText("Enter Member's Age");
+        birthdateTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                birthdateTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(birthdateTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 300, 302, -1));
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Email  :");
+        jLabel13.setText("Lname  :");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 143, -1, -1));
-
-        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Phone  :");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 184, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Subscribtion  :");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 421, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 450, -1, -1));
 
         subscribtionComboBox3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         subscribtionComboBox3.setToolTipText("Select Suitable Subscription");
@@ -345,11 +358,45 @@ public class AddMember extends javax.swing.JFrame {
                 subscribtionComboBox3ActionPerformed(evt);
             }
         });
-        jPanel1.add(subscribtionComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 302, -1));
+        jPanel1.add(subscribtionComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 490, 302, -1));
+
+        fnameTextField.setToolTipText("Enter Member's Name");
+        fnameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fnameTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 101, 302, -1));
+
+        CityTextField1.setToolTipText("Enter Member's Address");
+        CityTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CityTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(CityTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 260, 80, -1));
+
+        jLabel12.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("City:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 260, -1, -1));
+
+        jLabel14.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Street:");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, -1, -1));
+
+        StreetTextField2.setToolTipText("Enter Member's Address");
+        StreetTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StreetTextField2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(StreetTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, -1));
 
         pic.setForeground(new java.awt.Color(255, 255, 255));
         pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
-        jPanel1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 870, 560));
+        jPanel1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 870, 610));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -375,17 +422,17 @@ public class AddMember extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
 
-    private void addressTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addressTextFieldActionPerformed
+    private void Apt_noTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Apt_noTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addressTextFieldActionPerformed
+    }//GEN-LAST:event_Apt_noTextFieldActionPerformed
 
     private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_branchComboBoxActionPerformed
 
-    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+    private void lnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nameTextFieldActionPerformed
+    }//GEN-LAST:event_lnameTextFieldActionPerformed
 
     private void MaleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MaleButton1ActionPerformed
         MaleButton1.setActionCommand("Male");
@@ -407,6 +454,26 @@ public class AddMember extends javax.swing.JFrame {
     private void subscribtionComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subscribtionComboBox3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_subscribtionComboBox3ActionPerformed
+
+    private void birthdateTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birthdateTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_birthdateTextFieldActionPerformed
+
+    private void fnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fnameTextFieldActionPerformed
+
+    private void emailTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailTextFieldActionPerformed
+
+    private void CityTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CityTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CityTextField1ActionPerformed
+
+    private void StreetTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StreetTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StreetTextField2ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -445,18 +512,22 @@ public class AddMember extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField Apt_noTextField;
+    private javax.swing.JTextField CityTextField1;
     private javax.swing.JRadioButton FemailButton2;
     private javax.swing.ButtonGroup GenderbuttonGroup;
     private javax.swing.JRadioButton MaleButton1;
+    private javax.swing.JTextField StreetTextField2;
     private javax.swing.JButton addButton;
-    private javax.swing.JTextField addressTextField;
-    private javax.swing.JTextField ageTextField;
+    private javax.swing.JTextField birthdateTextField;
     private javax.swing.JComboBox<String> branchComboBox;
     private javax.swing.JTextField emailTextField;
+    private javax.swing.JTextField fnameTextField;
     private javax.swing.JSpinner heightSpinner;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -470,7 +541,7 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JTextField nameTextField;
+    private javax.swing.JTextField lnameTextField;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JLabel pic;
     private javax.swing.JButton returnmainpageButton;
