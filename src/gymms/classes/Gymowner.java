@@ -4,11 +4,13 @@ import gymms.database.DatabaseManeger;
 import java.sql.ResultSet;
 
 public class Gymowner extends User{
+    
+    String temp;
 
     public Gymowner() {
     }
 
-    public Gymowner(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH) {
+    public Gymowner(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH ) {
         super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER, BRANCH);
     }
 
@@ -102,11 +104,19 @@ public class Gymowner extends User{
     }
     
     public boolean adduser(){
-        return getDbmanager().adduser(FNAME,LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER,BRANCH);
+        return getDbmanager().adduser( FNAME, LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER,BRANCH, temp);
     }
     
     public ResultSet viewUserdata(String groupby){
         return getDbmanager().viewuserdata(groupby);
+    }
+
+    public String getTemp() {
+        return temp;
+    }
+
+    public void setTemp(String temp) {
+        this.temp = temp;
     }
     
     public void deleteUser(int USERID){

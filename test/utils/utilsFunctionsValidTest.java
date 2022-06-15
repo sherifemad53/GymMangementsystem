@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author user
  */
-public class utilsFunctionsTest {
+public class utilsFunctionsValidTest {
     
-    public utilsFunctionsTest() {
+    public utilsFunctionsValidTest() {
     }
     
     @BeforeClass
@@ -43,9 +43,9 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckname() {
         System.out.println("checkname");
-        String name = "1mazen";
+        String name = "mazen";
         utilsFunctions instance = new utilsFunctions();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.checkname(name);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -58,9 +58,9 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckusername() {
         System.out.println("checkusername");
-        String username = "5sameh";
+        String username = "samehadel";
         utilsFunctions instance = new utilsFunctions();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.checkusername(username);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
@@ -73,13 +73,13 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckpassword_String() {
         System.out.println("checkpassword");
-        String password = "mazen1";
+        String password = "Jehad3@21";
         utilsFunctions instance = new utilsFunctions();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.checkpassword(password);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-       // fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
 
     /**
@@ -88,8 +88,8 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckpassword_String_String() {
         System.out.println("checkpassword");
-        String password = "mazen1234";
-        String confpassword = "mazen1234";
+        String password = "Jehad3@21";
+        String confpassword = "Jehad3@21";
         utilsFunctions instance = new utilsFunctions();
         boolean expResult = true;
         boolean result = instance.checkpassword(password, confpassword);
@@ -125,7 +125,7 @@ public class utilsFunctionsTest {
         boolean result = instance.checkemail(email);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
 
     /**
@@ -134,13 +134,13 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckaddress() {
         System.out.println("checkaddress");
-        String address = "NasrCity";
+        String address = "23 Elhadayq Cairo";
         utilsFunctions instance = new utilsFunctions();
         boolean expResult = true;
         boolean result = instance.checkaddress(address);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
 
     /**
@@ -149,13 +149,13 @@ public class utilsFunctionsTest {
     @Test
     public void testCheckage() {
         System.out.println("checkage");
-        String age = "0";
+        String age = "22";
         utilsFunctions instance = new utilsFunctions();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.checkage(age);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
 
     /**
@@ -170,7 +170,7 @@ public class utilsFunctionsTest {
         boolean result = instance.checkcost(cost);
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+       // fail("The test case is a prototype.");
     }
     
 }

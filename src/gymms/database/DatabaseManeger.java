@@ -175,6 +175,18 @@ public class DatabaseManeger<neededtype> {
         return null;
     }
 
+        public ResultSet getmanager() {
+        String getmanagerr = "SELECT  USERS_ID ,USERS_FNAME , USERS_LNAME FROM USERS, GYMMANAGER WHERE USERS.USERS_ID = GYMMANAGER.MANAGER_ID";
+        try {
+            ps = con.prepareStatement(getmanagerr);
+            rs = ps.executeQuery();
+            return rs;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        return null;
+    }
+    
     public ResultSet totalusermember(String userormember) {
         String viewquery = null;
         if (userormember.equals("USERS")) {
@@ -192,6 +204,8 @@ public class DatabaseManeger<neededtype> {
         }
         return null;
     }
+    
+    
 
     public void subscribe(String USERFNAME, String USERLNAME, String PACKAGENAME, String MEMBERFNAME, String MEMBERLNAME) {
         int MEMBERID = 0, USERID = 0, PACKAGEID = 0, PACKAGEDURATION = 0;
@@ -269,11 +283,12 @@ public class DatabaseManeger<neededtype> {
         //return rslocal;
     }
 
-    public boolean adduser/*register*/(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, String CONFPASSWORD, int Apt_no, String street, String city, String PHONE, String JOBTYPE, String GENDER, String BRANCH) {
+    public boolean adduser/*register*/(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, String CONFPASSWORD, int Apt_no, String street, String city, String PHONE, String JOBTYPE, String GENDER, String BRANCH , String temp) {
         String branchid = "SELECT ID FROM GYM WHERE GYM_NAME=?";
         String register = "INSERT INTO USERS (USERS_FNAME,USERS_LNAME,USERS_EMAIL,USERS_USERNAME,USERS_PASSWORD,USERS_APT_NO,USERS_STREET,USERS_CITY,USERS_GENDER,USERS_JOBTYPE,GYM_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         String addphone = "INSERT INTO USERPHONE (USERPHONE_ID,PHONE_NUMBER) VALUES (?,?)";
         String insertindisjointtables = null;
+        String assignManagaer = null;
         PreparedStatement ps2;
         int branid, genereatedid;
         try {
@@ -282,8 +297,8 @@ public class DatabaseManeger<neededtype> {
             rs = ps2.executeQuery();
             rs.next();
             branid = rs.getInt("ID");
-            
-            ps = con.prepareStatement(register);
+            ps = null;
+            ps = con.prepareStatement(register,Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, FNAME);
             ps.setString(2, LNAME);
             ps.setString(3, EMAIL);
@@ -301,17 +316,27 @@ public class DatabaseManeger<neededtype> {
             rs = ps.getGeneratedKeys();
             rs.next();
 
-            ps = con.prepareCall(addphone);
+            ps = con.prepareStatement(addphone);
             genereatedid = rs.getInt(1);
             ps.setInt(1, genereatedid);
             ps.setString(2, PHONE);
             ps.executeUpdate();
             if (JOBTYPE.equals("TRAINER")) {
-                insertindisjointtables = "INSERT INTO TRAINER (TRAINER_ID,CERTIFIED,EXPERIENCE_YEARS) VALUES (?,true,2)";
-                ps = con.prepareStatement(insertindisjointtables);
-                ps.setInt(1, genereatedid);
-                ps.executeUpdate();
-            }
+                assignManagaer = "UPDATE USERS SET MANGER_ID = ? WHERE USER_ID = ?";
+                insertindisjointtables = "INSERT INTO TRAINER (TRAINER_ID,EXPERIENCE_YEARS) VALUES (?,?)";}
+            else if (JOBTYPE.equals("GYMOWNER")) 
+                insertindisjointtables = "INSERT INTO GYMOWNER (OWNER_ID,PERCENTAGE_CUT) VALUES (?,?)";
+            else if (JOBTYPE.equals("GYMMANAGER")) 
+                insertindisjointtables = "INSERT INTO GYMMANAGER (MANAGER_ID,GYMMANAGER_SALARY) VALUES (?,?)";
+            else if (JOBTYPE.equals("RECEPTIONIST")) {
+                assignManagaer = "UPDATE USERS SET MANGER_ID = ? WHERE USER_ID = ?";    
+                insertindisjointtables = "INSERT INTO RECEPTIONIST (RECEPTIONIST_ID,SHIFT) VALUES (?,?)";}
+            
+            ps = con.prepareStatement(insertindisjointtables);
+            ps.setInt(1, genereatedid);
+            ps.setInt(2, Integer.parseInt(temp));
+            ps.executeUpdate();
+            
             return rs != null;
 
         } catch (SQLException ex) {

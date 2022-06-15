@@ -1,0 +1,181 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  Internal Error (signature.cpp:54), pid=4352, tid=0x0000000000002b84
+#  fatal error: expecting (
+#
+# JRE version: Java(TM) SE Runtime Environment (8.0_111-b14) (build 1.8.0_111-b14)
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.111-b14 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000000002e20800):  JavaThread "main" [_thread_in_vm, id=11140, stack(0x0000000002c80000,0x0000000002d80000)]
+
+Stack: [0x0000000002c80000,0x0000000002d80000]
+[error occurred during error reporting (printing stack bounds), id 0xc0000005]
+
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+Java frames: (J=compiled Java code, j=interpreted, Vv=VM code)
+j  java.util.concurrent.ThreadPoolExecutor.<clinit>()V+0
+v  ~StubRoutines::call_stub
+j  org.apache.derby.jdbc.InternalDriver.<clinit>()V+14
+v  ~StubRoutines::call_stub
+j  org.apache.derby.jdbc.AutoloadedDriver.connect(Ljava/lang/String;Ljava/util/Properties;)Ljava/sql/Connection;+1
+j  java.sql.DriverManager.getConnection(Ljava/lang/String;Ljava/util/Properties;Ljava/lang/Class;)Ljava/sql/Connection;+171
+j  java.sql.DriverManager.getConnection(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/sql/Connection;+37
+j  gymms.database.javaconnect.connectdb()Ljava/sql/Connection;+8
+j  gymms.Gymms.main([Ljava/lang/String;)V+0
+v  ~StubRoutines::call_stub
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x0000000027da1000 JavaThread "Service Thread" daemon [_thread_blocked, id=2580, stack(0x00000000288d0000,0x00000000289d0000)]
+  0x0000000027d05800 JavaThread "C1 CompilerThread3" daemon [_thread_blocked, id=5552, stack(0x00000000287d0000,0x00000000288d0000)]
+  0x0000000027d01800 JavaThread "C2 CompilerThread2" daemon [_thread_blocked, id=16328, stack(0x00000000286d0000,0x00000000287d0000)]
+  0x0000000027cfd000 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=15376, stack(0x00000000285d0000,0x00000000286d0000)]
+  0x0000000027cf9800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=9332, stack(0x00000000284d0000,0x00000000285d0000)]
+  0x0000000027cf8800 JavaThread "Attach Listener" daemon [_thread_blocked, id=13452, stack(0x00000000283d0000,0x00000000284d0000)]
+  0x0000000027cf7000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=3936, stack(0x00000000282d0000,0x00000000283d0000)]
+  0x0000000027cf0800 JavaThread "Finalizer" daemon [_thread_blocked, id=2776, stack(0x00000000280d0000,0x00000000281d0000)]
+  0x0000000002f16000 JavaThread "Reference Handler" daemon [_thread_blocked, id=11524, stack(0x0000000027bd0000,0x0000000027cd0000)]
+=>0x0000000002e20800 JavaThread "main" [_thread_in_vm, id=11140, stack(0x0000000002c80000,0x0000000002d80000)]
+
+Other Threads:
+  0x0000000025e09800 VMThread [stack: 0x0000000027ad0000,0x0000000027bd0000] [id=3140]
+  0x0000000027dc3000 WatcherThread [stack: 0x00000000289d0000,0x0000000028ad0000] [id=15640]
+
+VM state:not at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Heap:
+ PSYoungGen      total 152576K, used 5242K [0x0000000716300000, 0x0000000720d00000, 0x00000007c0000000)
+  eden space 131072K, 4% used [0x0000000716300000,0x000000071681eba8,0x000000071e300000)
+  from space 21504K, 0% used [0x000000071f800000,0x000000071f800000,0x0000000720d00000)
+  to   space 21504K, 0% used [0x000000071e300000,0x000000071e300000,0x000000071f800000)
+ ParOldGen       total 348160K, used 0K [0x00000005c2800000, 0x00000005d7c00000, 0x0000000716300000)
+  object space 348160K, 0% used [0x00000005c2800000,0x00000005c2800000,0x00000005d7c00000)
+ Metaspace       used 3533K, capacity 4600K, committed 4864K, reserved 1056768K
+  class space    used 387K, capacity 424K, committed 512K, reserved 1048576K
+
+Card table byte_map: [0x00000000122e0000,0x00000000132d0000] byte_map_base: 0x000000000f4cc000
+
+Marking Bits: (ParMarkBitMap*) 0x0000000059a7a6c0
+ Begin Bits: [0x0000000014570000, 0x000000001c4d0000)
+ End Bits:   [0x000000001c4d0000, 0x0000000024430000)
+
+Polling page: 0x0000000000ea0000
+
+CodeCache: size=245760Kb used=1234Kb max_used=1248Kb free=244525Kb
+ bounds [0x0000000002f20000, 0x0000000003190000, 0x0000000011f20000]
+ total_blobs=329 nmethods=83 adapters=159
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 0.146 Thread 0x0000000027d05800 nmethod 79 0x0000000003053510 code [0x0000000003053780, 0x0000000003054598]
+Event: 0.146 Thread 0x0000000027d05800   82       3       java.lang.String::replace (127 bytes)
+Event: 0.146 Thread 0x0000000027cfd000 nmethod 75 0x0000000003057a90 code [0x0000000003057be0, 0x00000000030581a8]
+Event: 0.146 Thread 0x0000000027d01800 nmethod 77 0x00000000030531d0 code [0x0000000003053300, 0x0000000003053478]
+Event: 0.147 Thread 0x0000000027d05800 nmethod 82 0x0000000003056e90 code [0x0000000003057040, 0x00000000030576f0]
+Event: 0.147 Thread 0x0000000027d05800   81       3       java.util.concurrent.ConcurrentHashMap::setTabAt (19 bytes)
+Event: 0.147 Thread 0x0000000027d05800 nmethod 81 0x0000000003056b50 code [0x0000000003056ca0, 0x0000000003056e10]
+Event: 0.147 Thread 0x0000000027d05800   80       3       java.nio.charset.CharsetEncoder::maxBytesPerChar (5 bytes)
+Event: 0.147 Thread 0x0000000027d05800 nmethod 80 0x0000000003056850 code [0x00000000030569a0, 0x0000000003056af0]
+Event: 0.147 Thread 0x0000000027cf9800   83       4       java.lang.String::indexOf (70 bytes)
+
+GC Heap History (0 events):
+No events
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (6 events):
+Event: 0.038 Thread 0x0000000002e20800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.defineClass(Ljava/lang/String;[BII)Ljava/lang/Class; name or signature does not match> (0x0000000716307c78) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\
+Event: 0.038 Thread 0x0000000002e20800 Exception <a 'java/lang/NoSuchMethodError': Method sun.misc.Unsafe.prefetchRead(Ljava/lang/Object;J)V name or signature does not match> (0x0000000716307f60) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\src\share\vm\prims
+Event: 0.119 Thread 0x0000000002e20800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007163b9c50) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.119 Thread 0x0000000002e20800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007163b9e60) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.119 Thread 0x0000000002e20800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007163bce40) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+Event: 0.119 Thread 0x0000000002e20800 Exception <a 'java/security/PrivilegedActionException'> (0x00000007163bd050) thrown at [C:\re\workspace\8-2-build-windows-amd64-cygwin\jdk8u111\7883\hotspot\src\share\vm\prims\jvm.cpp, line 1386]
+
+Events (10 events):
+Event: 0.147 loading class org/apache/derby/security/SystemPermission done
+Event: 0.148 loading class java/sql/CallableStatement
+Event: 0.148 loading class java/sql/CallableStatement done
+Event: 0.149 loading class java/util/concurrent/ThreadPoolExecutor
+Event: 0.149 loading class java/util/concurrent/AbstractExecutorService
+Event: 0.149 loading class java/util/concurrent/AbstractExecutorService done
+Event: 0.149 loading class java/util/concurrent/ThreadPoolExecutor done
+Event: 0.149 loading class java/util/concurrent/ThreadPoolExecutor$AbortPolicy
+Event: 0.149 loading class java/util/concurrent/RejectedExecutionHandler
+Event: 0.149 loading class java/util/concurrent/RejectedExecutionHandler done
+
+
+Dynamic libraries:
+0x00007ff75e300000 - 0x00007ff75e337000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\java.exe
+0x00007ffffb250000 - 0x00007ffffb445000 	C:\Windows\SYSTEM32\ntdll.dll
+0x00007ffff9e00000 - 0x00007ffff9ebd000 	C:\Windows\System32\KERNEL32.DLL
+0x00007ffff8b50000 - 0x00007ffff8e1d000 	C:\Windows\System32\KERNELBASE.dll
+0x00007ffff97d0000 - 0x00007ffff987e000 	C:\Windows\System32\ADVAPI32.dll
+0x00007ffffac20000 - 0x00007ffffacbe000 	C:\Windows\System32\msvcrt.dll
+0x00007ffffb170000 - 0x00007ffffb20c000 	C:\Windows\System32\sechost.dll
+0x00007ffff9880000 - 0x00007ffff99a5000 	C:\Windows\System32\RPCRT4.dll
+0x00007ffff9630000 - 0x00007ffff97d0000 	C:\Windows\System32\USER32.dll
+0x00007ffff8990000 - 0x00007ffff89b2000 	C:\Windows\System32\win32u.dll
+0x00007ffff9600000 - 0x00007ffff962a000 	C:\Windows\System32\GDI32.dll
+0x00007ffff9190000 - 0x00007ffff929b000 	C:\Windows\System32\gdi32full.dll
+0x00007ffff8ed0000 - 0x00007ffff8f6d000 	C:\Windows\System32\msvcp_win.dll
+0x00007ffff89c0000 - 0x00007ffff8ac0000 	C:\Windows\System32\ucrtbase.dll
+0x00007ffff7d40000 - 0x00007ffff7fda000 	C:\Windows\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.19041.1110_none_60b5254171f9507e\COMCTL32.dll
+0x00007ffff9560000 - 0x00007ffff9590000 	C:\Windows\System32\IMM32.DLL
+0x0000000059180000 - 0x0000000059252000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\msvcr100.dll
+0x0000000059260000 - 0x0000000059afa000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\server\jvm.dll
+0x00007ffffa220000 - 0x00007ffffa228000 	C:\Windows\System32\PSAPI.DLL
+0x00007fffdbc50000 - 0x00007fffdbc77000 	C:\Windows\SYSTEM32\WINMM.dll
+0x00007fffd57f0000 - 0x00007fffd57f9000 	C:\Windows\SYSTEM32\WSOCK32.dll
+0x00007ffff0580000 - 0x00007ffff058a000 	C:\Windows\SYSTEM32\VERSION.dll
+0x00007ffff9590000 - 0x00007ffff95fb000 	C:\Windows\System32\WS2_32.dll
+0x0000000059130000 - 0x000000005913f000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\verify.dll
+0x0000000059100000 - 0x0000000059129000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\java.dll
+0x00000000590e0000 - 0x00000000590f6000 	E:\College\Programs\Java\jdk1.8.0_111\jre\bin\zip.dll
+0x00007ffffa4d0000 - 0x00007ffffac14000 	C:\Windows\System32\SHELL32.dll
+0x00007ffff63f0000 - 0x00007ffff6b84000 	C:\Windows\SYSTEM32\windows.storage.dll
+0x00007ffff9ec0000 - 0x00007ffffa214000 	C:\Windows\System32\combase.dll
+0x00007ffff7cd0000 - 0x00007ffff7cfc000 	C:\Windows\SYSTEM32\Wldp.dll
+0x00007ffff9ba0000 - 0x00007ffff9c4d000 	C:\Windows\System32\SHCORE.dll
+0x00007ffff9d30000 - 0x00007ffff9d85000 	C:\Windows\System32\shlwapi.dll
+0x00007ffff88a0000 - 0x00007ffff88bf000 	C:\Windows\SYSTEM32\profapi.dll
+
+VM Arguments:
+jvm_args: -Dfile.encoding=UTF-8 
+java_command: gymms.Gymms
+java_class_path (initial): E:\College\Programs\Java\jdk1.8.0_111\db\lib\derby.jar;E:\College\Programs\Java\jdk1.8.0_111\db\lib\derbyclient.jar;E:\College\Programs\Java\jdk1.8.0_111\db\lib\derbynet.jar;E:\College\Programs\NetBeans 8.2\java\modules\ext\AbsoluteLayout.jar;E:\College\Computer Dept\3rd Computer\Assignments\Java\GymClone\GymMangementsystem\build\classes
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\Git\cmd;C:\Users\user\AppData\Local\Microsoft\WindowsApps;
+USERNAME=user
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 142 Stepping 12, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 19041 (10.0.19041.1706)
+
+CPU:total 8 (4 cores per cpu, 2 threads per core) family 6 model 142 stepping 12, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, avx2, aes, clmul, erms, 3dnowpref, lzcnt, ht, tsc, tscinvbit, bmi1, bmi2, adx
+
+Memory: 4k page, physical 33388072k(27860804k free), swap 35485224k(27061992k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.111-b14) for windows-amd64 JRE (1.8.0_111-b14), built on Sep 22 2016 19:24:05 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Wed Jun 15 15:40:41 2022
+elapsed time: 0 seconds (0d 0h 0m 0s)
+

@@ -11,7 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import utils.utilsFunctions;
 
 public class AddUser extends javax.swing.JFrame {
@@ -23,7 +26,7 @@ public class AddUser extends javax.swing.JFrame {
     DatabaseManeger dbmanager = new DatabaseManeger();
     ArrayList<String> jobtypelist = new ArrayList<>();
     ArrayList<String> branchlist = new ArrayList<>();
-
+    ArrayList<Integer> managerids = new ArrayList<>();
     public int jobtypemodifyCombobox() {
         int counter = 4;
         jobtypelist.add("GYMOWNER");
@@ -81,15 +84,37 @@ public class AddUser extends javax.swing.JFrame {
     utilsFunctions utilfuncs = new utilsFunctions();
 
     public void submitdatabase() {
-        if (fnameTextField.getText().isEmpty() || lnameTextField1.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
-                || passwordTextField.getText().isEmpty() || confpasswordTextField.getText().isEmpty() || MaleRadioButton.isSelected() == false && FemaleRadioButton.isSelected() == false) {
-            JOptionPane.showMessageDialog(null, "Missing");
-        } else {
+//        if (fnameTextField.getText().isEmpty() || lnameTextField1.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
+//                || passwordTextField.getText().isEmpty() || confpasswordTextField.getText().isEmpty() || MaleRadioButton.isSelected() == false && FemaleRadioButton.isSelected() == false) {
+//            JOptionPane.showMessageDialog(null, "Missing");
+//        } else {
 //            if (utilfuncs.checkname(fnameTextField.getText())&& utilfuncs.checkname(lnameTextField.getText())
 //                    && utilfuncs.checkemail(emailTextField.getText())
 //                    && utilfuncs.checkphone(phoneTextField.getText())
 //                    && utilfuncs.checkusername(usernameTextField.getText())) {
             if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
+                String temp = null;
+                
+                JComboBox asignmanager = new JComboBox();
+                try {
+                        ResultSet rss = dbmanager.getmanager();
+                        while (rss.next()) {
+                        asignmanager.addItem(rss.getString("USERS_FNAME") + " " + rss.getString("USERS_LNAME"));
+                        managerids.add(rss.getInt("USERS_ID"));
+                     }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    if (jobtypeComboBox.getSelectedItem().toString().equals("TRAINER")) {
+                        System.out.println(JOptionPane.showConfirmDialog(null,asignmanager));
+                        temp = JOptionPane.showInputDialog(null,"Enter Experiance Years",null,JOptionPane.PLAIN_MESSAGE);}
+                    else if (jobtypeComboBox.getSelectedItem().toString().equals("GYMOWNER")) 
+                        temp = JOptionPane.showInputDialog(null,"Enter Percantage Cut",null,JOptionPane.PLAIN_MESSAGE);
+                    else if (jobtypeComboBox.getSelectedItem().toString().equals("GYMMANAGER")) 
+                        temp =  JOptionPane.showInputDialog(null,"Enter Manager Salary",null,JOptionPane.PLAIN_MESSAGE);
+                    else if (jobtypeComboBox.getSelectedItem().toString().equals("RECEPTIONIST")) 
+                        temp = JOptionPane.showInputDialog(null,"Enter Shift",null,JOptionPane.PLAIN_MESSAGE);
+                    
                 Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField1.getText(),
                         emailTextField.getText(), usernameTextField.getText(),
                         passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()), 
@@ -98,7 +123,9 @@ public class AddUser extends javax.swing.JFrame {
                         jobtypeComboBox.getSelectedItem().toString(),
                         GenderButtonGroup.getSelection().getActionCommand(),
                         branchComboBox.getSelectedItem().toString());
-                if (gymowner.adduser()) {
+                        gymowner.setTemp(temp);
+                        
+                    if (gymowner.adduser()) {
                     JOptionPane.showMessageDialog(null, "Add User complete");
                     dispose();
                     new login().setVisible(true);
@@ -114,7 +141,7 @@ public class AddUser extends javax.swing.JFrame {
 //                JOptionPane.showMessageDialog(null, "error");
 //            }
             //TODO give user a note to know what entered wrong
-        }
+//        }
     }
 
     @SuppressWarnings("unchecked")
