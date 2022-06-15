@@ -19,7 +19,7 @@ public class User<needtype> {
     public User(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH) {
         this.PHONE = PHONE;
         this.FNAME = FNAME;
-        this.FNAME = FNAME;
+        this.LNAME = LNAME;
         this.EMAIL = EMAIL;
         this.USERNAME = USERNAME;
         this.PASSWORD = PASSWORD;
