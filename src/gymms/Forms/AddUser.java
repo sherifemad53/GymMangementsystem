@@ -81,7 +81,7 @@ public class AddUser extends javax.swing.JFrame {
     utilsFunctions utilfuncs = new utilsFunctions();
 
     public void submitdatabase() {
-        if (fnameTextField.getText().isEmpty() || lnameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
+        if (fnameTextField.getText().isEmpty() || lnameTextField1.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
                 || passwordTextField.getText().isEmpty() || confpasswordTextField.getText().isEmpty() || MaleRadioButton.isSelected() == false && FemaleRadioButton.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
@@ -90,7 +90,7 @@ public class AddUser extends javax.swing.JFrame {
 //                    && utilfuncs.checkphone(phoneTextField.getText())
 //                    && utilfuncs.checkusername(usernameTextField.getText())) {
             if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
-                Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField.getText(),
+                Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField1.getText(),
                         emailTextField.getText(), usernameTextField.getText(),
                         passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()), 
                         StreetTextField2.getText(), CityTextField1.getText(),
@@ -147,13 +147,13 @@ public class AddUser extends javax.swing.JFrame {
         branchComboBox = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        lnameTextField = new javax.swing.JTextField();
         CityTextField1 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         StreetTextField2 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         Apt_noTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        lnameTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -211,7 +211,7 @@ public class AddUser extends javax.swing.JFrame {
                 fnameTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 303, 30));
+        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 120, 303, 30));
 
         emailTextField.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         emailTextField.setToolTipText("Enter User's Email");
@@ -314,15 +314,6 @@ public class AddUser extends javax.swing.JFrame {
         jLabel16.setText("Lname :");
         jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
-        lnameTextField.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
-        lnameTextField.setToolTipText("Enter User's Name");
-        lnameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lnameTextFieldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(lnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 170, 303, -1));
-
         CityTextField1.setToolTipText("Enter Member's Address");
         CityTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,6 +352,15 @@ public class AddUser extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Address:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+
+        lnameTextField1.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        lnameTextField1.setToolTipText("Enter User's Name");
+        lnameTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lnameTextField1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(lnameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 303, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -412,10 +412,6 @@ public class AddUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_branchComboBoxActionPerformed
 
-    private void lnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lnameTextFieldActionPerformed
-
     private void fnameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_fnameTextFieldActionPerformed
@@ -431,6 +427,10 @@ public class AddUser extends javax.swing.JFrame {
     private void Apt_noTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Apt_noTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Apt_noTextFieldActionPerformed
+
+    private void lnameTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lnameTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lnameTextField1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -496,7 +496,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> jobtypeComboBox;
-    private javax.swing.JTextField lnameTextField;
+    private javax.swing.JTextField lnameTextField1;
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JButton registerButton;

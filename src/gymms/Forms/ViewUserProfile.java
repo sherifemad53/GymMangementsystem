@@ -335,14 +335,14 @@ public class ViewUserProfile extends javax.swing.JFrame {
         dispose();
         new login().setVisible(true);     }//GEN-LAST:event_LogOutMenuActionPerformed
 
-    utils.utilsFunctions utilfuncs =new utilsFunctions();
-    
+    utils.utilsFunctions utilfuncs = new utilsFunctions();
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (utilfuncs.checkname(lnameTextField.getText())
                 && utilfuncs.checkemail(emailTextField.getText())
                 && utilfuncs.checkphone(phoneTextField.getText())
                 && utilfuncs.checkusername(usernameTextField.getText())
-                && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " +CityTextField1.getText())) {
+                && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " + CityTextField1.getText())) {
             try {
                 User user = new User();
                 user.setID(Integer.parseInt(idTextField.getText()));
@@ -388,8 +388,8 @@ public class ViewUserProfile extends javax.swing.JFrame {
         PrintUser obj = new PrintUser();
 
         obj.InformationTextArea.setText("ID :\t" + idTextField.getText() + "\nName :\t" + lnameTextField.getText() + "\nRole :\t" + jobtypeTextField.getText() + "\nEmail"
-                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + Integer.parseInt(Apt_noTextField.getText()) + " " + StreetTextField2.getText() + " " + CityTextField1.getText() + "\nUsername :\t" 
-+ usernameTextField.getText() + "\nPassword :\t" + passwordTextField.getText() + "\nGender :\t" + genderTextField.getText());
+                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + Integer.parseInt(Apt_noTextField.getText()) + " " + StreetTextField2.getText() + " " + CityTextField1.getText() + "\nUsername :\t"
+                + usernameTextField.getText() + "\nPassword :\t" + passwordTextField.getText() + "\nGender :\t" + genderTextField.getText());
         obj.setVisible(true);
 
     }//GEN-LAST:event_PrintButtonActionPerformed
@@ -423,9 +423,9 @@ public class ViewUserProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_CityTextField1ActionPerformed
 
     private void addmoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmoreButtonActionPerformed
-        String temp =  JOptionPane.showInputDialog(null,"Enter phone",null,JOptionPane.PLAIN_MESSAGE);
-        DatabaseManeger db=new DatabaseManeger();
-        if(db.useraddphone(Integer.parseInt(idTextField.getText()), temp)){
+        String temp = JOptionPane.showInputDialog(null, "Enter phone", null, JOptionPane.PLAIN_MESSAGE);
+        DatabaseManeger db = new DatabaseManeger();
+        if (db.useraddphone(Integer.parseInt(idTextField.getText()), temp)) {
             JOptionPane.showMessageDialog(null, "done");
         }
     }//GEN-LAST:event_addmoreButtonActionPerformed

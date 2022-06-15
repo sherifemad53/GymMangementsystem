@@ -149,7 +149,7 @@ public class DatabaseManeger<neededtype> {
                 + "MEMBERS.MEMBERS_LNAME ,PACKAGE.PACKAGE_NAME,PACKAGE.PACKAGE_COST,SUBSCRIBE.STARTDATE,"
                 + "SUBSCRIBE.ENDDATE,MEMBERS.MEMBERS_PROGRAM "
                 + "FROM USERS ,MEMBERS, PACKAGE, SUBSCRIBE "
-                + "WHERE SUBSCRIBE.MEMBERID=MEMBERS.MEMBERS_ID AND SUBSCRIBE.USERID=USERS.USERS_ID AND SUBSCRIBE.PACKAGEID=PACKAGE.PACKAGE_ID";
+                + "WHERE SUBSCRIBE.MEMBERID=MEMBERS.MEMBERS_ID AND SUBSCRIBE.TRAINER_ID = USERS.USERS_ID AND SUBSCRIBE.PACKAGEID=PACKAGE.PACKAGE_ID";
         try {
             ps = con.prepareStatement(viewquery);
             rs = ps.executeQuery();
@@ -197,9 +197,9 @@ public class DatabaseManeger<neededtype> {
         int MEMBERID = 0, USERID = 0, PACKAGEID = 0, PACKAGEDURATION = 0;
 
         String strMEMBERID = "SELECT MEMBERS_ID FROM MEMBERS WHERE MEMBERS_FNAME = '" + MEMBERFNAME + "' AND MEMBERS_LNAME = '" + MEMBERLNAME + "'";
-        String strUSERID = "SELECT USERS_ID FROM USERS WHERE USERS_FNAME = '" + USERFNAME + "' AND USERS_LNAME = '" + USERLNAME + "'";
+        String strUSERID = "SELECT TRAINER_ID FROM USERS,TRAINER WHERE TRAINER.TRAINER_ID = USERS.USERS_ID AND USERS_FNAME = '" + USERFNAME + "' AND USERS_LNAME = '" + USERLNAME + "'";
         String strPACKAGE = "SELECT PACKAGE_ID,PACKAGE_DURATION FROM PACKAGE WHERE PACKAGE_NAME = '" + PACKAGENAME + "'";
-        String sub = "INSERT INTO SUBSCRIBE (MEMBERID,USERID,PACKAGEID,STARTDATE,ENDDATE) VALUES(?,?,?,?,?)";
+        String sub = "INSERT INTO SUBSCRIBE (MEMBERID,TRAINER_ID,PACKAGEID,STARTDATE,ENDDATE) VALUES(?,?,?,?,?)";
         try {
             ps = con.prepareStatement(strMEMBERID);
             rs = ps.executeQuery();
@@ -273,18 +273,17 @@ public class DatabaseManeger<neededtype> {
         String branchid = "SELECT ID FROM GYM WHERE GYM_NAME=?";
         String register = "INSERT INTO USERS (USERS_FNAME,USERS_LNAME,USERS_EMAIL,USERS_USERNAME,USERS_PASSWORD,USERS_APT_NO,USERS_STREET,USERS_CITY,USERS_GENDER,USERS_JOBTYPE,GYM_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
         String addphone = "INSERT INTO USERPHONE (USERPHONE_ID,PHONE_NUMBER) VALUES (?,?)";
-
+        String insertindisjointtables = null;
         PreparedStatement ps2;
-        int branid;
+        int branid, genereatedid;
         try {
             ps2 = con.prepareStatement(branchid);
             ps2.setString(1, BRANCH);
             rs = ps2.executeQuery();
             rs.next();
             branid = rs.getInt("ID");
-
-            ps = con.prepareStatement(register, Statement.RETURN_GENERATED_KEYS);
-
+            
+            ps = con.prepareStatement(register);
             ps.setString(1, FNAME);
             ps.setString(2, LNAME);
             ps.setString(3, EMAIL);
@@ -297,16 +296,22 @@ public class DatabaseManeger<neededtype> {
             ps.setString(9, GENDER);
             ps.setString(10, JOBTYPE);
             ps.setInt(11, branid);
-
+            
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             rs.next();
 
             ps = con.prepareCall(addphone);
-            ps.setInt(1, rs.getInt(1));
+            genereatedid = rs.getInt(1);
+            ps.setInt(1, genereatedid);
             ps.setString(2, PHONE);
             ps.executeUpdate();
-
+            if (JOBTYPE.equals("TRAINER")) {
+                insertindisjointtables = "INSERT INTO TRAINER (TRAINER_ID,CERTIFIED,EXPERIENCE_YEARS) VALUES (?,true,2)";
+                ps = con.prepareStatement(insertindisjointtables);
+                ps.setInt(1, genereatedid);
+                ps.executeUpdate();
+            }
             return rs != null;
 
         } catch (SQLException ex) {

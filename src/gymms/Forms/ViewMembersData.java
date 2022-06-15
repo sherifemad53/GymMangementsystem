@@ -103,6 +103,7 @@ public class ViewMembersData extends javax.swing.JFrame {
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
                 LocalDateTime now = LocalDateTime.now();
                 Age = now.getYear() - birthdate.getYear();
+                obj.ageTextField.setText(Integer.toString(Age));
                 obj.birthTextField.setText(Integer.toString(Age));
                 obj.emailTextField.setText(rss2.getString("MEMBERS_EMAIL"));
                 //obj.phoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
