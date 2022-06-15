@@ -1,5 +1,6 @@
 package gymms.Forms;
 
+import gymms.Gymms;
 import gymms.classes.Gymowner;
 import gymms.database.DatabaseManeger;
 import gymms.database.javaconnect;
@@ -21,14 +22,32 @@ public class AddUser extends javax.swing.JFrame {
 
     DatabaseManeger dbmanager = new DatabaseManeger();
     ArrayList<String> jobtypelist = new ArrayList<>();
+    ArrayList<String> branchlist = new ArrayList<>();
 
     public int jobtypemodifyCombobox() {
         int counter = 4;
         jobtypelist.add("GYMOWNER");
-        jobtypelist.add("TRANIER");
+        jobtypelist.add("TRAINER");
         jobtypelist.add("GYMMANAGER");
         jobtypelist.add("RECEPTIONIST");
         return counter;
+    }
+
+    Gymms gymms = new Gymms();
+
+    public int branchmodifyCombobox() {
+        int counter = 0;
+        try {
+            ResultSet rss = gymms.getbranch();
+            while (rss.next()) {
+                branchlist.add(rss.getString("GYM_NAME"));
+                counter++;
+            }
+            return counter;
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     int size = jobtypemodifyCombobox();
@@ -37,6 +56,10 @@ public class AddUser extends javax.swing.JFrame {
         initComponents();
         for (int i = 0; i < size; i++) {
             jobtypeComboBox.addItem(jobtypelist.get(i));
+        }
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(branchlist.get(i));
         }
     }
 
@@ -48,12 +71,17 @@ public class AddUser extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             jobtypeComboBox.addItem(jobtypelist.get(i));
         }
+
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(branchlist.get(i));
+        }
     }
 
     utilsFunctions utilfuncs = new utilsFunctions();
 
     public void submitdatabase() {
-        if (fnameTextField.getText().isEmpty() || lnameTextField.getText().isEmpty()|| emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
+        if (fnameTextField.getText().isEmpty() || lnameTextField.getText().isEmpty() || emailTextField.getText().isEmpty() || usernameTextField.getText().isEmpty()
                 || passwordTextField.getText().isEmpty() || confpasswordTextField.getText().isEmpty() || MaleRadioButton.isSelected() == false && FemaleRadioButton.isSelected() == false) {
             JOptionPane.showMessageDialog(null, "Missing");
         } else {
@@ -61,29 +89,32 @@ public class AddUser extends javax.swing.JFrame {
 //                    && utilfuncs.checkemail(emailTextField.getText())
 //                    && utilfuncs.checkphone(phoneTextField.getText())
 //                    && utilfuncs.checkusername(usernameTextField.getText())) {
-                if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
-                    Gymowner gymowner = new Gymowner(fnameTextField.getText(),lnameTextField.getText(),
-                            emailTextField.getText(), usernameTextField.getText(),
-                            passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(),
-                            Long.parseLong(phoneTextField.getText()),
-                            jobtypeComboBox.getSelectedItem().toString(), GenderButtonGroup.getSelection().getActionCommand());
-                    if (gymowner.adduser()) {
-                        JOptionPane.showMessageDialog(null, "Add User complete");
-                        dispose();
-                        new login().setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Add User failed......");
-                    }
+            if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
+                Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField.getText(),
+                        emailTextField.getText(), usernameTextField.getText(),
+                        passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()), 
+                        StreetTextField2.getText(), CityTextField1.getText(),
+                        phoneTextField.getText(),
+                        jobtypeComboBox.getSelectedItem().toString(),
+                        GenderButtonGroup.getSelection().getActionCommand(),
+                        branchComboBox.getSelectedItem().toString());
+                if (gymowner.adduser()) {
+                    JOptionPane.showMessageDialog(null, "Add User complete");
+                    dispose();
+                    new login().setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Password doesn't match.......");
-                    passwordTextField.setText("");
-                    confpasswordTextField.setText("");
+                    JOptionPane.showMessageDialog(null, "Add User failed......");
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password doesn't match.......");
+                passwordTextField.setText("");
+                confpasswordTextField.setText("");
+            }
 //            } else {
 //                JOptionPane.showMessageDialog(null, "error");
 //            }
             //TODO give user a note to know what entered wrong
-       }
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -123,7 +154,6 @@ public class AddUser extends javax.swing.JFrame {
         jLabel17 = new javax.swing.JLabel();
         Apt_noTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -332,18 +362,17 @@ public class AddUser extends javax.swing.JFrame {
         jLabel7.setText("Address:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
 
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/DumbleForUSer.PNG"))); // NOI18N
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 620));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
         );
 
         pack();
@@ -453,7 +482,6 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

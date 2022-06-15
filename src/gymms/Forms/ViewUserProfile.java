@@ -2,6 +2,7 @@ package gymms.Forms;
 
 import gymms.classes.Gymowner;
 import gymms.classes.User;
+import gymms.database.DatabaseManeger;
 import javax.swing.JOptionPane;
 import utils.utilsFunctions;
 
@@ -77,6 +78,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
         StreetTextField2 = new javax.swing.JTextField();
         CityTextField1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
+        addmoreButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -123,7 +125,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
 
         phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         phoneTextField.setToolTipText("User's Phone");
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 370, 370, -1));
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 370, 280, -1));
 
         usernameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         usernameTextField.setToolTipText("User's Username");
@@ -286,6 +288,14 @@ public class ViewUserProfile extends javax.swing.JFrame {
         jLabel17.setText("City:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 410, -1, -1));
 
+        addmoreButton.setText("Add more");
+        addmoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addmoreButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addmoreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, -1, 30));
+
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, -260, 1000, 900));
 
@@ -342,7 +352,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
                 user.setStreet(StreetTextField2.getText());
                 user.setCity(CityTextField1.getText());
                 user.setEMAIL(emailTextField.getText());
-                user.setPHONE(Long.parseLong(phoneTextField.getText()));
+                user.setPHONE(phoneTextField.getText());
                 user.setUSERNAME(usernameTextField.getText());
                 user.setPASSWORD(passwordTextField.getText());
                 user.setGENDER(genderTextField.getText());
@@ -412,6 +422,14 @@ public class ViewUserProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CityTextField1ActionPerformed
 
+    private void addmoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmoreButtonActionPerformed
+        String temp =  JOptionPane.showInputDialog(null,"Enter phone",null,JOptionPane.PLAIN_MESSAGE);
+        DatabaseManeger db=new DatabaseManeger();
+        if(db.useraddphone(Integer.parseInt(idTextField.getText()), temp)){
+            JOptionPane.showMessageDialog(null, "done");
+        }
+    }//GEN-LAST:event_addmoreButtonActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -467,6 +485,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton PrintButton;
     public javax.swing.JTextField StreetTextField2;
+    private javax.swing.JButton addmoreButton;
     public javax.swing.JTextField branchTextField1;
     public javax.swing.JTextField emailTextField;
     public javax.swing.JTextField fnameTextField;

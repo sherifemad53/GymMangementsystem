@@ -198,7 +198,6 @@ public class AddMember extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         StreetTextField2 = new javax.swing.JTextField();
-        pic = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -318,7 +317,7 @@ public class AddMember extends javax.swing.JFrame {
                 trainerComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(trainerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 302, -1));
+        jPanel1.add(trainerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 290, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -395,7 +394,7 @@ public class AddMember extends javax.swing.JFrame {
                 fnameTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(252, 101, 302, -1));
+        jPanel1.add(fnameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(254, 101, 300, -1));
 
         CityTextField1.setToolTipText("Enter Member's Address");
         CityTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -423,21 +422,15 @@ public class AddMember extends javax.swing.JFrame {
         });
         jPanel1.add(StreetTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 80, -1));
 
-        pic.setForeground(new java.awt.Color(255, 255, 255));
-        pic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
-        jPanel1.add(pic, new org.netbeans.lib.awtextra.AbsoluteConstraints(-150, 0, 870, 610));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
         );
 
         pack();
@@ -572,7 +565,6 @@ public class AddMember extends javax.swing.JFrame {
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JTextField lnameTextField;
     private javax.swing.JTextField phoneTextField;
-    private javax.swing.JLabel pic;
     private javax.swing.JButton returnmainpageButton;
     private javax.swing.JComboBox<String> subComboBox;
     private javax.swing.JComboBox<String> trainerComboBox;

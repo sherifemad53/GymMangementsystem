@@ -7,22 +7,16 @@ public class User<needtype> {
 
     DatabaseManeger dbmanager = new DatabaseManeger();
 
-    protected int ID , Apt_no; 
-    protected long PHONE;
-    protected String FNAME,LNAME, EMAIL, USERNAME, PASSWORD, street,city, ROLENAME,GENDER;
+    protected int ID, Apt_no;
+    protected String PHONE;
+    protected String FNAME, LNAME, EMAIL, USERNAME, PASSWORD, street, city, ROLENAME, GENDER, BRANCH;
 
-    public User(){
+    public User() {
     }
 
-    public long getPHONE() {
-        return PHONE;
-    }
 
-    public void setPHONE(long PHONE) {
-        this.PHONE = PHONE;
-    }
-    
-    public User(String FNAME,String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, long PHONE, String ROLENAME,String GENDER) {
+
+    public User(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH) {
         this.PHONE = PHONE;
         this.FNAME = FNAME;
         this.FNAME = FNAME;
@@ -33,7 +27,24 @@ public class User<needtype> {
         this.street = street;
         this.city = city;
         this.ROLENAME = ROLENAME;
-        this.GENDER=GENDER;
+        this.GENDER = GENDER;
+        this.BRANCH = BRANCH;
+    }
+
+    public String getBRANCH() {
+        return BRANCH;
+    }
+
+    public void setBRANCH(String BRANCH) {
+        this.BRANCH = BRANCH;
+    }
+
+    public String getPHONE() {
+        return PHONE;
+    }
+
+    public void setPHONE(String PHONE) {
+        this.PHONE = PHONE;
     }
 
     public DatabaseManeger getDbmanager() {
@@ -43,11 +54,10 @@ public class User<needtype> {
     public String getFNAME() {
         return FNAME;
     }
-    
+
     public String getLNAME() {
         return LNAME;
     }
-    
 
     public String getEMAIL() {
         return EMAIL;
@@ -72,27 +82,28 @@ public class User<needtype> {
     public int login(String USERNAME, String PASSWORD) {
         return dbmanager.login(USERNAME, PASSWORD);
     }
-    
-    public ResultSet getUser(String ROLENAME){
+
+    public ResultSet getUser(String ROLENAME) {
         return dbmanager.getUser(ROLENAME);
     }
-    
-    public ResultSet viewMemberdata(){
+
+    public ResultSet viewMemberdata() {
         return dbmanager.viewmembersdata();
     }
-    
-    public ResultSet SearchMember(needtype nameorid){
-    return dbmanager.searchmember(nameorid);
+
+    public ResultSet SearchMember(needtype nameorid) {
+        
+        return dbmanager.searchmember(nameorid);
     }
 
     public void setID(int ID) {
         this.ID = ID;
     }
 
-
     public void setFNAME(String FNAME) {
         this.FNAME = FNAME;
     }
+
     public void setLNAME(String LNAME) {
         this.LNAME = LNAME;
     }
@@ -143,5 +154,5 @@ public class User<needtype> {
 
     public int getID() {
         return ID;
-    }   
+    }
 }

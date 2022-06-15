@@ -22,7 +22,7 @@ public class ViewUsersData extends javax.swing.JFrame {
         DefaultTableModel tbmodel = (DefaultTableModel) UserDataTable.getModel();
         tbmodel.setRowCount(0);
         try {
-            ResultSet rss = gymowner.viewUserdata();
+            ResultSet rss = gymowner.viewUserdata(null);
             UserDataTable.removeAll();
             while (rss.next()) {
                 String id = Integer.toString(rss.getInt("USERS_ID"));
@@ -36,7 +36,8 @@ public class ViewUsersData extends javax.swing.JFrame {
                 String phone = null; //Long.toString(rss.getLong("USERS_PHONE"));
                 String jobtype = rss.getString("USERS_JOBTYPE");
                 String gender = rss.getString("USERS_GENDER");
-
+                countTextField1.setText(Integer.toString(dbmanager.totalusermember("USERS").getInt("TOTALUSERS")));
+                countTextField1.setEditable(false);
                 String tbdata[] = {id, fname,lname, email, username, password, address, phone, jobtype,gender};
 
                 tbmodel.addRow(tbdata);
@@ -147,7 +148,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 searchTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 127, -1));
+        jPanel1.add(searchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 130, 30));
 
         deleteButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         deleteButton.setText("Delete User");
@@ -167,7 +168,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 searchButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 124, 127, -1));
+        jPanel1.add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 124, 130, -1));
 
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +176,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 240, -1, -1));
+        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 90, -1));
 
         branchButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         branchButton.setText("Changebranch");
@@ -184,7 +185,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 branchButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(branchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 160, 130, -1));
+        jPanel1.add(branchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 120, 30));
 
         branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         branchComboBox.setToolTipText("Select Suitable Subscription");
@@ -193,7 +194,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 branchComboBoxActionPerformed(evt);
             }
         });
-        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 130, 20));
+        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 160, 130, 30));
 
         branchButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         branchButton1.setText("Order By");
@@ -202,7 +203,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 branchButton1ActionPerformed(evt);
             }
         });
-        jPanel1.add(branchButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 130, 20));
+        jPanel1.add(branchButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 120, 30));
 
         orderbyComboBox1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         orderbyComboBox1.setToolTipText("Select Suitable Subscription");
@@ -211,7 +212,7 @@ public class ViewUsersData extends javax.swing.JFrame {
                 orderbyComboBox1ActionPerformed(evt);
             }
         });
-        jPanel1.add(orderbyComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 130, 20));
+        jPanel1.add(orderbyComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 200, 130, 30));
         jPanel1.add(countTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, 120, -1));
 
         jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N

@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 
 public class Gymowner extends User{
 
-    public Gymowner(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, long PHONE, String ROLENAME, String GENDER) {
-        super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER);
-    }
-    
     public Gymowner() {
     }
+
+    public Gymowner(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH) {
+        super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER, BRANCH);
+    }
+
 
     public int getID() {
         return ID;
@@ -26,14 +27,6 @@ public class Gymowner extends User{
 
     public void setApt_no(int Apt_no) {
         this.Apt_no = Apt_no;
-    }
-
-    public long getPHONE() {
-        return PHONE;
-    }
-
-    public void setPHONE(long PHONE) {
-        this.PHONE = PHONE;
     }
 
     public String getFNAME() {
@@ -109,11 +102,11 @@ public class Gymowner extends User{
     }
     
     public boolean adduser(){
-        return getDbmanager().adduser(FNAME,LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER);
+        return getDbmanager().adduser(FNAME,LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER,BRANCH);
     }
     
-    public ResultSet viewUserdata(){
-        return getDbmanager().viewuserdata();
+    public ResultSet viewUserdata(String groupby){
+        return getDbmanager().viewuserdata(groupby);
     }
     
     public void deleteUser(int USERID){
@@ -132,5 +125,21 @@ public class Gymowner extends User{
        return getDbmanager().edituser(user.getID(), user.getFNAME(),user.getLNAME(), 
                user.getUSERNAME(), user.getPASSWORD(),user.getEMAIL(), 
                user.getPHONE(), user.getApt_no(), user.getStreet(), user.getCity(), user.getGENDER());
+    }
+
+    public String getPHONE() {
+        return PHONE;
+    }
+
+    public void setPHONE(String PHONE) {
+        this.PHONE = PHONE;
+    }
+
+    public String getBRANCH() {
+        return BRANCH;
+    }
+
+    public void setBRANCH(String BRANCH) {
+        this.BRANCH = BRANCH;
     }
 }

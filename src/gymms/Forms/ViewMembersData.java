@@ -132,6 +132,10 @@ public class ViewMembersData extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
         }
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(subscribelist.get(i));
+        }
     }
 
     int loginidx;
@@ -143,6 +147,10 @@ public class ViewMembersData extends javax.swing.JFrame {
         int size = subcribemodifyCombobox();
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
+        }
+        size = branchmodifyCombobox();
+        for (int i = 0; i < size; i++) {
+            branchComboBox.addItem(subscribelist.get(i));
         }
     }
 

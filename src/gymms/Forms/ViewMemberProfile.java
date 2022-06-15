@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import gymms.classes.Receptionist;
 import gymms.classes.Trainer;
 import gymms.classes.User;
+import gymms.database.DatabaseManeger;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -143,6 +144,9 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         StreetTextField2 = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         Apt_noTextField = new javax.swing.JTextField();
+        addmoreButton = new javax.swing.JButton();
+        jLabel24 = new javax.swing.JLabel();
+        ageTextField = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -176,7 +180,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
                 birthTextFieldActionPerformed(evt);
             }
         });
-        jPanel1.add(birthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, 370, -1));
+        jPanel1.add(birthTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 350, 130, -1));
 
         emailTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         emailTextField.setToolTipText("Member's Email");
@@ -184,7 +188,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
         phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         phoneTextField.setToolTipText("Member's Phone");
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 370, -1));
+        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 280, -1));
 
         weightTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         weightTextField.setToolTipText("Member's Date");
@@ -419,6 +423,28 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         });
         jPanel1.add(Apt_noTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 460, 40, -1));
 
+        addmoreButton.setText("Add more");
+        addmoreButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addmoreButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addmoreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 420, -1, 30));
+
+        jLabel24.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Age:");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 350, -1, -1));
+
+        ageTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        ageTextField.setToolTipText("Member's Age");
+        ageTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ageTextFieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 350, 130, -1));
+
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 720));
 
@@ -476,10 +502,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         if (loginid == 3) {
             fnameTextField.setEditable(true);
             lnameTextField.setEditable(true);
-            
             birthTextField.setEditable(true);
-            
-            
             emailTextField.setEditable(true);
             phoneTextField.setEditable(true);
             Apt_noTextField.setEditable(true);
@@ -572,6 +595,18 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_Apt_noTextFieldActionPerformed
 
+    private void addmoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmoreButtonActionPerformed
+        String temp =  JOptionPane.showInputDialog(null,"Enter phone",null,JOptionPane.PLAIN_MESSAGE);
+        DatabaseManeger db=new DatabaseManeger();
+        if(db.memberaddphone(Integer.parseInt(idTextField.getText()), temp)){
+            JOptionPane.showMessageDialog(null, "done");
+        }
+    }//GEN-LAST:event_addmoreButtonActionPerformed
+
+    private void ageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ageTextFieldActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -622,6 +657,8 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     public javax.swing.JTextField StartDateTextField;
     public javax.swing.JTextField StreetTextField2;
     public javax.swing.JTextField SubscribtionTextField;
+    private javax.swing.JButton addmoreButton;
+    public javax.swing.JTextField ageTextField;
     public javax.swing.JTextField birthTextField;
     public javax.swing.JTextField branchTextField1;
     private javax.swing.JButton editButton;
@@ -647,6 +684,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

@@ -5,13 +5,14 @@ import java.util.StringTokenizer;
 
 public class Receptionist extends User {
 
-    public Receptionist(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, long PHONE, String ROLENAME, String GENDER) {
-        super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER);
-    }
-
 
     public Receptionist() {
     }
+
+    public Receptionist(String FNAME, String LNAME, String EMAIL, String USERNAME, String PASSWORD, int Apt_no, String street, String city, String PHONE, String ROLENAME, String GENDER, String BRANCH) {
+        super(FNAME, LNAME, EMAIL, USERNAME, PASSWORD, Apt_no, street, city, PHONE, ROLENAME, GENDER, BRANCH);
+    }
+
 
     public boolean addmember(Member member, String PACKAGENAME, String USERNAME,String branch) {
         StringTokenizer st = new StringTokenizer(USERNAME," ");
@@ -38,7 +39,12 @@ public class Receptionist extends User {
     }
 
     public void resubscribe(String ROLENAME, String MEMBERNAME) {
-        getDbmanager().resubscribe(ROLENAME, MEMBERNAME);
+         StringTokenizer st = new StringTokenizer(USERNAME," ");
+        ArrayList<String> usernamelist = new ArrayList<>();
+        while (st.hasMoreTokens()) {  
+            usernamelist.add(st.nextToken());  
+         }  
+        getDbmanager().resubscribe(ROLENAME, usernamelist.get(0),usernamelist.get(1));
     }
 
     public boolean editmember(Member member) {
