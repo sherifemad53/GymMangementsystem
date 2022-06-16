@@ -6,7 +6,16 @@ import java.sql.ResultSet;
 public class Gymowner extends User{
     
     String temp;
+    int managerid;
 
+    public int getManagerid() {
+        return managerid;
+    }
+
+    public void setManagerid(int managerid) {
+        this.managerid = managerid;
+    }
+    
     public Gymowner() {
     }
 
@@ -104,7 +113,7 @@ public class Gymowner extends User{
     }
     
     public boolean adduser(){
-        return getDbmanager().adduser( FNAME, LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER,BRANCH, temp);
+        return getDbmanager().adduser( FNAME, LNAME, EMAIL, USERNAME, PASSWORD, PASSWORD, Apt_no, street, city, PHONE,ROLENAME,GENDER,BRANCH, temp,managerid);
     }
     
     public ResultSet viewUserdata(String groupby){

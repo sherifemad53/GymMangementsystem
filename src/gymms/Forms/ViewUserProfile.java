@@ -3,6 +3,10 @@ package gymms.Forms;
 import gymms.classes.Gymowner;
 import gymms.classes.User;
 import gymms.database.DatabaseManeger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import utils.utilsFunctions;
 
@@ -17,7 +21,6 @@ public class ViewUserProfile extends javax.swing.JFrame {
         emailTextField.setEditable(false);
         usernameTextField.setEditable(false);
         passwordTextField.setEditable(false);
-        phoneTextField.setEditable(false);
         Apt_noTextField.setEditable(false);
         StreetTextField2.setEditable(false);
         CityTextField1.setEditable(false);
@@ -33,11 +36,24 @@ public class ViewUserProfile extends javax.swing.JFrame {
         emailTextField.setEditable(false);
         usernameTextField.setEditable(false);
         passwordTextField.setEditable(false);
-        phoneTextField.setEditable(false);
         Apt_noTextField.setEditable(false);
         StreetTextField2.setEditable(false);
         CityTextField1.setEditable(false);
         genderTextField.setEditable(false);
+    }
+    DatabaseManeger dbmanager = new DatabaseManeger();
+
+    public int phonemodifycombobox(String userormember, int id) {
+        try {
+            System.out.println(id);
+            ResultSet rss = dbmanager.getphone(userormember, id);
+            while (rss.next()) {
+                phoneComboBox.addItem(rss.getString("PHONE_NUMBER"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     @SuppressWarnings("unchecked")
@@ -50,7 +66,6 @@ public class ViewUserProfile extends javax.swing.JFrame {
         lnameTextField = new javax.swing.JTextField();
         jobtypeTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        phoneTextField = new javax.swing.JTextField();
         usernameTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -79,6 +94,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
         CityTextField1 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         addmoreButton = new javax.swing.JButton();
+        phoneComboBox = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -122,10 +138,6 @@ public class ViewUserProfile extends javax.swing.JFrame {
             }
         });
         jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 335, 370, -1));
-
-        phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        phoneTextField.setToolTipText("User's Phone");
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(387, 370, 280, -1));
 
         usernameTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         usernameTextField.setToolTipText("User's Username");
@@ -296,6 +308,14 @@ public class ViewUserProfile extends javax.swing.JFrame {
         });
         jPanel1.add(addmoreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 370, -1, 30));
 
+        phoneComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        phoneComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(phoneComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 270, 30));
+
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(-170, -260, 1000, 900));
 
@@ -340,7 +360,6 @@ public class ViewUserProfile extends javax.swing.JFrame {
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (utilfuncs.checkname(lnameTextField.getText())
                 && utilfuncs.checkemail(emailTextField.getText())
-                && utilfuncs.checkphone(phoneTextField.getText())
                 && utilfuncs.checkusername(usernameTextField.getText())
                 && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " + CityTextField1.getText())) {
             try {
@@ -352,7 +371,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
                 user.setStreet(StreetTextField2.getText());
                 user.setCity(CityTextField1.getText());
                 user.setEMAIL(emailTextField.getText());
-                user.setPHONE(phoneTextField.getText());
+                user.setPHONE(null);
                 user.setUSERNAME(usernameTextField.getText());
                 user.setPASSWORD(passwordTextField.getText());
                 user.setGENDER(genderTextField.getText());
@@ -370,7 +389,6 @@ public class ViewUserProfile extends javax.swing.JFrame {
         emailTextField.setEditable(true);
         usernameTextField.setEditable(true);
         passwordTextField.setEditable(true);
-        phoneTextField.setEditable(true);
         Apt_noTextField.setEditable(true);
         StreetTextField2.setEditable(true);
         CityTextField1.setEditable(true);
@@ -388,7 +406,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
         PrintUser obj = new PrintUser();
 
         obj.InformationTextArea.setText("ID :\t" + idTextField.getText() + "\nName :\t" + lnameTextField.getText() + "\nRole :\t" + jobtypeTextField.getText() + "\nEmail"
-                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + Integer.parseInt(Apt_noTextField.getText()) + " " + StreetTextField2.getText() + " " + CityTextField1.getText() + "\nUsername :\t"
+                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneComboBox.getSelectedItem().toString()+ "\nAddress \t" + Integer.parseInt(Apt_noTextField.getText()) + " " + StreetTextField2.getText() + " " + CityTextField1.getText() + "\nUsername :\t"
                 + usernameTextField.getText() + "\nPassword :\t" + passwordTextField.getText() + "\nGender :\t" + genderTextField.getText());
         obj.setVisible(true);
 
@@ -429,6 +447,10 @@ public class ViewUserProfile extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "done");
         }
     }//GEN-LAST:event_addmoreButtonActionPerformed
+
+    private void phoneComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneComboBoxActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -515,7 +537,7 @@ public class ViewUserProfile extends javax.swing.JFrame {
     public javax.swing.JTextField jobtypeTextField;
     public javax.swing.JTextField lnameTextField;
     public javax.swing.JTextField passwordTextField;
-    public javax.swing.JTextField phoneTextField;
+    private javax.swing.JComboBox<String> phoneComboBox;
     private javax.swing.JButton saveButton;
     public javax.swing.JTextField usernameTextField;
     // End of variables declaration//GEN-END:variables

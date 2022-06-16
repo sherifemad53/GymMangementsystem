@@ -52,6 +52,7 @@ public class Mainpage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         AddProgramButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        addbranchButton = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         FileMenu = new javax.swing.JMenu();
         LogOutMenu = new javax.swing.JMenuItem();
@@ -70,7 +71,7 @@ public class Mainpage extends javax.swing.JFrame {
                 addMemberButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(addMemberButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 57, 145, 30));
+        jPanel1.add(addMemberButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 60, 145, 30));
 
         adddUserButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         adddUserButton.setText("Add User");
@@ -128,6 +129,16 @@ public class Mainpage extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/Webp.net-resizeimage.png"))); // NOI18N
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, -1, -1));
+
+        addbranchButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        addbranchButton.setText("Add branch");
+        addbranchButton.setToolTipText("Click Here To Add New Member");
+        addbranchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addbranchButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(addbranchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, 145, 30));
 
         FileMenu.setText("File");
         FileMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -203,6 +214,11 @@ public class Mainpage extends javax.swing.JFrame {
            
     }//GEN-LAST:event_FileMenuActionPerformed
 
+    private void addbranchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addbranchButtonActionPerformed
+       dispose();
+       new AddBranch().setVisible(true);
+    }//GEN-LAST:event_addbranchButtonActionPerformed
+
     private void AddProgramButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddProgramButtonActionPerformed
         dispose();
         new AddProgram().setVisible(true);
@@ -246,6 +262,7 @@ public class Mainpage extends javax.swing.JFrame {
     private javax.swing.JMenu FileMenu;
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton addMemberButton;
+    private javax.swing.JButton addbranchButton;
     private javax.swing.JButton adddUserButton;
     private javax.swing.JButton addpackageButton;
     private javax.swing.JLabel jLabel1;

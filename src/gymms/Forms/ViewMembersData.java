@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import static java.util.Calendar.DATE;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,8 +26,7 @@ public class ViewMembersData extends javax.swing.JFrame {
     Receptionist receptionist = new Receptionist();
 
     ArrayList<String> subscribelist = new ArrayList<>();
-    ArrayList<String> branchlist = new ArrayList<>();
-    
+
     gymms.classes.Package packagee = new gymms.classes.Package();
 
     public int subcribemodifyCombobox() {
@@ -43,22 +43,6 @@ public class ViewMembersData extends javax.swing.JFrame {
         }
         return 0;
     }
-    
-    public int branchmodifyCombobox() {
-        Gymms gymms =new Gymms();
-        int counter = 0;
-        try {
-            ResultSet rss = gymms.getbranch();
-            while (rss.next()) {
-                branchlist.add(rss.getString("GYM_NAME"));
-                counter++;
-            }
-            return counter;
-        } catch (SQLException ex) {
-            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return 0;
-    }
 
     public void viewdata() {
         DefaultTableModel tbmodel = (DefaultTableModel) jTable1.getModel();
@@ -66,8 +50,8 @@ public class ViewMembersData extends javax.swing.JFrame {
         try {
             ResultSet rss = user.viewMemberdata();
             while (rss.next()) {
-                String ID=Integer.toString(rss.getInt("MEMBERS_ID"));
-                String trainerfname = rss.getString("USERS_FNAME"); 
+                String ID = Integer.toString(rss.getInt("MEMBERS_ID"));
+                String trainerfname = rss.getString("USERS_FNAME");
                 String trainerlname = rss.getString("USERS_LNAME");
                 String memberfname = rss.getString("MEMBERS_FNAME");
                 String memberlname = rss.getString("MEMBERS_LNAME");
@@ -76,7 +60,9 @@ public class ViewMembersData extends javax.swing.JFrame {
                 String startdate = rss.getDate("STARTDATE").toString();
                 String enddate = rss.getDate("ENDDATE").toString();
                 String program = rss.getString("MEMBERS_PROGRAM");
-                String tbdata[] = {ID,memberfname, memberlname,trainerfname,trainerlname, packagename, packagecost, startdate, enddate, program};
+                countTextField1.setText(Integer.toString(dbmanager.totalusermember("MEMBERS").getInt("TOTALMEMBER")));
+                countTextField1.setEditable(false);
+                String tbdata[] = {ID, memberfname, memberlname, trainerfname, trainerlname, packagename, packagecost, startdate, enddate, program};
                 tbmodel.addRow(tbdata);
             }
         } catch (SQLException ex) {
@@ -94,17 +80,17 @@ public class ViewMembersData extends javax.swing.JFrame {
             ViewMemberProfile obj = new ViewMemberProfile(loginidx);
             try {
                 int ID = rss2.getInt("MEMBERS_ID");
-                obj.idTextField.setText(ID + "");
+                obj.idTextField.setText(Integer.toString(ID));
                 String fname = rss2.getString("MEMBERS_FNAME");
                 obj.fnameTextField.setText(fname);
                 String lname = rss2.getString("MEMBERS_LNAME");
                 obj.lnameTextField.setText(lname);
                 Date birthdate = rss2.getDate("MEMBERS_BIRTHDATE");
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");  
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDateTime now = LocalDateTime.now();
-                Age = now.getYear() - birthdate.getYear();
+                Age = now.getYear() - (birthdate.getYear() + 1900);
                 obj.ageTextField.setText(Integer.toString(Age));
-                obj.birthTextField.setText(Integer.toString(Age));
+                obj.birthTextField.setText(birthdate.toString());
                 obj.emailTextField.setText(rss2.getString("MEMBERS_EMAIL"));
                 //obj.phoneTextField.setText(rss2.getString("MEMBERS_PHONE"));
                 obj.Apt_noTextField.setText(rss2.getString("MEMBERS_APT_NO"));
@@ -118,6 +104,8 @@ public class ViewMembersData extends javax.swing.JFrame {
                 obj.StartDateTextField.setText(rss2.getDate("STARTDATE").toString());
                 obj.CostTextField.setText(rss2.getString("PACKAGE_COST"));
                 obj.EndDateTextField.setText(rss2.getDate("ENDDATE").toString());
+                obj.branchTextField.setText(rss2.getString("GYM_NAME"));
+                obj.phonemodifycombobox("MEMBERS", ID);
             } catch (SQLException ex) {
                 Logger.getLogger(ViewMembersData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -133,10 +121,7 @@ public class ViewMembersData extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
         }
-        size = branchmodifyCombobox();
-        for (int i = 0; i < size; i++) {
-            branchComboBox.addItem(subscribelist.get(i));
-        }
+
     }
 
     int loginidx;
@@ -149,10 +134,7 @@ public class ViewMembersData extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
         }
-        size = branchmodifyCombobox();
-        for (int i = 0; i < size; i++) {
-            branchComboBox.addItem(subscribelist.get(i));
-        }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -169,8 +151,6 @@ public class ViewMembersData extends javax.swing.JFrame {
         AddProgramButton = new javax.swing.JButton();
         refreshButton = new javax.swing.JButton();
         subscribeComboBox = new javax.swing.JComboBox<>();
-        branchButton = new javax.swing.JButton();
-        branchComboBox = new javax.swing.JComboBox<>();
         resubscribeButton1 = new javax.swing.JButton();
         countTextField1 = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
@@ -243,7 +223,7 @@ public class ViewMembersData extends javax.swing.JFrame {
                 AddProgramButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(AddProgramButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 126, 32));
+        jPanel1.add(AddProgramButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 126, 32));
 
         refreshButton.setText("Refresh");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
@@ -251,7 +231,7 @@ public class ViewMembersData extends javax.swing.JFrame {
                 refreshButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 79, -1));
+        jPanel1.add(refreshButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 79, -1));
 
         subscribeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -259,24 +239,6 @@ public class ViewMembersData extends javax.swing.JFrame {
             }
         });
         jPanel1.add(subscribeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 185, 127, -1));
-
-        branchButton.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        branchButton.setText("Changebranch");
-        branchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                branchButtonActionPerformed(evt);
-            }
-        });
-        jPanel1.add(branchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 127, -1));
-
-        branchComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        branchComboBox.setToolTipText("Select Suitable Subscription");
-        branchComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                branchComboBoxActionPerformed(evt);
-            }
-        });
-        jPanel1.add(branchComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 130, 20));
 
         resubscribeButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         resubscribeButton1.setText("Resubscribe");
@@ -286,7 +248,7 @@ public class ViewMembersData extends javax.swing.JFrame {
             }
         });
         jPanel1.add(resubscribeButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 186, 127, -1));
-        jPanel1.add(countTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 290, 120, 20));
+        jPanel1.add(countTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 280, 120, 30));
 
         jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -399,17 +361,6 @@ public class ViewMembersData extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_subscribeComboBoxActionPerformed
 
-    private void branchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchButtonActionPerformed
-        if (loginidx == 3) {
-            String memberid = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), -1).toString();
-            receptionist.resubscribe(subscribeComboBox.getSelectedItem().toString(), memberid);
-        }
-    }//GEN-LAST:event_branchButtonActionPerformed
-
-    private void branchComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_branchComboBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_branchComboBoxActionPerformed
-
     private void resubscribeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resubscribeButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_resubscribeButton1ActionPerformed
@@ -452,8 +403,6 @@ public class ViewMembersData extends javax.swing.JFrame {
     private javax.swing.JButton AddProgramButton;
     private javax.swing.JMenuItem LogOutMenu;
     private javax.swing.JButton SearchButton;
-    private javax.swing.JButton branchButton;
-    private javax.swing.JComboBox<String> branchComboBox;
     private javax.swing.JTextField countTextField1;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;

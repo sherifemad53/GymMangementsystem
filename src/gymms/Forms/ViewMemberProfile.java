@@ -20,7 +20,6 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     gymms.classes.Package packagee = new gymms.classes.Package();
     Receptionist receptionist = new Receptionist();
 
-    //print
     public int subcribemodifyCombobox() {
         int counter = 0;
         try {
@@ -36,15 +35,29 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         return 0;
     }
 
+    DatabaseManeger dbmanager = new DatabaseManeger();
+
+    public int phonemodifycombobox(String userormember,int id) {
+        try {
+            System.out.println(id);
+            ResultSet rss = dbmanager.getphone(userormember, id);
+            while (rss.next()) {
+                phoneComboBox.addItem(rss.getString("PHONE_NUMBER"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     public ViewMemberProfile() {
         initComponents();
         idTextField.setEditable(false);
         fnameTextField.setEditable(false);
         lnameTextField.setEditable(false);
-        
+
         birthTextField.setEditable(false);
         emailTextField.setEditable(false);
-        phoneTextField.setEditable(false);
         Apt_noTextField.setEditable(false);
         StreetTextField2.setEditable(false);
         CityTextField1.setEditable(false);
@@ -62,6 +75,9 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
         }
+//        if (idTextField.getText() != null) {
+//            phonemodifycombobox("MEMBERS",id);
+//        }
     }
     int loginid;
 
@@ -72,7 +88,6 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         fnameTextField.setEditable(false);
         birthTextField.setEditable(false);
         emailTextField.setEditable(false);
-        phoneTextField.setEditable(false);
         Apt_noTextField.setEditable(false);
         StreetTextField2.setEditable(false);
         CityTextField1.setEditable(false);
@@ -89,6 +104,9 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             subscribeComboBox.addItem(subscribelist.get(i));
         }
+//        if (idTextField.getText() != null) {
+//            phonemodifycombobox("MEMBERS");
+//        }
     }
 
     @SuppressWarnings("unchecked")
@@ -101,7 +119,6 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         fnameTextField = new javax.swing.JTextField();
         birthTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
-        phoneTextField = new javax.swing.JTextField();
         weightTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -133,7 +150,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         subscribeButton = new javax.swing.JButton();
         subscribeComboBox = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
-        branchTextField1 = new javax.swing.JTextField();
+        branchTextField = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         lnameTextField = new javax.swing.JTextField();
@@ -147,6 +164,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         addmoreButton = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         ageTextField = new javax.swing.JTextField();
+        phoneComboBox = new javax.swing.JComboBox<>();
         jLabel18 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -185,10 +203,6 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         emailTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         emailTextField.setToolTipText("Member's Email");
         jPanel1.add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 390, 370, -1));
-
-        phoneTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        phoneTextField.setToolTipText("Member's Phone");
-        jPanel1.add(phoneTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 280, -1));
 
         weightTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         weightTextField.setToolTipText("Member's Date");
@@ -357,14 +371,14 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         jPanel1.add(subscribeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 380, -1, -1));
 
         subscribeComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        jPanel1.add(subscribeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(187, 381, 345, 30));
+        jPanel1.add(subscribeComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 345, 30));
 
         jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/GENDER.PNG"))); // NOI18N
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(753, 41, -1, -1));
 
-        branchTextField1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
-        branchTextField1.setToolTipText("MEmber's Gender");
-        jPanel1.add(branchTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 370, -1));
+        branchTextField.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        branchTextField.setToolTipText("MEmber's Gender");
+        jPanel1.add(branchTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 190, 370, -1));
 
         jLabel19.setFont(new java.awt.Font("Arial Black", 0, 16)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(255, 255, 255));
@@ -445,6 +459,14 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         });
         jPanel1.add(ageTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 350, 130, -1));
 
+        phoneComboBox.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        phoneComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(phoneComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 420, 270, 30));
+
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gymms/Forms/AUSER.PNG"))); // NOI18N
         jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 720));
 
@@ -486,8 +508,8 @@ public class ViewMemberProfile extends javax.swing.JFrame {
 
     private void PrintButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintButtonActionPerformed
         PrintMember obj = new PrintMember();
-        obj.MemberTextArea.setText("ID :\t" + idTextField.getText() + "\nFname :\t" + fnameTextField.getText()+ "\nLname :\t" + lnameTextField.getText() + "\nAge :\t" + birthTextField.getText() + "\nEmail"
-                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneTextField.getText() + "\nAddress \t" + Apt_noTextField.getText()+ StreetTextField2.getText() + CityTextField1.getText() + "\nWeight :\t" + weightTextField.getText()
+        obj.MemberTextArea.setText("ID :\t" + idTextField.getText() + "\nFname :\t" + fnameTextField.getText() + "\nLname :\t" + lnameTextField.getText() + "\nAge :\t" + birthTextField.getText() + "\nEmail"
+                + " :\t" + emailTextField.getText() + "\nPhone :\t" + phoneComboBox.getSelectedItem().toString() + "\nAddress \t" + Apt_noTextField.getText() + StreetTextField2.getText() + CityTextField1.getText() + "\nWeight :\t" + weightTextField.getText()
                 + "\nHeight :\t" + heightTextField.getText() + "\nGender :\t" + genderTextField.getText() + "\nSubsribtion :\t" + SubscribtionTextField.getText() + ""
                 + "\nCost :\t" + CostTextField.getText() + "\nStart Date :+\t" + StartDateTextField.getText() + "\nEnd Date :\t" + EndDateTextField.getText() + "\nProgram :\n\n" + ProgramTextArea.getText());
         obj.setVisible(true);
@@ -504,7 +526,6 @@ public class ViewMemberProfile extends javax.swing.JFrame {
             lnameTextField.setEditable(true);
             birthTextField.setEditable(true);
             emailTextField.setEditable(true);
-            phoneTextField.setEditable(true);
             Apt_noTextField.setEditable(true);
             StreetTextField2.setEditable(true);
             CityTextField1.setEditable(true);
@@ -528,20 +549,19 @@ public class ViewMemberProfile extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SubscribtionTextFieldActionPerformed
 
-    utils.utilsFunctions utilfuncs =new utilsFunctions();
-    
+    utils.utilsFunctions utilfuncs = new utilsFunctions();
+
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if (loginid == 3) {
             if (utilfuncs.checkname(fnameTextField.getText())
                     && utilfuncs.checkemail(emailTextField.getText())
-                    && utilfuncs.checkphone(phoneTextField.getText())
                     && utilfuncs.checkage(birthTextField.getText())
-                    && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " +CityTextField1.getText())) {
+                    && utilfuncs.checkaddress(Apt_noTextField.getText() + " " + StreetTextField2.getText() + " " + CityTextField1.getText())) {
                 try {
-                    Member member = new Member(fnameTextField.getText(),lnameTextField.getText(),
+                    Member member = new Member(fnameTextField.getText(), lnameTextField.getText(),
                             Date.valueOf(birthTextField.getText()), Integer.parseInt(weightTextField.getText()),
-                            Integer.parseInt(heightTextField.getText()), phoneTextField.getText(),
-                            emailTextField.getText(), Integer.parseInt(Apt_noTextField.getText()),StreetTextField2.getText(),CityTextField1.getText(), genderTextField.getText());
+                            Integer.parseInt(heightTextField.getText()), null,
+                            emailTextField.getText(), Integer.parseInt(Apt_noTextField.getText()), StreetTextField2.getText(), CityTextField1.getText(), genderTextField.getText());
                     member.setID(Integer.parseInt(idTextField.getText()));
                     if (receptionist.editmember(member)) {
                         JOptionPane.showMessageDialog(null, "Editted successfully...");
@@ -596,9 +616,9 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     }//GEN-LAST:event_Apt_noTextFieldActionPerformed
 
     private void addmoreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmoreButtonActionPerformed
-        String temp =  JOptionPane.showInputDialog(null,"Enter phone",null,JOptionPane.PLAIN_MESSAGE);
-        DatabaseManeger db=new DatabaseManeger();
-        if(db.memberaddphone(Integer.parseInt(idTextField.getText()), temp)){
+        String temp = JOptionPane.showInputDialog(null, "Enter phone", null, JOptionPane.PLAIN_MESSAGE);
+        DatabaseManeger db = new DatabaseManeger();
+        if (db.memberaddphone(Integer.parseInt(idTextField.getText()), temp)) {
             JOptionPane.showMessageDialog(null, "done");
         }
     }//GEN-LAST:event_addmoreButtonActionPerformed
@@ -606,6 +626,10 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private void ageTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ageTextFieldActionPerformed
+
+    private void phoneComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneComboBoxActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -660,7 +684,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JButton addmoreButton;
     public javax.swing.JTextField ageTextField;
     public javax.swing.JTextField birthTextField;
-    public javax.swing.JTextField branchTextField1;
+    public javax.swing.JTextField branchTextField;
     private javax.swing.JButton editButton;
     public javax.swing.JTextField emailTextField;
     public javax.swing.JTextField fnameTextField;
@@ -699,7 +723,7 @@ public class ViewMemberProfile extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JTextField lnameTextField;
     public javax.swing.JTextField nameTextField1;
-    public javax.swing.JTextField phoneTextField;
+    private javax.swing.JComboBox<String> phoneComboBox;
     private javax.swing.JButton saveButton;
     private javax.swing.JButton subscribeButton;
     private javax.swing.JComboBox<String> subscribeComboBox;

@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import utils.utilsFunctions;
@@ -27,6 +28,7 @@ public class AddUser extends javax.swing.JFrame {
     ArrayList<String> jobtypelist = new ArrayList<>();
     ArrayList<String> branchlist = new ArrayList<>();
     ArrayList<Integer> managerids = new ArrayList<>();
+
     public int jobtypemodifyCombobox() {
         int counter = 4;
         jobtypelist.add("GYMOWNER");
@@ -53,6 +55,20 @@ public class AddUser extends javax.swing.JFrame {
         return 0;
     }
 
+    public int managermodifycombobox() {
+        int counter = 0;
+        try {
+            ResultSet rss = dbmanager.getmanager();
+            while (rss.next()) {
+                managerComboBox.addItem(rss.getString("USERS_FNAME") + " " + rss.getString("USERS_LNAME"));
+                managerids.add(rss.getInt("USERS_ID"));
+                counter++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
     int size = jobtypemodifyCombobox();
 
     public AddUser() {
@@ -64,6 +80,11 @@ public class AddUser extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             branchComboBox.addItem(branchlist.get(i));
         }
+        managermodifycombobox();
+//        size = managermodifycombobox();
+//        for (int i = 0; i < size; i++) {
+//            managerComboBox.addItem(branchlist.get(i));
+//        }
     }
 
     int loginidx;
@@ -79,6 +100,7 @@ public class AddUser extends javax.swing.JFrame {
         for (int i = 0; i < size; i++) {
             branchComboBox.addItem(branchlist.get(i));
         }
+        managermodifycombobox();
     }
 
     utilsFunctions utilfuncs = new utilsFunctions();
@@ -92,55 +114,66 @@ public class AddUser extends javax.swing.JFrame {
 //                    && utilfuncs.checkemail(emailTextField.getText())
 //                    && utilfuncs.checkphone(phoneTextField.getText())
 //                    && utilfuncs.checkusername(usernameTextField.getText())) {
-            if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
-                String temp = null;
-                
-                JComboBox asignmanager = new JComboBox();
-                try {
-                        ResultSet rss = dbmanager.getmanager();
-                        while (rss.next()) {
-                        asignmanager.addItem(rss.getString("USERS_FNAME") + " " + rss.getString("USERS_LNAME"));
-                        managerids.add(rss.getInt("USERS_ID"));
-                     }
-                    } catch (SQLException ex) {
-                        Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    if (jobtypeComboBox.getSelectedItem().toString().equals("TRAINER")) {
-                        System.out.println(JOptionPane.showConfirmDialog(null,asignmanager));
-                        temp = JOptionPane.showInputDialog(null,"Enter Experiance Years",null,JOptionPane.PLAIN_MESSAGE);}
-                    else if (jobtypeComboBox.getSelectedItem().toString().equals("GYMOWNER")) 
-                        temp = JOptionPane.showInputDialog(null,"Enter Percantage Cut",null,JOptionPane.PLAIN_MESSAGE);
-                    else if (jobtypeComboBox.getSelectedItem().toString().equals("GYMMANAGER")) 
-                        temp =  JOptionPane.showInputDialog(null,"Enter Manager Salary",null,JOptionPane.PLAIN_MESSAGE);
-                    else if (jobtypeComboBox.getSelectedItem().toString().equals("RECEPTIONIST")) 
-                        temp = JOptionPane.showInputDialog(null,"Enter Shift",null,JOptionPane.PLAIN_MESSAGE);
-                    
-                Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField1.getText(),
-                        emailTextField.getText(), usernameTextField.getText(),
-                        passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()), 
-                        StreetTextField2.getText(), CityTextField1.getText(),
-                        phoneTextField.getText(),
-                        jobtypeComboBox.getSelectedItem().toString(),
-                        GenderButtonGroup.getSelection().getActionCommand(),
-                        branchComboBox.getSelectedItem().toString());
-                        gymowner.setTemp(temp);
-                        
-                    if (gymowner.adduser()) {
-                    JOptionPane.showMessageDialog(null, "Add User complete");
-                    dispose();
-                    new login().setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Add User failed......");
+        if (utilfuncs.checkpassword(passwordTextField.getText(), confpasswordTextField.getText())) {
+            String temp = null;
+
+            try {
+                ResultSet rss = dbmanager.getmanager();
+                while (rss.next()) {
+                    managerComboBox.addItem(rss.getString("USERS_FNAME") + " " + rss.getString("USERS_LNAME"));
+                    managerids.add(rss.getInt("USERS_ID"));
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Password doesn't match.......");
-                passwordTextField.setText("");
-                confpasswordTextField.setText("");
+            } catch (SQLException ex) {
+                Logger.getLogger(AddUser.class.getName()).log(Level.SEVERE, null, ex);
             }
+            int idd=0;
+            switch (jobtypeComboBox.getSelectedItem().toString()) {
+                case "TRAINER":
+                    idd = managerids.get(branchComboBox.getSelectedIndex());
+                   // System.out.println(idd);
+                    temp = JOptionPane.showInputDialog(null, "Enter Experiance Years", null, JOptionPane.PLAIN_MESSAGE);
+                    break;
+                case "GYMOWNER":
+                    temp = JOptionPane.showInputDialog(null, "Enter Percantage Cut", null, JOptionPane.PLAIN_MESSAGE);
+                    break;
+                case "GYMMANAGER":
+                    temp = JOptionPane.showInputDialog(null, "Enter Manager Salary", null, JOptionPane.PLAIN_MESSAGE);
+                    break;
+                case "RECEPTIONIST":
+                    idd = managerids.get(branchComboBox.getSelectedIndex());
+                    temp = JOptionPane.showInputDialog(null, "Enter Shift", null, JOptionPane.PLAIN_MESSAGE);
+                    break;
+                default:
+                    break;
+            }
+
+            Gymowner gymowner = new Gymowner(fnameTextField.getText(), lnameTextField1.getText(),
+                    emailTextField.getText(), usernameTextField.getText(),
+                    passwordTextField.getText(), Integer.parseInt(Apt_noTextField.getText()),
+                    StreetTextField2.getText(), CityTextField1.getText(),
+                    phoneTextField.getText(),
+                    jobtypeComboBox.getSelectedItem().toString(),
+                    GenderButtonGroup.getSelection().getActionCommand(),
+                    branchComboBox.getSelectedItem().toString());
+                    gymowner.setTemp(temp);
+                    gymowner.setManagerid(idd);
+
+            if (gymowner.adduser()) {
+                JOptionPane.showMessageDialog(null, "Add User complete");
+                dispose();
+                new login().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Add User failed......");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Password doesn't match.......");
+            passwordTextField.setText("");
+            confpasswordTextField.setText("");
+        }
 //            } else {
 //                JOptionPane.showMessageDialog(null, "error");
 //            }
-            //TODO give user a note to know what entered wrong
+        //TODO give user a note to know what entered wrong
 //        }
     }
 
@@ -181,6 +214,7 @@ public class AddUser extends javax.swing.JFrame {
         Apt_noTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lnameTextField1 = new javax.swing.JTextField();
+        managerComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -215,7 +249,7 @@ public class AddUser extends javax.swing.JFrame {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 560, 520, -1));
+        jPanel1.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 590, 520, -1));
 
         jLabel8.setFont(new java.awt.Font("Berlin Sans FB Demi", 1, 36)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -289,12 +323,12 @@ public class AddUser extends javax.swing.JFrame {
                 MaleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(MaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, -1, -1));
+        jPanel1.add(MaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 550, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 0, 17)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Gender:");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 520, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 550, -1, -1));
 
         GenderButtonGroup.add(FemaleRadioButton);
         FemaleRadioButton.setFont(new java.awt.Font("Arial Black", 0, 17)); // NOI18N
@@ -305,7 +339,7 @@ public class AddUser extends javax.swing.JFrame {
                 FemaleRadioButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(FemaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 520, -1, -1));
+        jPanel1.add(FemaleRadioButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 550, -1, -1));
 
         returnmainpageButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         returnmainpageButton.setText("Back To Mainpage");
@@ -389,6 +423,15 @@ public class AddUser extends javax.swing.JFrame {
         });
         jPanel1.add(lnameTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 160, 303, 30));
 
+        managerComboBox.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        managerComboBox.setToolTipText("Select User's Role");
+        managerComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                managerComboBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(managerComboBox, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 520, 304, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -459,6 +502,10 @@ public class AddUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_lnameTextField1ActionPerformed
 
+    private void managerComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_managerComboBoxActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -524,6 +571,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JComboBox<String> jobtypeComboBox;
     private javax.swing.JTextField lnameTextField1;
+    private javax.swing.JComboBox<String> managerComboBox;
     private javax.swing.JPasswordField passwordTextField;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JButton registerButton;

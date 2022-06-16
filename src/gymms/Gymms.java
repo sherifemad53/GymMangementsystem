@@ -8,10 +8,11 @@ import java.sql.ResultSet;
 
 public class Gymms {
     
-    private int ID,street;
-    private String TYPE,DESCRIPTION,name,city;
+    private int ID,OWNERID;
+    private String TYPE,DESCRIPTION,name,city,street;
 
-    public Gymms(int ID, String name, String TYPE, String DESCRIPTION, int street,    String city) {
+    
+    public Gymms(int ID, String name, String TYPE, String DESCRIPTION, String street,    String city) {
         this.ID = ID;
         this.street = street;
         this.TYPE = TYPE;
@@ -27,6 +28,14 @@ public class Gymms {
     
     public boolean addbranch(Gymms gymms){
         return dbmaneger.addbranch(gymms);
+    }
+
+    public int getOWNERID() {
+        return OWNERID;
+    }
+
+    public void setOWNERID(int OWNERID) {
+        this.OWNERID = OWNERID;
     }
     
     // add branches
@@ -47,13 +56,15 @@ public class Gymms {
         this.ID = ID;
     }
 
-    public int getStreet() {
+    public String getStreet() {
         return street;
     }
 
-    public void setStreet(int street) {
+    public void setStreet(String street) {
         this.street = street;
     }
+
+
 
     public String getTYPE() {
         return TYPE;
